@@ -27,6 +27,7 @@ TEST_F(CBinHeapTest, DeleteMin)
 	{
 		std::cout << heap.DeleteMin() << " ";
 	}
+	std::cout << std::endl;
 }
 
 #endif

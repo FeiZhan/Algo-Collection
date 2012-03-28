@@ -1,3 +1,5 @@
+/// from DSAA
+
 #ifndef _LEFT_HEAP_
 #define _LEFT_HEAP_
 
@@ -25,6 +27,7 @@ namespace NsLeftHeap
 	protected:
 		struct LeftHeapNode *InsertNode(const int key
 			, struct LeftHeapNode *node);
+		/// \note main operation. O(logN)
 		struct LeftHeapNode *Merge(struct LeftHeapNode *node1
 			, struct LeftHeapNode *node2);
 		struct LeftHeapNode *MergeNode(struct LeftHeapNode *node1

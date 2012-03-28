@@ -1,10 +1,15 @@
+/// from DSAA
+
 #ifndef _BIN_QUEUE_
 #define _BIN_QUEUE_
 
 #include <iostream>
+#include <map>
+#include <limits.h>
 
 namespace NsBinQueue
 {
+	typedef std::map<int, struct BinQueueNode *> BinQueType;
 	struct BinQueueNode
 	{
 		int key;
@@ -15,13 +20,13 @@ namespace NsBinQueue
 	public:
 		CBinQueue(void);
 		~CBinQueue(void);
+		int DeleteMin(void);
 	protected:
 		struct BinQueueNode *Combine(struct BinQueueNode *node1
 			, struct BinQueueNode *node2);
-		struct BinQueueNode *Merge(struct BinQueueNode *node1
-			, struct BinQueueNode *node2);
+		bool Merge(const CBinQueue &queue);
 	private:
-		struct BinQueueNode *head;
+		BinQueType bin_queue;
 	};
 }
 

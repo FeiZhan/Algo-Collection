@@ -1,3 +1,5 @@
+/// \cite CLRS
+
 #ifndef _QUICK_SORT_
 #define _QUICK_SORT_
 
@@ -19,6 +21,7 @@ namespace NsQuickSort
  *  \exception std::out_of_range parameter is out of range.
  *  \return a bool.
  */
+		/// \complexity NlogN
 		bool QuickSort(std::vector<int> &num_vec);
 	protected:
 		bool SubQuickSort(std::vector<int> &num_vec

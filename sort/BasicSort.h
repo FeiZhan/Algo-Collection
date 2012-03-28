@@ -10,8 +10,11 @@ namespace NsBasicSort
 	{
 	public:
 		CBasicSort &operator<< (const int num);
+		/// \complexity O(N2)
 		bool InsertionSort(void);
+		/// \complexity O(N2)
 		bool ShellSort(void);
+		/// \complexity O(NlogN), require extra memory space
 		bool MergeSort(void);
 		friend std::ostream &operator<< (std::ostream &os
 			, const CBasicSort &sort);

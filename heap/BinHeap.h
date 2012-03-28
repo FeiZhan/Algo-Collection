@@ -1,3 +1,5 @@
+/// from DSAA
+
 #ifndef _BIN_HEAP_
 #define _BIN_HEAP_
 
@@ -11,6 +13,7 @@ namespace NsBinHeap
 	public:
 		bool Insert(const int key);
 		bool Empty(void);
+		/// \note O(logN)
 		int DeleteMin(void);
 		friend std::ostream &operator<< (std::ostream &os
 			, const CBinHeap &heap);

@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="L:\a\作品\open_source\gtest-1.6.0\include"
+				AdditionalIncludeDirectories="..\include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -59,7 +59,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="gtestd.lib"
-				AdditionalLibraryDirectories="L:\a\作品\open_source\gtest-1.6.0\msvc\gtest\Debug"
+				AdditionalLibraryDirectories="..\include\gtest\Debug"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -239,6 +239,14 @@
 			Name="list"
 			>
 			<File
+				RelativePath="..\list\MaxSeqSum.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\list\MaxSeqSum.h"
+				>
+			</File>
+			<File
 				RelativePath="..\list\OpenHash.cpp"
 				>
 			</File>
@@ -327,6 +335,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\test\MaxSeqSumTest.h"
+				>
+			</File>
+			<File
 				RelativePath="..\test\MyQuickSortTest.h"
 				>
 			</File>
@@ -336,6 +348,10 @@
 			</File>
 			<File
 				RelativePath="..\test\QuickSortTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\test\QuickSortV2Test.h"
 				>
 			</File>
 			<File
@@ -380,6 +396,14 @@
 			</File>
 			<File
 				RelativePath="..\sort\QuickSort.h"
+				>
+			</File>
+			<File
+				RelativePath="..\sort\QuickSortV2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sort\QuickSortV2.h"
 				>
 			</File>
 		</Filter>
@@ -448,6 +472,30 @@
 			</File>
 			<File
 				RelativePath="..\heap\LeftHeap.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="divide and conquer"
+			>
+			<File
+				RelativePath="..\divide and conquer\ClosestPair.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\divide and conquer\ClosestPair.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="geometry"
+			>
+			<File
+				RelativePath="..\geometry\Point.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\geometry\Point.h"
 				>
 			</File>
 		</Filter>

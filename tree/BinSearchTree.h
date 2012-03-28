@@ -1,3 +1,5 @@
+/// from DSAA
+
 #ifndef _BIN_SEARCH_TREE_
 #define _BIN_SEARCH_TREE_
 
@@ -18,12 +20,14 @@ namespace NsBinSearchTree
 		CBinSearchTree(void);
 		~CBinSearchTree(void);
 		virtual bool Clear(void);
+		/// \note the core operation of BinSearchTree.
+		/// The Average Time Complexity is O(log N).
 		struct BinTreeNode *Find(const int key);
 		struct BinTreeNode *FindMin(void);
 		struct BinTreeNode *FindMax(void);
 		bool Insert(const int key);
 		bool Delete(const int key);
-		/// \note this CBinSearchTree should be a cite.
+		/// \note this CBinSearchTree should be a reference.
 		friend std::ostream &operator<< (std::ostream &os
 			, const CBinSearchTree &tree);
 	protected:

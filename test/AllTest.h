@@ -20,5 +20,7 @@
 #include "BasicSortTest.h"
 #include "DisjointSetTest.h"
 #include "BigIntegerTest.h"
+#include "MaxSeqSumTest.h"
+#include "QuickSortV2Test.h"
 
 #endif
