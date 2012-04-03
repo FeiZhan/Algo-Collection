@@ -1,2 +1,3 @@
-./Debug/*
-./algo/Debug/*
+Debug
+algo/Debug
+*.txt
