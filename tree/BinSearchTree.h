@@ -1,4 +1,5 @@
 /// from DSAA
+/// \bug CLRS is different from this
 
 #ifndef _BIN_SEARCH_TREE_
 #define _BIN_SEARCH_TREE_

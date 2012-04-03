@@ -1,3 +1,5 @@
+/// \cite CLRS
+
 #ifndef _RED_BLACK_TREE_
 #define _RED_BLACK_TREE_
 
@@ -25,6 +27,7 @@ namespace NsRedBlackTree
 		~CRedBlackTree(void);
 		bool Clear(void);
 		bool Insert(const int key);
+		bool Delete(const int key);
 		friend std::ostream &operator<< (std::ostream &os, CRedBlackTree &tree);
 	protected:
 		bool ClearNode(struct RedBlackNode *node);
@@ -32,7 +35,7 @@ namespace NsRedBlackTree
 		bool InsertFix(struct RedBlackNode *node);
 		bool LeftRotate(struct RedBlackNode *node);
 		bool RightRotate(struct RedBlackNode *node);
-		bool TraverseNode(struct RedBlackNode *node);
+		bool DeleteNode(struct RedBlackNode *node);
 	private:
 		struct RedBlackNode *root;
 	};

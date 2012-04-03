@@ -1,6 +1,0 @@
-递归还是不能完全理解。
-没有实现template<typename T>
-const ElementType &initdata  ?
-
-	ElementType& GetTail();
-	ElementType GetTail() const;

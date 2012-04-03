@@ -4,13 +4,21 @@
 #include "gtest/gtest.h"
 #include "../tree/RedBlackTree.h"
 
-TEST(RedBlackTreeTest, Insert)
+class CRedBlackTreeTest : public ::testing::Test
 {
+protected:
+	virtual void SetUp()
+	{
+		rbtree.Insert(1);
+		rbtree.Insert(2);
+		rbtree.Insert(3);
+	}
 	NsRedBlackTree::CRedBlackTree rbtree;
-	rbtree.Insert(1);
-	rbtree.Insert(2);
-	rbtree.Insert(3);
-	rbtree.Traverse();
+};
+TEST_F(CRedBlackTreeTest, output)
+{
+	std::cout << rbtree << std::endl;
+	SUCCEED();
 }
 
 #endif

@@ -80,7 +80,7 @@ namespace NsRedBlackTree
 			if (node->parent == node->parent->parent->left)
 			{
 				y = node->parent->parent->right;
-				if (y->color == TreeRed)
+				if (y != NULL && y->color == TreeRed)
 				{
 					node->parent->color = TreeBlack;
 					y->color = TreeBlack;
@@ -99,7 +99,7 @@ namespace NsRedBlackTree
 			else
 			{
 				y = node->parent->parent->left;
-				if (y->color == TreeRed)
+				if (y != NULL && y->color == TreeRed)	/// \bug if y == NULL?
 				{
 					node->parent->color = TreeBlack;
 					y->color = TreeBlack;
@@ -123,7 +123,8 @@ namespace NsRedBlackTree
 	{
 		struct RedBlackNode *y = node->right;
 		node->right = y->left;
-		y->left->parent = y->left;
+		if (y->left != NULL)	/// \bug if y->left == NULL?
+			y->left->parent = y->left;
 		y->parent = node->parent;
 		if (node->parent == NULL)
 		{
@@ -145,7 +146,8 @@ namespace NsRedBlackTree
 	{
 		struct RedBlackNode *y = node->left;
 		node->left = y->right;
-		y->right->parent = y->right;
+		if (y->right != NULL)
+			y->right->parent = y->right;
 		y->parent = node->parent;
 		if (node->parent == NULL)
 		{
@@ -161,6 +163,30 @@ namespace NsRedBlackTree
 		}
 		y->right = node;
 		node->parent = y;
+		return true;
+	}
+	bool CRedBlackTree::Delete(const int key)
+	{
+		struct RedBlackNode *node/* = this->Find(key)*/;
+		if (node)
+		{
+			return this->DeleteNode(node);
+		}
+		return false;
+	}
+	bool CRedBlackTree::DeleteNode(struct RedBlackNode *node)
+	{
+		struct RedBlackNode *x;
+		if (node->left != NULL)
+		{
+			x = node->left;
+		}
+		else
+		{
+			x = node->right;
+		}
+		x->parent = node->parent;
+
 		return true;
 	}
 	std::ostream &operator<< (std::ostream &os, struct RedBlackNode &node)

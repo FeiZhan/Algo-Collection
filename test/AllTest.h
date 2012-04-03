@@ -7,7 +7,7 @@
 //#include "QuickSortTest.h"
 //#include "HeapSortTest.h"
 //#include "GraphTest.h"
-//#include "RedBlackTreeTest.h"
+#include "RedBlackTreeTest.h"
 //#include "SingleListTest.h"
 //#include "StackTest.h"
 //#include "BinSearchTreeTest.h"
