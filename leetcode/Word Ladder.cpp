@@ -5,6 +5,7 @@ public:
         unordered_set<string> added;
     	queue<string> q;
     	int ret = 0;
+    	// size of the old queue and the new queue
     	int lev1 = 1, lev2 = 0;
     	q.push(start);
     	added.insert(start);

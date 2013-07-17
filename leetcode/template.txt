@@ -1,0 +1,35 @@
+//1181Word Amalgamation
+#include <iostream>
+#include <stdio.h>
+#define FILE_DEBUG
+//#define _C_LAN_
+#ifdef FILE_DEBUG
+#include <fstream>
+#endif
+using namespace std;
+
+#include <string>
+#include <map>
+#include <algorithm>
+int main(int argc, char *argv[])
+{
+#ifdef FILE_DEBUG
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef FILE_DEBUG
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+
+    return 0;
+}
