@@ -1,0 +1,78 @@
+//2256Mincost
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <iomanip>
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int len;
+	double cost;
+	bool flag;
+	while (cin >> len && len)
+	{
+		cost = 0;
+		flag = false;
+		while (len >= 16)
+		{
+			cost += 36;
+			len -= 16;
+			flag = true;
+		}
+		if (flag == true && len <= 5 && len > 0)
+		{
+			cost += len * 2.4;
+		}
+		else if (len > 13)
+		{
+			cost += 10.0 + 8.0 + 10.0 + (len - 12.0) * 2.0;
+		}
+		else if (len > 8)
+		{
+			cost += 10.0 + 8.0 + (len - 8.0) * 2.4;
+		}
+		else if (len > 4)
+		{
+			cost += 10.0 + 2.0 * (len - 4.0);
+		}
+		else if (len > 0)
+		{
+			cost += 10;
+		}
+		cout << setiosflags(ios::fixed);
+		if (cost != int(cost))
+		{
+			cout << setprecision(1);
+		}
+		else
+		{
+			cout << setprecision(0);
+		}
+		cout << cost << endl;
+	}
+
+	return 0;
+}

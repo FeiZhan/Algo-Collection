@@ -1,0 +1,60 @@
+//2358Sum of Factorials
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#define MAX 1000000
+bool is_sum_fact[MAX + 10];
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int now = 1, fact = 1, fact_num[100000], fact_ptr = 1, fact_tmp;
+	memset(is_sum_fact, 0, sizeof(is_sum_fact));
+	memset(fact_num, 0, sizeof(fact_num));
+	is_sum_fact[0] = true;
+	while (fact <= MAX)
+	{
+		fact_tmp = fact_ptr;
+		for (int i = 0; i < fact_tmp; i ++)
+		{
+			fact_num[fact_ptr] = fact + fact_num[i];
+			is_sum_fact[fact_num[fact_ptr]] = true;
+			fact_ptr ++;
+		}
+		now ++;
+		fact *= now;
+	}
+	int num;
+	while (cin >> num && num >= 0)
+	{
+		if (num > 0 && (is_sum_fact[num] || is_sum_fact[num - 1]))
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+
+	return 0;
+}

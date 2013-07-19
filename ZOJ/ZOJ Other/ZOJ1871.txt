@@ -1,0 +1,63 @@
+//1871Steps
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <cmath>
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num[2], diff, sum, add, step;
+	while (cin >> num[0] >> num[1])
+	{
+		diff = abs(double(num[0] - num[1]));
+		sum = 0;
+		add = 0;
+		step = 0;
+		while (sum < diff)
+		{
+			add ++;
+			sum += add * 2;
+			step += 2;
+		}
+		if (sum > diff)
+		{
+			sum -= add * 2;
+			add --;
+			step -= 2;
+		}
+		if (diff - sum > add + 1)
+		{
+			step += 2;
+		}
+		else if (diff - sum > 0)
+		{
+			step ++;
+		}
+		cout << step << endl;
+	}
+
+	return 0;
+}

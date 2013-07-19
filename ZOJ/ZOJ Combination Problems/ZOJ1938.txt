@@ -1,0 +1,54 @@
+//1938Binomial Showdown
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	long long n, k, sum, x;
+	while (cin >> n >> k && n)
+	{
+		if (k == 0)
+		{
+			cout << 1 << endl;
+			continue;
+		}
+		if (k > n - k)
+		{
+			k = n - k;
+		}
+		sum = x = 1;
+		for (int i = n; i > n - k; i --)
+		{
+			sum *= i;
+			sum /= x;
+			x ++;
+		}
+		cout << sum << endl;
+	}
+
+	return 0;
+}

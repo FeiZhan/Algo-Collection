@@ -1,0 +1,75 @@
+//1292 Integer Inquiry 
+#include<iostream>
+#include<string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int n, integer[100][100], i, j, imax, sum[200];
+	string str1;
+	cin>>n;
+	while(n-- != NULL)
+	{
+		i = 0;
+		for(i=0; i<100; i++)
+		{
+			cin>>str1;
+			if(str1 == "0")
+				break;
+			else if(str1 == "" || str1 == " ")
+				cin>>str1;
+			for(j=100-str1.size(); j<100; j++)
+			{
+				integer[i][j] = int(str1.at(j-100+str1.size()) - '0');
+			}
+			for(j=0; j<100-str1.size(); j++)
+				integer[i][j] = 0;
+		}
+		imax = i;
+		for(i=imax; i<100; i++)
+			for(j=0; j<100; j++)
+			{
+				integer[i][j] = 0;
+			}
+		for(i=0; i<200; i++)
+		{
+			sum[i] = 0;
+		}
+		for(i=99; i>=0; i--)
+		{
+			for(j=0; j<100; j++)
+			{
+				sum[i+100] += integer[j][i];
+				if(sum[i+100] >= 10)
+				{
+					sum[i+100-1] ++;
+					sum[i+100] -= 10;
+				}
+			}
+		}
+		for(i=0; i<200; i++)
+		{
+			if(sum[i] != 0)
+			{
+				imax = i;
+				break;
+			}
+		}
+		if(i == 200)
+			cout<<0;
+		else
+		{
+			for(i=imax; i<200; i++)
+			{
+				cout<<sum[i];
+			}
+		}
+		cout<<endl/*<<endl*/;
+		if(n != 0)
+			cout<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

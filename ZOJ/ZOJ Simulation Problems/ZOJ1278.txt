@@ -1,0 +1,59 @@
+//1278Pseudo-Random Numbers
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int Z, I, M, L, i, num1, CaseNum = 0;
+	long sum;
+	bool flag;
+	struct list
+	{
+		int num;
+		struct list *next;
+	} *head, *ptr1, *ptr2;
+	while (cin>>Z>>I>>M>>L && Z + I + M + L != 0)
+	{
+		CaseNum ++;
+		ptr1 = head = new(struct list);
+		ptr1->num = L;
+		sum = 1;
+		while (1)
+		{
+			L = ( Z * L + I ) % M;
+			ptr2 = head;
+			flag = false;
+			num1 = 0;
+			for (i=0; i<sum; i++)
+			{
+				if (ptr2->num == L)
+				{
+					flag = true;
+					num1 = i;
+					//sum -= i;
+					break;
+				}
+				else
+				{
+					ptr2 = ptr2->next;
+				}
+			}
+			if (flag == true)
+			{
+				cout<<"Case "<<CaseNum<<": "<<sum - num1<<endl;
+				break;
+			}
+			else
+			{
+				ptr1->next = new(struct list);
+				ptr1 = ptr1->next;
+				ptr1->num = L;
+				sum ++;
+			}
+		}
+	}
+	//getchar();getchar();
+	return 0;
+}

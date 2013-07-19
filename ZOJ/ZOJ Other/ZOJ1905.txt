@@ -1,0 +1,73 @@
+//1905Power Strings
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <string>
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	string full, part;
+	bool is_sub;
+	int sub_cnt, sub_max;
+	while (cin >> full && full != ".")
+	{
+		sub_max = 0;
+		for (int i = 1; i <= full.size() / 2; i ++)
+		{
+			if (full.size() % i != 0)
+			{
+				continue;
+			}
+			part = full.substr(0, i);
+			is_sub = true;
+			sub_cnt = 0;
+			for (int j = 0; j < full.size() / i; j ++)
+			{
+				//cout << "cmp " << part << " "
+				//	<< full.substr(j * i, i) << endl;
+				if (part != full.substr(j * i, i))
+				{
+					is_sub = false;
+					break;
+				}
+				else
+				{
+					sub_cnt ++;
+				}
+			}
+			if (is_sub == true && sub_cnt > sub_max)
+			{
+				sub_max = sub_cnt;
+			}
+		}
+		if (sub_max == 0)
+			cout << 1 << endl;
+		else
+			cout << sub_max << endl;
+	}
+
+	return 0;
+}

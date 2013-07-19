@@ -1,0 +1,59 @@
+//1139Rectangles
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int rec[5010][4];
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int rec_sum, cnt;
+	while (cin >> rec_sum)
+	{
+		cnt = 0;
+		for (int i = 0; i < rec_sum; i ++)
+		{
+			for (int j = 0; j < 4; j ++)
+			{
+				cin >> rec[i][j];
+			}
+		}
+		for (int i = 0; i < rec_sum; i ++)
+		{
+			for (int j = 0; j < rec_sum; j ++)
+			{
+				if (j != i && rec[i][0] >= rec[j][0] && rec[i][1] <= rec[j][1]
+					&& rec[i][2] >= rec[j][2] && rec[i][3] <= rec[j][3])
+				{
+					cnt ++;
+					break;
+				}
+			}
+		}
+		cout << cnt << endl;
+	}
+
+	return 0;
+}

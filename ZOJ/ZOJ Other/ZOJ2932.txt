@@ -1,0 +1,52 @@
+//2932The Seven Percent Solution
+#include <iostream>
+#include <string>
+//#include <fstream>
+using namespace std;
+int main()
+{
+	//ifstream fin;
+	//fin.open("data.txt");
+	//cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+
+	string str_in, str_out, str_tmp;
+	char chr_tmp;
+	while (getline(cin, str_in) && str_in.compare("#") != 0)
+	{
+		str_out.clear();
+		for (int i = 0; i < str_in.size(); i ++)
+		{
+			chr_tmp = str_in.at(i);
+			switch (chr_tmp)
+			{
+			case ' ':
+				str_out.append("%20");
+				break;
+			case '!':
+				str_out.append("%21");
+				break;
+			case '$':
+				str_out.append("%24");
+				break;
+			case '%':
+				str_out.append("%25");
+				break;
+			case '(':
+				str_out.append("%28");
+				break;
+			case ')':
+				str_out.append("%29");
+				break;
+			case '*':
+				str_out.append("%2a");
+				break;
+			default:
+				str_tmp = chr_tmp;
+				str_out.append(str_tmp);
+			}
+		}
+		cout<<str_out<<endl;
+	}
+	//system("pause");
+	return 0;
+}

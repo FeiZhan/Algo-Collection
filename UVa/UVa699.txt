@@ -1,0 +1,109 @@
+//699 - The Falling Leaves
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <map>
+using namespace std;
+
+map<int, int> val_map;
+map<int, int>::iterator it;
+struct b_tree
+{
+	int pos, val;
+	struct b_tree *left, *right;
+};
+void build_tree(struct b_tree *ptr)
+{
+	int val;
+	cin >> val;
+	if (val != -1)
+	{
+		ptr->left = new struct b_tree;
+		ptr->left->val = val;
+		ptr->left->pos = ptr->pos - 1;
+		it = val_map.find(ptr->left->pos);
+		if (it != val_map.end())
+		{
+			it->second += val;
+		}
+		else
+			val_map.insert(pair<int, int> (ptr->left->pos, val));
+		build_tree(ptr->left);
+	}
+	else
+		ptr->left = NULL;
+	cin >> val;
+	if (val != -1)
+	{
+		ptr->right = new struct b_tree;
+		ptr->right->val = val;
+		ptr->right->pos = ptr->pos + 1;
+		it = val_map.find(ptr->right->pos);
+		if (it != val_map.end())
+		{
+			it->second += val;
+		}
+		else
+			val_map.insert(pair<int, int> (ptr->right->pos, val));
+		build_tree(ptr->right);
+	}
+	else
+		ptr->right = NULL;
+}
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int val, case_num = 0;
+	struct b_tree *head;
+	head = new struct b_tree;
+	while (cin >> val && val != -1)
+	{
+		head->val = val;
+		head->pos = 0;
+		val_map.clear();
+		val_map.insert(pair<int, int> (0, val));
+		build_tree(head);
+		case_num ++;
+		cout << "Case " << case_num << ":" << endl;
+		for (it = val_map.begin(); it != val_map.end(); it ++)
+		{
+			if (it != val_map.begin())
+			{
+				cout << " ";
+			}
+			cout << it->second;
+		}
+		cout << endl << endl;
+	}
+
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

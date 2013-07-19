@@ -1,0 +1,64 @@
+//1239Hanoi Tower Troubles Again!
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <math.h>
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, peg_sum, now, peg[55], last_peg;
+	bool if_find;
+	double add;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> peg_sum;
+		now = 0;
+		last_peg = 0;
+		while (last_peg <= peg_sum)
+		{
+			now ++;
+			if_find = false;
+			for (int i = 0; i < last_peg; i ++)
+			{
+				add = now + peg[i];
+				if (sqrt(add) == int(sqrt(add)))
+				{
+					if_find = true;
+					peg[i] = now;
+					break;
+				}
+			}
+			if (if_find == false)
+			{
+				peg[last_peg] = now;
+				last_peg ++;
+			}
+		}
+		cout << now - 1 << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,46 @@
+//2807Electrical Outlets
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, strip_sum, sum, outlet;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> strip_sum;
+		sum = 0;
+		for (int i = 0; i < strip_sum; ++ i)
+		{
+			cin >> outlet;
+			sum += outlet;
+		}
+		cout << sum - strip_sum + 1 << endl;
+	}
+
+	return 0;
+}

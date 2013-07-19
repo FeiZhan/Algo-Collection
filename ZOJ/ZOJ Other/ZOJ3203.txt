@@ -1,0 +1,63 @@
+//3203Light Bulb
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <iomanip>
+
+double H, h, D;
+double Calc(double len)
+{
+	return D - len + H - (D * (H - h) / len);
+}
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum;
+	double left, right, mid[2];
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> H >> h >> D;
+		left = D * (H - h) / H;
+		right = D;
+		while (right - left >= 1e-9)
+		{
+			mid[0] = (right + left) / 2;
+			mid[1] = (right + mid[0]) / 2;
+			if (Calc(mid[0]) > Calc(mid[1]))
+			{
+				right = mid[1];
+			}
+			else
+			{
+				left = mid[0];
+			}
+		}
+		cout << setiosflags(ios::fixed) << setprecision(3)
+			<< Calc(left) << endl;
+	}
+
+	return 0;
+}

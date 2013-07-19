@@ -1,0 +1,46 @@
+followed by a blank line. 
+要用2个\n
+
+scanf("%d %d")和scanf("%d%d")一样
+
+main函数应为int型，最后return 0 ，即：
+
+int main()
+
+{
+
+...
+
+   return 0;
+
+}
+
+这样做是因为避免有些编译器报错。
+
+
+and followed by the end-of-line.在最后加一个\n
+
+A blank line should separate output lines.
+两个答案中间用\n\n，答案和结尾用\n或没有
+
+The first line of input for a game will be an integer n <= 20. (A value of n = 0 terminates input.) The next two lines will each contain n integers between 1 and 5 inclusive indicating the cards played on each of n rounds. 
+数组应设为[20]
+
+ZOJ1113可以通过动态规划化简
+前面几个直接输出
+
+n次循环：while(n--)
+
+Segmentation Fault 数组太小了
+
+尽量将数组弄大些
+
+注意最后一个输出的数字之后是否应该跟一个空格
+
+如果有很多特殊情况，不必硬把他们计算在内，可以单独列出。
+
+若输入的n==0就退出：while (cin >> n, n)
+
+注意输出的格式（Presentation Error ）
+
+c语言中实现以2为的对数的函数是啥？log(n)/log(2) 

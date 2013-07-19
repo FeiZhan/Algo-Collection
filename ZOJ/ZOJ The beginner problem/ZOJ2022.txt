@@ -1,0 +1,47 @@
+//2022Factorial
+#define _FILE_DEBUG_
+#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum;
+	long num, tmp, zero_sum;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		scanf("%ld", &num);
+		tmp = num;
+		zero_sum = 0;
+		while (tmp > 0)
+		{
+			zero_sum += tmp / 5;
+			tmp /= 5;
+		}
+		printf("%ld\n", zero_sum);
+	}
+	return 0;
+}

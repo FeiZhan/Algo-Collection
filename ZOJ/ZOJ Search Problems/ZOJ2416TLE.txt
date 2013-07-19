@@ -1,0 +1,143 @@
+// 2416Open the Lock
+#define _USE_FILE_
+//#define _C_LAN_
+#ifdef _USE_FILE_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+vector<string> LockState;
+vector<long> LockStep;
+long LockIt;
+void InsertLock(string lock_change)
+{
+	if (find(LockState.begin(), LockState.end(), lock_change)
+		== LockState.end())
+	{
+		LockState.push_back(lock_change);
+		LockStep.push_back(LockStep.at(LockIt) + 1);
+	}
+}
+long CheckPswd(string pswd)
+{
+	string lock = LockState.at(LockIt);
+	string lock_change, lock_bit;
+	bool diff[4];
+
+	cout << lock << " " << LockStep.at(LockIt) << endl;
+	if (lock.compare(pswd) == NULL)
+	{
+		return LockStep.at(LockIt);
+	}
+	for (int i = 0; i < 4; i ++)
+	{
+		if (lock.at(i) > pswd.at(i))
+		{
+			diff[i] = true;
+			lock_change = lock;
+			if (lock.at(i) == '9' && pswd.at(i) <= '4')
+			{
+				lock_change.replace(i, 1, "1");
+			}
+			else
+			{
+				lock_bit = lock.at(i) - 1;
+				lock_change.replace(i, 1, lock_bit);
+			}
+			InsertLock(lock_change);
+		}
+		else if (lock.at(i) < pswd.at(i))
+		{
+			diff[i] = true;
+			lock_change = lock;
+			if (lock.at(i) == '1' && pswd.at(i) > '5')
+			{
+				lock_change.replace(i, 1, "9");
+			}
+			else
+			{
+				lock_bit = lock.at(i) + 1;
+				lock_change.replace(i, 1, lock_bit);
+			}
+			InsertLock(lock_change);
+		}
+		else
+		{
+			diff[i] = false;
+		}
+		//cout << diff[i] << endl;
+	}
+	for (int i = 0; i < 3; i ++)
+	{
+		if (diff[i] == true && diff[i + 1] == true && lock.at(i) != lock.at(i + 1))
+		{
+			lock_change = lock;
+			lock_bit = lock.at(i + 1);
+			lock_change.replace(i, 1, lock_bit);
+			lock_bit = lock.at(i);
+			lock_change.replace(i + 1, 1, lock_bit);
+			InsertLock(lock_change);
+		}
+	}
+	if (diff[3] == true && diff[0] == true && lock.at(3) != lock.at(0))
+	{
+		lock_change = lock;
+		lock_bit = lock.at(0);
+		lock_change.replace(3, 1, lock_bit);
+		lock_bit = lock.at(3);
+		lock_change.replace(0, 1, lock_bit);
+		InsertLock(lock_change);
+	}
+	return -1;
+}
+
+int main()
+{
+#ifdef _USE_FILE_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _USE_FILE_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, min_step;
+	string init_num, pswd;
+
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> init_num >> pswd;
+		LockState.clear();
+		LockState.push_back(init_num);
+		LockStep.clear();
+		LockStep.push_back(0);
+		LockIt = 0;
+		while (true)
+		{
+			min_step = CheckPswd(pswd);
+			if (min_step >= 0)
+			{
+				cout << min_step << endl;
+				break;
+			}
+			LockIt ++;
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,59 @@
+//2829Beautiful Number
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#define MAX_NUM 220000
+bool is_beau[MAX_NUM];
+int ind[MAX_NUM];
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	memset(is_beau, 0x0, sizeof(is_beau));
+	memset(ind, 0x0, sizeof(ind));
+	for (int i = 1; i * 3 < MAX_NUM; i ++)
+	{
+		is_beau[i * 3] = true;
+		if (i * 5 < MAX_NUM)
+			is_beau[i * 5] = true;
+	}
+	int tmp = 1;
+	for (int i = 1; i < MAX_NUM; i ++)
+	{
+		if (is_beau[i] == true)
+		{
+			ind[tmp] = i;
+			tmp ++;
+		}
+	}
+	int num;
+	while (cin >> num)
+	{
+		cout << ind[num] << endl;
+	}
+
+	return 0;
+}

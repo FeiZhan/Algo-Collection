@@ -1,0 +1,61 @@
+//1006Do the Untwist
+#include<iostream>
+#include<string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int key, i, temp1, temp2, ciphercode[70], plaincode[70], size;
+	string ciphertext;
+	while(cin>>key && key != 0)
+	{
+		cin>>ciphertext;
+		size = ciphertext.size();
+		for(i=0; i<size; i++)
+		{
+			switch(ciphertext.at(i))
+			{
+			case '_':
+				ciphercode[i] = 0;
+				break;
+			case '.':
+				ciphercode[i] = 27;
+				break;
+			default:
+				ciphercode[i] = ciphertext.at(i) - 'a' + 1;
+				break;
+			}
+		}
+		for(i=0; i<size; i++)
+		{
+			temp2 = - 100;
+			temp1 = ciphercode[i] + 28*temp2 + i;
+			while(temp1 < 0 || temp1 >= 28)
+			{
+				temp1 = ciphercode[i] + 28*temp2 + i;
+				temp2 ++;
+			}
+			plaincode[(key * i) % size] = temp1;
+		}
+		for(i=0; i<size; i++)
+		{
+			switch(plaincode[i])
+			{
+			case 0:
+				cout<<"_";
+				break;
+			case 27:
+				cout<<".";
+				break;
+			default:
+				cout<<char(plaincode[i] - 1 + 'a');
+				break;
+			}
+		}
+		cout<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

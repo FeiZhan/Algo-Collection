@@ -1,0 +1,63 @@
+//10050 - Hartals
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, day_sum, party_sum, hartal_index, day;
+	vector<int> hartal;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> day_sum >> party_sum;
+		hartal.clear();
+		for (int i = 0; i < party_sum; i ++)
+		{
+			cin >> hartal_index;
+			day = 0;
+			while ((day += hartal_index) >= 0 && day <= day_sum)
+			{
+				if (day % 7 != 0 && day % 7 != 6
+					&& find(hartal.begin(), hartal.end(), day) == hartal.end())
+				{
+					hartal.push_back(day);
+				}
+			}
+		}
+		cout << hartal.size() << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

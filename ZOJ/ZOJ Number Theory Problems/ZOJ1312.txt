@@ -1,0 +1,77 @@
+//1312Prime Cuts
+#include <iostream>
+#include <memory.h>
+using namespace std;
+
+#define MAX_NUM 1000
+bool prime[MAX_NUM + 1];
+int GetPrime(const int max_num)
+{
+	bool prime_flag;
+	int prime_sum = 0;
+	for (int i = 1; i <= max_num; i ++)
+	{
+		prime_flag = true;
+		for (int j = 2; j * j <= i; j ++)
+		{
+			if (i % j == 0)
+			{
+				prime_flag = false;
+				break;
+			}
+		}
+		if (prime_flag == true)
+		{
+			prime[i] = true;
+			prime_sum ++;
+		}
+	}
+	return prime_sum;
+}
+int main()
+{
+	int max_num, center_sum, prime_sum, print_num, print_sum, print_ptr, print_ptr2;
+	while (cin>>max_num>>center_sum && cin.eof() != true)
+	{
+		memset(prime, 0x00, sizeof(prime));
+		prime_sum = GetPrime(max_num);
+		if (prime_sum % 2 == 0)
+		{
+			print_sum = center_sum * 2;
+			print_num = (prime_sum - print_sum) / 2;
+		}
+		else
+		{
+			print_sum = center_sum * 2 - 1;
+			print_num = (prime_sum - print_sum) / 2;
+		}
+		if (print_sum > prime_sum)
+		{
+			print_sum = prime_sum;
+		}
+		print_ptr = 1;
+		print_ptr2 = 0;
+		cout<<max_num<<" "<<center_sum<<": ";
+		while (print_sum > 0 && print_ptr <= MAX_NUM)
+		{
+			if (prime[print_ptr] == true)
+			{
+				print_ptr2 ++;
+			}
+			if (prime[print_ptr] == true && print_ptr2 > print_num)
+			{
+				if (print_sum <= 1)
+				{
+					cout<<print_ptr;
+				}
+				else
+					cout<<print_ptr<<" ";
+				print_sum --;
+			}
+			print_ptr ++;
+		}
+		cout<<endl<<endl;
+	}
+	//system("pause");
+	return 0;
+}

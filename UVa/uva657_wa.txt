@@ -1,0 +1,156 @@
+//657 - The die is cast
+#define _FILE_IN_
+#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <map>
+#include <set>
+using namespace std;
+
+void die_dfs(int check_i, int check_j, int dice_count, char pixel[55][55]
+	, int is_checked[55][55], const int size[2])
+{
+	is_checked[check_i][check_j] = dice_count;
+	if (check_i - 1 >= 0 && pixel[check_i - 1][check_j] != '.'
+		&& is_checked[check_i - 1][check_j] == 0)
+	{
+		die_dfs(check_i - 1, check_j, dice_count, pixel, is_checked, size);
+	}
+	if (check_i + 1 < size[0] && pixel[check_i + 1][check_j] != '.'
+		&& is_checked[check_i + 1][check_j] == 0)
+	{
+		die_dfs(check_i + 1, check_j, dice_count, pixel, is_checked, size);
+	}
+	if (check_j - 1 >= 0 && pixel[check_i][check_j - 1] != '.'
+		&& is_checked[check_i][check_j - 1] == 0)
+	{
+		die_dfs(check_i, check_j - 1, dice_count, pixel, is_checked, size);
+	}
+	if (check_i + 1 < size[1] && pixel[check_i][check_j + 1] != '.'
+		&& is_checked[check_i][check_j + 1] == 0)
+	{
+		die_dfs(check_i, check_j + 1, dice_count, pixel, is_checked, size);
+	}
+}
+
+void dot_dfs(int check_i, int check_j, char pixel[55][55], int is_counted[55][55]
+	, const int size[2])
+{
+	is_counted[check_i][check_j] = 1;
+	if (check_i - 1 >= 0 && pixel[check_i - 1][check_j] == 'X'
+		&& is_counted[check_i - 1][check_j] == 0)
+	{
+		dot_dfs(check_i - 1, check_j, pixel, is_counted, size);
+	}
+	if (check_i + 1 < size[0] && pixel[check_i + 1][check_j] == 'X'
+		&& is_counted[check_i + 1][check_j] == 0)
+	{
+		dot_dfs(check_i + 1, check_j, pixel, is_counted, size);
+	}
+	if (check_j - 1 >= 0 && pixel[check_i][check_j - 1] == 'X'
+		&& is_counted[check_i][check_j - 1] == 0)
+	{
+		dot_dfs(check_i, check_j - 1, pixel, is_counted, size);
+	}
+	if (check_i + 1 < size[1] && pixel[check_i][check_j + 1] == 'X'
+		&& is_counted[check_i][check_j + 1] == 0)
+	{
+		dot_dfs(check_i, check_j + 1, pixel, is_counted, size);
+	}
+}
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int size[2], is_checked[55][55], is_counted[55][55], dice_count, case_num = 0;
+	char pixel[55][55];
+	map<int, int> dot_count;
+	map<int, int>::iterator it_map;
+	multiset<int> output_set;
+	multiset<int>::iterator it_set;
+	while (cin >> size[1] >> size[0] && !(size[0] == 0 && size[1] == 0))
+	{
+		dot_count.clear();
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				cin >> pixel[i][j];
+				is_checked[i][j] = 0;
+				is_counted[i][j] = 0;
+			}
+		}
+		dice_count = 0;
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				if (pixel[i][j] != '.' && is_checked[i][j] == 0)
+				{
+					dice_count ++;
+					die_dfs(i, j, dice_count, pixel, is_checked, size);
+				}
+			}
+		}
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				if (pixel[i][j] == 'X' && is_counted[i][j] == 0)
+				{
+					it_map = dot_count.find(is_checked[i][j]);
+					if (it_map == dot_count.end())
+					{
+						dot_count.insert(pair<int, int>(is_checked[i][j], 1));
+					}
+					else
+						it_map->second ++;
+					dot_dfs(i, j, pixel, is_counted, size);
+				}
+			}
+		}
+		output_set.clear();
+		for (it_map = dot_count.begin(); it_map != dot_count.end(); it_map ++)
+		{
+			output_set.insert(it_map->second);
+		}
+		case_num ++;
+		cout << "Throw " << case_num << endl;
+		for (it_set = output_set.begin(); it_set != output_set.end(); it_set ++)
+		{
+			if (it_set != output_set.begin())
+			{
+				cout << " ";
+			}
+			cout << *it_set;
+		}
+		cout << endl << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

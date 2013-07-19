@@ -1,0 +1,46 @@
+//2001Adding Reversed Numbers
+#include<iostream>
+#include<string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int CaseNum, i, j, temp1;
+	long num[3];
+	string strnum[3], RevNum[3];
+	cin>>CaseNum;
+	while(CaseNum --)
+	{
+		for (i=0; i<2; i++)
+		{
+			cin>>strnum[i];
+			RevNum[i] = "";
+			num[i] = 0;
+			for (j=0; j<strnum[i].size(); j++)
+			{
+				RevNum[i] = RevNum[i] + strnum[i].at(strnum[i].size() - j - 1);
+				temp1 = int (RevNum[i].at(j) - '0');
+				num[i] = num[i] * 10 + temp1;
+			}
+		}
+		num[2] = num[0] + num[1];
+		strnum[2] = "";
+		while (num[2] > 0)
+		{
+			strnum[2] = strnum[2] + char ((num[2] - num[2] / 10 * 10) + '0');
+			num[2] /= 10;
+		}
+		i = 0;
+		while(strnum[2].at (i) == '0')
+			i ++;
+		for(i; i<strnum[2].size(); i++)
+		{
+			cout << strnum[2].at(i);
+		}
+		cout << endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

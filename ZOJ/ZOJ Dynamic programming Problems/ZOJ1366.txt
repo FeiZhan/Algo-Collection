@@ -1,0 +1,87 @@
+//1366Cash Machine
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <memory.h>
+
+bool is_used[100000];
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int cash, deno, bill[12], bill_sum[12], now;
+	bool is_found;
+	while (cin >> cash >> deno)
+	{
+		for (int i = 0; i < deno; i ++)
+		{
+			cin >> bill_sum[i] >> bill[i];
+		}
+		if (cash == 0 || deno == 0)
+		{
+			cout << 0 << endl;
+			continue;
+		}
+		memset(is_used, 0x0, sizeof(is_used));
+		is_used[0] = true;
+		is_found = false;
+		for (int i = 0; i < deno; i ++)
+		{
+			for (int j = cash - 1; j >= 0; j --)
+			{
+				if (is_used[j] == false)
+					continue;
+				for (int k = 1; k <= bill_sum[i]; k ++)
+				{
+					now = j + k * bill[i];
+					if(now > cash)
+						break;
+					else if(now == cash)
+					{
+						is_found = true;
+						cout << cash << endl;
+						break;
+					}
+					else
+						is_used[now] = true;
+				}
+				if (is_found == true)
+					break;
+			}
+			if (is_found == true)
+				break;
+		}
+		if (is_found == true)
+			continue;
+		for(int i = cash - 1; i >= 0; i --)
+		{
+			if(is_used[i] == true)
+			{
+				cout << i << endl;
+				break;
+			}
+		}
+	}
+	return 0;
+}

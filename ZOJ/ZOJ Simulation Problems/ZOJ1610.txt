@@ -1,0 +1,81 @@
+//1610Count the Colors
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#include <algorithm>
+#define MAX_NUM 16010
+typedef struct
+{
+	int begin, end, color;
+} sline;
+sline paint[MAX_NUM];
+int line[MAX_NUM], len[MAX_NUM], color[MAX_NUM];
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int line_sum, cnt;
+	while (cin >> line_sum)
+	{
+		memset(len, 0, sizeof(len));
+		memset(color, -1, sizeof(color));
+		cnt = 0;
+		for (int i = 0; i < line_sum; i ++)
+		{
+			cin >> paint[i].begin >> paint[i].end >> paint[i].color;
+			line[cnt ++] = paint[i].begin;
+			line[cnt ++] = paint[i].end;
+		}
+		sort(line, line + cnt);
+		for (int i = 0; i < line_sum; i ++)
+		{
+			int x = lower_bound(line, line + cnt, paint[i].begin) - line;
+			int y = lower_bound(line, line + cnt, paint[i].end) - line;
+			for (int j = x; j < y; j ++)
+			{
+				color[j] = paint[i].color;
+			}
+		}
+		for (int i = 0; i < MAX_NUM; i ++)
+		{
+			if (color[i] != -1 && color[i + 1] != color[i])
+			{
+				len[color[i]] ++;
+			}
+		}
+		for (int i = 0; i < MAX_NUM; i ++)
+		{
+			if (len[i])
+			{
+				cout << i << " " << len[i] << endl;
+			}
+		}
+		cout << endl;
+	}
+
+	return 0;
+}

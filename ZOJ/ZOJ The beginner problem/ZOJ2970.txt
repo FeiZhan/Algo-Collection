@@ -1,0 +1,60 @@
+//2970Faster, Higher, Stronger
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, num_sum, max, min, num;
+	string cre;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> cre >> num_sum >> num;
+		max = min = num;
+		for (int i = 0; i < num_sum - 1; i ++)
+		{
+			cin >> num;
+			if (max < num)
+				max = num;
+			else if (min > num)
+				min = num;
+		}
+		switch (cre.at(0))
+		{
+		case 'F':
+			cout << min;
+			break;
+		case 'H':
+		case 'S':
+			cout << max;
+			break;
+		}
+		cout << endl;
+	}
+
+	return 0;
+}

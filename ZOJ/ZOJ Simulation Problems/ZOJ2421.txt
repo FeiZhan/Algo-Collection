@@ -1,0 +1,64 @@
+//2421Recaman's Sequence
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <set>
+#include <vector>
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int index, now_sum = 1, next;
+	set<int> int_set;
+	vector<int> int_vec;
+	set<int>::iterator find;
+	int_vec.push_back(0);
+	int_set.insert(0);
+	while (cin >> index && index >= 0)
+	{
+		while (int_vec.size() <= index)
+		{
+			next = int_vec.at(int_vec.size() - 1) - int_vec.size();
+			if (next > 0)
+			{
+				find = int_set.find(next);
+				if (find == int_set.end())
+				{
+					int_vec.push_back(next);
+					int_set.insert(next);
+					now_sum ++;
+					continue;
+				}
+			}
+			next = int_vec.at(int_vec.size() - 1) + int_vec.size();
+			int_vec.push_back(next);
+			int_set.insert(next);
+			now_sum ++;
+		}
+		cout << int_vec.at(index) << endl;
+	}
+
+	return 0;
+}

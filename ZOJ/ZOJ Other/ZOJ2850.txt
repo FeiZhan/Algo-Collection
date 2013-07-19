@@ -1,0 +1,56 @@
+//2850Beautiful Meadow
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	bool is_beau, is_all;
+	int size[2], mat[20][20];
+	while (cin >> size[0] >> size[1] && size[0] > 0 && size[1] > 0)
+	{
+		is_beau = is_all = true;
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				cin >> mat[i][j];
+				if (mat[i][j] == 0)
+				{
+					is_all = false;
+				}
+				if ((i > 0 && mat[i][j] + mat[i - 1][j] == 0)
+					|| (j > 0 && mat[i][j] + mat[i][j - 1] == 0))
+				{
+					is_beau = false;
+				}
+			}
+		}
+		cout << ((is_beau == true && is_all == false) ? "Yes" : "No") << endl;
+	}
+
+	return 0;
+}

@@ -1,0 +1,80 @@
+//2202Alphacode
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <string>
+#define MAX 50000
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	string code;
+	int dp[MAX];
+	while (cin >> code && code.compare("0") != 0)
+	{
+		if (code.at(0) != '0')
+		{
+			dp[0] = 1;
+		}
+		else
+		{
+			cout << 0 << endl;
+			continue;
+		}
+		for (int i = 1; i < code.size(); i ++)
+		{
+			if (code.at(i) == '0')
+			{
+				if (i <= 1)
+				{
+					dp[i] = 1;
+				}
+				else
+				{
+					dp[i] = dp[i - 2];
+				}
+			}
+			else if (code.at(i - 1) == '1'
+				|| (code.at(i - 1) == '2' && code.at(i) <= '6'))
+			{
+				if (i <= 1)
+				{
+					dp[i] = 2;
+				}
+				else
+				{
+					dp[i] = dp[i - 2] + dp[i - 1];
+				}
+			}
+			else
+			{
+				dp[i] = dp[i - 1];
+			}
+		}
+		cout << dp[code.size() - 1] << endl;
+	}
+
+	return 0;
+}

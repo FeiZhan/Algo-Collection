@@ -1,0 +1,79 @@
+//2109FatMouse' Trade
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <iomanip>
+#include <algorithm>
+#define MAX_NUM 1010
+typedef struct
+{
+	int javabean, catfood;
+	double value;
+} sroom;
+sroom room[MAX_NUM];
+bool cmp( sroom x, sroom y )
+{
+    if( x.value >= y.value )
+        return true;
+    else
+        return false;
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int catfood, room_sum, last, i;
+	double food_pay, bean_get;
+	while (cin >> catfood >> room_sum && (catfood != -1 || room_sum != -1))
+	{
+		for (int i = 0; i < room_sum; i ++)
+		{
+			cin >> room[i].javabean >> room[i].catfood;
+			room[i].value = 1.0 * room[i].javabean / room[i].catfood;
+		}
+		sort(room, room + room_sum, cmp);
+		food_pay = bean_get = 0;
+		last = room_sum;
+		for (int i = 0; i < room_sum; i ++)
+		{
+			food_pay += room[i].catfood;
+			bean_get += room[i].javabean;
+			if (food_pay > catfood)
+			{
+				food_pay -= room[i].catfood;
+				bean_get -= room[i].javabean;
+				last = i;
+				break;
+			}
+		}
+		if (last < room_sum)
+		{
+			bean_get += 1.0 * (catfood - food_pay) / room[last].catfood
+				* room[last].javabean;  
+		}         
+		cout << setiosflags(ios::fixed) << setprecision(3) << bean_get << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,32 @@
+//2388Beat the Spread!
+#include <iostream>
+using namespace std;
+int main()
+{
+	//ifstream fin;
+	//fin.open("data.txt");
+	//cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+
+	int case_sum, sum, diff;
+	double score[2];
+	cin>>case_sum;
+	while (case_sum --)
+	{
+		cin>>sum>>diff;
+		score[0] = (sum - diff) / 2.0 + diff;
+		score[1] = sum - score[0];
+		if (score[0] < 0 || score[1] < 0 || int(score[0]) != score[0]
+			|| int(score[1]) != score[1])
+		{
+			cout<<"impossible"<<endl;
+		}
+		else if (score[0] > score[1])
+		{
+			cout<<score[0]<<" "<<score[1]<<endl;
+		}
+		else
+			cout<<score[1]<<" "<<score[0]<<endl;
+	}
+	//system("pause");
+	return 0;
+}

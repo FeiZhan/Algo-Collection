@@ -1,0 +1,46 @@
+//2772Quick Change
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, money;
+	cin >> case_sum;
+	for (int i = 0; i < case_sum; i ++)
+	{
+		cin >> money;
+		cout << i + 1 << " " << money / 25 << " QUARTER(S), ";
+		money %= 25;
+		cout << money / 10 << " DIME(S), ";
+		money %= 10;
+		cout << money / 5 << " NICKEL(S), ";
+		money %= 5;
+		cout << money << " PENNY(S)" << endl;
+	}
+
+	return 0;
+}

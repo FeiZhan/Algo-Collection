@@ -1,0 +1,47 @@
+//2176Speed Limit
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int record_sum, speed[20], etime[20], time_diff, sum;
+	while (cin >> record_sum && record_sum >= 0)
+	{
+		sum = 0;
+		for (int i = 0; i < record_sum; i ++)
+		{
+			cin >> speed[i] >> etime[i];
+			if (i == 0)
+				time_diff = etime[0];
+			else
+				time_diff = etime[i] - etime[i - 1];
+			sum += speed[i] * time_diff;
+		}
+		cout << sum << " miles" << endl;
+	}
+	return 0;
+}

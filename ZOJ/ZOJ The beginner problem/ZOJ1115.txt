@@ -1,0 +1,37 @@
+//1115Digital Roots
+#include <iostream>
+#include <string>
+using namespace std;
+long long GetRoot(long long in_num)
+{
+	if (in_num < 10)
+	{
+		return in_num;
+	}
+	else
+	{
+		long long sum = 0;
+		while (in_num > 0)
+		{
+			sum += in_num % 10;
+			in_num /= 10;
+		}
+		return GetRoot(sum);
+	}
+}
+int main()
+{
+	string in_num;
+	long long num;
+	while (cin>>in_num && in_num.compare("0") != false)
+	{
+		num = 0;
+		for (int i = 0; i < in_num.size(); i ++)
+		{
+			num += int(in_num.at(i) - '0');
+		}
+		cout<<GetRoot(num)<<endl;
+	}
+	//system("pause");
+	return 0;
+}

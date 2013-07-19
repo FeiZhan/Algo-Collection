@@ -1,0 +1,149 @@
+//10142 - Australian Voting
+//#define _DEBUG_
+//#define _OUTPUT_FILE_
+//#define _C_LAN_
+#ifdef _DEBUG_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+#ifdef _DEBUG_
+	ifstream fin;
+	fin.open("data.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("data.txt", "r", stdin);
+#endif
+#endif
+#ifdef _OUTPUT_FILE_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, name_sum, round, voter_sum, vote_max, vote_min
+		, winner, vote_num;
+	string str_tmp;
+	vector<string> name_vec;
+	vector<int> vote_vec, result_vec, rank_vec, max_vec, min_vec, elimi_vec;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> name_sum;
+		getline(cin, str_tmp);
+		name_vec.clear();
+		for (int i = 0; i < name_sum; i ++)
+		{
+			getline(cin, str_tmp);
+			name_vec.push_back(str_tmp);
+		}
+		voter_sum = 0;
+		vote_vec.clear();
+		while (getline(cin, str_tmp) && str_tmp.size() > 0)
+		{
+			voter_sum ++;
+			for (int i = 0; i < str_tmp.size(); i ++)
+			{
+				if (str_tmp.at(i) >= '0' && str_tmp.at(i) <= '9')
+				{
+					vote_vec.push_back(str_tmp.at(i) - '0');
+				}
+			}
+		}
+
+		round = 0;
+		winner = -1;
+		elimi_vec.clear();
+		while (round ++ >= 0 && round < name_sum)
+		{
+			result_vec.clear();
+			for (int i = 0; i < name_sum; i ++)
+			{
+				result_vec.push_back(-1);
+			}
+			for (int i = 0; i < voter_sum; i ++)
+			{
+				for (int j = 0; j < name_sum; j ++)
+				{
+					vote_num = vote_vec.at(i * name_sum + j);
+					if (find(elimi_vec.begin(), elimi_vec.end()
+						, vote_num - 1) == elimi_vec.end()	&& vote_num > 0)
+					{
+						if (result_vec.at(vote_num - 1) == -1)
+						{
+							result_vec[vote_num - 1] = 1;
+						}
+						else
+							result_vec[vote_num - 1] ++;
+						break;
+					}
+				}
+			}
+			vote_max = 0;
+			vote_min = voter_sum + 1;
+			for (int i = 0; i < name_sum; i ++)
+			{
+				if (result_vec.at(i) > vote_max)
+				{
+					vote_max = result_vec.at(i);
+				}
+				if (result_vec.at(i) >= 0 && result_vec.at(i) < vote_min)
+				{
+					vote_min = result_vec.at(i);
+				}
+			}
+			max_vec.clear();
+			min_vec.clear();
+			for (int i = 0; i < name_sum; i ++)
+			{
+				if (result_vec.at(i) == vote_max)
+				{
+					max_vec.push_back(i);
+				}
+				if (result_vec.at(i) == vote_min)
+				{
+					min_vec.push_back(i);
+					elimi_vec.push_back(i);
+				}
+			}
+			if (vote_max * 2 > voter_sum)
+			{
+				winner = max_vec.at(0);
+				break;
+			}
+		}
+		if (winner != -1)
+		{
+			cout << name_vec.at(winner) << endl;
+		}
+		else
+		{
+			for (int i = 0; i < max_vec.size(); i ++)
+			{
+				cout << name_vec.at(max_vec.at(i)) << endl;
+			}
+		}
+		if (case_sum > 0)
+		{
+			cout << endl;
+		}
+	}
+
+#ifdef _DEBUG_
+#ifndef _OUTPUT_FILE_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

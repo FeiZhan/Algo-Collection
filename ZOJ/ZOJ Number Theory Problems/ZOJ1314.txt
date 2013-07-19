@@ -1,0 +1,55 @@
+//1314Uniform Generator
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int step, mod, seed;
+	bool is_good;
+	while (cin >> step >> mod)
+	{
+		seed = 0;
+		is_good = true;
+		for (int i = 1; i < mod; i ++)
+		{
+			seed = (seed + step) % mod;
+			if (seed == 0)
+			{
+				is_good = false;
+				break;
+			}
+		}
+		cout << setw(10) << step << setw(10) << mod << "    ";
+		if (is_good == true)
+			cout << "Good Choice";
+		else
+			cout << "Bad Choice";
+		cout << endl << endl;
+	}
+	return 0;
+}

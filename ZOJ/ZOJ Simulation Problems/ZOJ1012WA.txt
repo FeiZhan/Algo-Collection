@@ -1,0 +1,70 @@
+// 1012Mainframe
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+#define MAX (10000)
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int TimeLine, cpu, memo, job, i, jcpu[MAX], jmemo[MAX], jArrTime[MAX], jTimeLine[MAX]
+		, reward[MAX], bonus[MAX], punishment[MAX], CaseNum = 0, RemainCPU, RemainMemo
+		, doingList[MAX], todoList[MAX], income, todoPtr, doingPtr, ptr1;
+	long time;
+	//typedef struct JobList
+	//{
+	//	int JobNum;
+	//	struct JobList *next;
+	//} JobList;
+	//JobList *HeadList, *ptr2;
+	while(cin>>TimeLine && TimeLine != 0)
+	{
+		CaseNum ++;
+		cin>>cpu>>memo>>job;
+		for(i=0; i<job; i++)
+		{
+			cin>>jcpu[i]>>jmemo[i]>>jArrTime[i]>>jTimeLine[i]>>reward[i]>>bonus[i]
+				>>punishment[i];
+		}
+		time = income = 0;
+		doingPtr = 0;
+		RemainCPU = cpu;
+		RemainMemo = memo;
+		//ptr2 = HeadList = new(JobList);
+		while(time <= TimeLine)
+		{
+			for(i=0; i<doingPtr; i++)
+			{
+				income += reward[doingList[doingPtr]];
+				if(jTimeLine[doingList[doingPtr]] >= TimeLine)
+					income += bonus[doingList[doingPtr]]
+					* (jTimeLine[doingList[doingPtr]] - TimeLine);
+				else income -= punishment[doingList[doingPtr]]
+					* (TimeLine - jTimeLine[doingList[doingPtr]]);
+			}
+			doingPtr = todoPtr = 0;
+			for(i=0; i<job; i++)
+			{
+				if(jArrTime[i] == time)
+				{
+					todoList[todoPtr] = i;
+					todoPtr ++;
+				}
+			}
+			ptr1 = 0;
+			while(ptr1 < todoPtr)
+			{
+				if(jcpu[todoList[ptr1]] <= RemainCPU && jmemo[todoList[ptr1]] <= RemainMemo)
+				{
+					doingList[doingPtr] = todoList[ptr1];
+					RemainCPU -= jcpu[todoList[ptr1]];
+					RemainMemo -= jmemo[todoList[ptr1]];
+					doingPtr ++;
+				}
+			}
+			time ++;
+		}
+	}
+	//getchar();getchar();
+	return 0;
+}

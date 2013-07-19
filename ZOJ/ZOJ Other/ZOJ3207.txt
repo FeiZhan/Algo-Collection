@@ -1,0 +1,63 @@
+//320780ers' Memory
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int mem_sum;
+	string tmp;
+	vector<string> mem_vec;
+	cin >> mem_sum;
+	for (int i = 0; i < mem_sum; ++ i)
+	{
+		cin >> tmp;
+		mem_vec.push_back(tmp);
+	}
+	int person_sum, quest_sum, cnt;
+	vector<string>::iterator it;
+	cin >> person_sum;
+	for (int i = 0; i < person_sum; ++ i)
+	{
+		cin >> quest_sum;
+		cnt = 0;
+		for (int j = 0; j < quest_sum; ++ j)
+		{
+			cin >> tmp;
+			it = find(mem_vec.begin(), mem_vec.end(), tmp);
+			if (it != mem_vec.end())
+			{
+				cnt ++;
+			}
+		}
+		cout << cnt << endl;
+	}
+
+	return 0;
+}

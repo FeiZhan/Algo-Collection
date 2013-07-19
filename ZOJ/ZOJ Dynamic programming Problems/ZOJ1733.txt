@@ -1,0 +1,52 @@
+//1733Common Subsequence
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+#include <memory.h>
+#define LEN_MAX 1010
+
+int dp[LEN_MAX][LEN_MAX];
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	string str[2];
+	while (cin >> str[0] >> str[1])
+	{
+		memset(dp, 0, sizeof(dp));
+		for (int i = 1; i <= str[0].size(); i ++)
+		{
+			for (int j = 1; j <= str[1].size(); j ++)
+			{
+				if(str[0].at(i - 1) == str[1].at(j - 1))
+					dp[i][j] = dp[i-1][j-1] + 1;  
+				else
+					dp[i][j] = (dp[i-1][j] > dp[i][j-1]) ? dp[i-1][j] : dp[i][j-1];  
+			}
+		}
+		cout << dp[str[0].size()][str[1].size()] << endl;  
+	}
+	return 0;
+}

@@ -1,0 +1,71 @@
+//1046 Color Me Less
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int basic_color[16][3], color[3], dist_min_color;
+	long dist, dist_min;
+
+	for (int i = 0; i < 16; i ++)
+	{
+		for (int j = 0; j < 3; j ++)
+		{
+			cin >> basic_color[i][j];
+		}
+	}
+	while (cin >> color[0] >> color[1] >> color[2] && color[0] >= 0)
+	{
+		dist_min = 99999;
+		for (int i = 0; i < 16; i ++)
+		{
+			dist = 0;
+			for (int j = 0; j < 3; j ++)
+			{
+				dist += pow(double(color[j] - basic_color[i][j]), 2);
+			}
+			dist = sqrt(double(dist));
+			if (dist < dist_min)
+			{
+				dist_min = dist;
+				dist_min_color = i;
+			}
+		}
+		cout << "(" << color[0] << "," << color[1] << "," << color[2] << ") maps to ("
+			<< basic_color[dist_min_color][0] << "," << basic_color[dist_min_color][1]
+			<< "," << basic_color[dist_min_color][2] << ")" << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

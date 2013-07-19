@@ -1,0 +1,53 @@
+//1666Square Coins
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <memory.h>
+#define COIN_MAX 17
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int dp[310], coin[20];
+	memset(dp, 0x0, sizeof(dp));
+	for (int i = 1; i <= COIN_MAX; i ++)
+	{
+		coin[i] = i * i;
+	}
+	dp[0] = 1;
+	for (int i = 1; i <= COIN_MAX; i ++)
+	{
+		for (int j = coin[i]; j <= 300; j ++)
+		{
+			dp[j] += dp[j - coin[i]];
+		}
+	}
+	int num;
+	while (cin >> num && num > 0)
+	{
+		cout << dp[num] << endl;
+	}
+	return 0;
+}

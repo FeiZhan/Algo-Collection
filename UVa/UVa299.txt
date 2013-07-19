@@ -1,0 +1,68 @@
+//299 - Train Swapping
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, car_sum, car_int, count;
+	vector<int> car_vec;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> car_sum;
+		car_vec.clear();
+		for (int i = 0; i < car_sum; i ++)
+		{
+			cin >> car_int;
+			car_vec.push_back(car_int);
+		}
+		count = 0;
+		for (int i = 0; i < car_sum; i ++)
+		{
+			for (int j = 0; j < i; j ++)
+			{
+				if (car_vec.at(i) < car_vec.at(j))
+				{
+					car_int = car_vec.at(i);
+					car_vec[i] = car_vec.at(j);
+					car_vec[j] = car_int;
+					count ++;
+				}
+			}
+		}
+		cout << "Optimal train swapping takes " << count << " swaps." << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

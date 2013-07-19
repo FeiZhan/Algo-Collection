@@ -1,0 +1,75 @@
+//2132The Most Frequent Number
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <map>
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num_sum, tmp;
+	map<int, int> num;
+	map<int, int>::iterator it;
+	bool flag;
+	while (cin >> num_sum)
+	{
+		num.clear();
+		for (int i = 0; i < num_sum; i ++)
+		{
+			cin >> tmp;
+			flag = false;
+			for (it = num.begin(); it != num.end(); it ++)
+			{
+				if (it->first != tmp)
+				{
+					if (it->second > 1)
+					{
+						it->second --;
+					}
+					else
+					{
+						num.erase(it);
+					}
+					flag = true;
+					break;
+				}
+			}
+			if (flag == false)
+			{
+				if (num.size() > 0)
+				{
+					num.begin()->second ++;
+				}
+				else
+				{
+					num.insert(pair<int, int> (tmp, 1));
+				}
+			}
+		}
+		cout << num.begin()->first << endl;
+	}
+
+	return 0;
+}

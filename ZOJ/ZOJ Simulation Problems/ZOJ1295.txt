@@ -1,0 +1,25 @@
+//1295Reverse Text
+#include<iostream>
+#include <string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int CaseNum, i;
+	string str1;
+	cin>>CaseNum;
+	getchar();
+	while (CaseNum --)
+	{
+		getline (cin, str1);
+		for (i=0; i<str1.size(); i++)
+		{
+			cout<<str1.at(str1.size() - 1 - i);
+		}
+		cout<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

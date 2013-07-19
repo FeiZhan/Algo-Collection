@@ -1,0 +1,18 @@
+#include<stdio.h>  
+#include<string.h>  
+int main()  
+{  
+   int t,n,time;  
+   scanf("%d",&t);  
+   while(t--)  
+   {  
+        scanf("%d",&n);  
+        if(n%2==0)  
+           time=2*(n/2)*(n/2-1)/2;  
+        else  
+           time=(n/2)*(n/2 -1)/2 + (n/2 +1)*(n/2)/2 ;   
+        printf("%d\n",time);  
+    }  
+     return 0;  
+  
+}

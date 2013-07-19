@@ -1,0 +1,126 @@
+//UVa 10189 - Minesweeper
+//#define _DEBUG_
+//#define _OUTPUT_FILE_
+//#define _C_LAN_
+#ifdef _DEBUG_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+#ifdef _DEBUG_
+	ifstream fin;
+	fin.open("data.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("data.txt", "r", stdin);
+#endif
+#endif
+#ifdef _OUTPUT_FILE_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	bool is_first = true;
+	int field_len, field_wid, count, case_num = 0;
+	string str_in, str_out, str_tmp, str_tmp2;
+	vector<string> vec_in, vec_out;
+	while (cin >> field_len >> field_wid && !(field_len == 0 && field_wid == 0))
+	{
+		if (is_first == false)
+		{
+			cout << endl;
+		}
+		else
+			is_first = false;
+		vec_in.clear();
+		str_tmp.clear();
+		for (int i = 0; i < field_wid + 2; i ++)
+		{
+			str_tmp += ".";
+		}
+		vec_in.push_back(str_tmp);
+		for (int i = 0; i < field_len; i ++)
+		{
+			cin >> str_in;
+			str_in = "." + str_in + ".";
+			vec_in.push_back(str_in);
+		}
+		vec_in.push_back(str_tmp);
+
+		vec_out.clear();
+		for (int i = 1; i < vec_in.size() - 1; i ++)
+		{
+			str_tmp = vec_in.at(i);
+			str_out.clear();
+			for (int j = 1; j < str_tmp.size() - 1; j ++)
+			{
+				if (str_tmp.at(j) == '*')
+				{
+					str_out.append("*");
+					continue;
+				}
+				count = 0;
+				if (str_tmp.at(j - 1) == '*')
+				{
+					count ++;
+				}
+				if (str_tmp.at(j + 1) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i - 1).at(j) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i + 1).at(j) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i - 1).at(j - 1) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i + 1).at(j - 1) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i - 1).at(j + 1) == '*')
+				{
+					count ++;
+				}
+				if (vec_in.at(i + 1).at(j + 1) == '*')
+				{
+					count ++;
+				}
+				str_tmp2 = char(count + '0');
+				str_out.append(str_tmp2);
+			}
+			vec_out.push_back(str_out);
+		}
+
+		case_num ++;
+		cout << "Field #" << case_num << ":" << endl;
+		for (int i = 0; i < vec_out.size(); i ++)
+		{
+			cout << vec_out.at(i) << endl;
+		}
+	}
+
+#ifdef _DEBUG_
+#ifndef _OUTPUT_FILE_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

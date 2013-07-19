@@ -1,0 +1,71 @@
+//1769Three Sides Make a Triangle
+#include<iostream>
+#include <math.h>
+#define PI  (acos(-1.0))//3.14159265359
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	double x[3], y[3], line[3], angle[3], MaxAngle, TotalAngle, DiffLine[3];
+	int i, j;
+	while (cin>>x[0] && x[0] >= 0)
+	{
+		cin>>y[0]>>x[1]>>y[1]>>x[2]>>y[2];
+		line[0] = sqrt((x[0] - x[1]) * (x[0] - x[1]) + (y[0] - y[1]) * (y[0] - y[1]));
+		line[1] = sqrt((x[1] - x[2]) * (x[1] - x[2]) + (y[1] - y[2]) * (y[1] - y[2]));
+		line[2] = sqrt((x[0] - x[2]) * (x[0] - x[2]) + (y[0] - y[2]) * (y[0] - y[2]));
+		DiffLine[0] = fabs(line[0] - line[1]);
+		DiffLine[1] = fabs(line[1] - line[2]);
+		DiffLine[2] = fabs(line[0] - line[2]);
+		angle[0] = acos((line[0] * line[0] + line[1] * line[1] - line[2] * line[2])
+			/ (2 * line[0] * line[1])) / PI * 180;
+		angle[1] = acos((line[1] * line[1] + line[2] * line[2] - line[0] * line[0])
+			/ (2 * line[2] * line[1])) / PI * 180;
+		angle[2] = acos((line[0] * line[0] + line[2] * line[2] - line[1] * line[1])
+			/ (2 * line[0] * line[2])) / PI * 180;
+		//MaxAngle = TotalAngle = 0;
+		//for (i=0; i<3; i++)
+		//{
+		//	if (angle[i] > MaxAngle)
+		//	{
+		//		MaxAngle = angle[i];
+		//	}
+		//	TotalAngle += angle[i];
+		//}
+		if (/*TotalAngle > 180 || line[0] == 0 || line[1] == 0 || line[2] == 0
+			|| angle[0] == 0 || angle[1] == 0 || angle[2] == 0
+			|| */line[0] - line[1] - line[2] >= 0|| line[1] - line[2] - line[0] >= 0
+			|| line[2] - line[1] - line[0] >= 0)
+		{
+			cout<<"Not a Triangle"<<endl;
+			continue;
+		}
+		if (DiffLine[0] < .01 && DiffLine[1] < .01 && DiffLine[2] < .01)
+		{
+			cout<<"Equilateral ";
+		}
+		else if (DiffLine[0] < .01 || DiffLine[1] < .01 || DiffLine[2] < .01)
+		{
+			cout<<"Isosceles ";
+		}
+		else cout<<"Scalene ";
+		if (angle[0] >= 92 || angle[1] >= 92 || angle[2] >= 92)
+		{
+			cout<<"Obtuse"<<endl;
+		}
+		//else if (MaxAngle >= 88 && MaxAngle <= 92)
+		//{
+		//	cout<<"Right"<<endl;
+		//}
+		else if (angle[0] < 88 && angle[1] < 88 && angle[2] < 88)
+		{
+			cout<<"Acute"<<endl;
+		}
+		else cout<<"Right"<<endl;
+	}
+	cout<<"End of Output"<<endl;
+	//getchar();getchar();
+	return 0;
+}

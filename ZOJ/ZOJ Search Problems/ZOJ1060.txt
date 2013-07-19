@@ -1,0 +1,255 @@
+//1060Sorting It All Out
+#include <iostream>
+#include <string>
+#include <memory.h>
+//#include <fstream>
+//#define cin filein
+using namespace std;
+
+//	原本写的递归时间效率低，TLE。改用网上的算法，AC
+
+typedef class Graph
+{
+public:
+	Graph()
+	{
+		memset(m_edge, false, sizeof(m_edge));
+	}
+	void AddEdge(const int obj1, const int obj2)
+	{
+		if (m_edge[obj1][obj2] == false)
+		{
+			m_edge[obj1][obj2] = true;
+		}
+	}
+	//bool HasLoop()
+	//{
+	//	bool edge_tmp[26];
+	//	memset(edge_tmp, false, sizeof(edge_tmp));
+	//	for (int i = 0; i < 26; i ++)
+	//	{
+	//		if (has_loop_dfs(0, edge_tmp) == true)
+	//		{
+	//			return true;
+	//		}
+	//	}
+	//	return false;
+	//}
+	bool HasLoop(int obj_sum)
+	{
+		bool f[26][26];
+		memcpy(f, m_edge, sizeof(m_edge));
+		for(int k = 0; k < obj_sum; k++)
+			for(int i = 0; i < obj_sum; i++)
+				for(int j = 0; j < obj_sum; j++)
+					if(f[i][k] && f[k][j])
+						f[i][j] = 1;
+		for(int i = 0; i < obj_sum; i++)
+			if(f[i][i])
+				return 1;
+		return 0;
+	}
+	int GetMaxPath()
+	{
+		int max_path_sum[26];
+		for (int i = 0; i < 26; i ++)
+		{
+			max_path_sum[i] = -1;
+		}
+		for (int i = 0; i < 26; i ++)
+		{
+			get_max_path_dfs(i, max_path_sum);
+		}
+		int max_path_tmp = 0, max_path_num;
+		for (int i = 0; i < 26; i ++)
+		{
+			if (max_path_tmp < max_path_sum[i])
+			{
+				max_path_tmp = max_path_sum[i];
+				max_path_num = i;
+			}
+		}
+		return max_path_tmp;
+	}
+	void Clear()
+	{
+		memset(m_edge, false, sizeof(m_edge));
+	}
+	void Sort()
+	{
+		for (int i = 0; i < 26; i ++)
+		{
+			for (int j = 0; j < 26; j ++)
+			{
+				if (m_edge[i][j] == true)
+				{
+					for (int k = 0; k < 26; k ++)
+					{
+						if (j != k && m_edge[i][k] == true)
+						{
+							if (find_dfs(j, k) == true)
+							{
+								m_edge[i][j] = false;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	void traverse(int tra[26])
+	{
+		bool rear_flag;
+		int rear_obj;
+		for (int i = 0; i < 26; i ++)
+		{
+			rear_flag = true;
+			for (int j = 0; j < 26; j ++)
+			{
+				if (m_edge[i][j] == true)
+				{
+					rear_flag = false;
+				}
+			}
+			if (rear_flag == true)
+			{
+				rear_obj = i;
+				tra[0] = i;
+				break;
+			}
+		}
+		bool find_flag;
+		for (int i = 1; i < 26; i ++)
+		{
+			find_flag = false;
+			for (int j = 0; j < 26; j ++)
+			{
+				if (m_edge[j][rear_obj] == true)
+				{
+					tra[i] = j;
+					rear_obj = j;
+					find_flag = true;
+					break;
+				}
+			}
+			if (find_flag == false)
+			{
+				break;
+			}
+		}
+	}
+private:
+	bool find_dfs(int target, int source)
+	{
+		if (source == target)
+		{
+			return true;
+		}
+		for(int i = 0; i < 26; i ++)
+			if (m_edge[source][i] == true)
+			{
+				if (find_dfs(target, i) == true)
+					return true;
+			}
+		return false;
+	}
+	bool has_loop_dfs(int edge_num, bool edge_tmp[26])
+	{
+		if (edge_tmp[edge_num] == false)
+		{
+			edge_tmp[edge_num] = true;
+		}
+		else
+			return true;
+		for (int i = 0; i < 26; i ++)
+		{
+			if (m_edge[edge_num][i] == true)
+			{
+				if (has_loop_dfs(i, edge_tmp) == true)
+				{
+					return true;
+				}
+			}
+		}
+		edge_tmp[edge_num] = false;
+		return false;
+	}
+	int get_max_path_dfs(int edge_num, int max_path_sum[26])
+	{
+		if (max_path_sum[edge_num] >= 0)
+		{
+			return max_path_sum[edge_num];
+		}
+		else
+			max_path_sum[edge_num] = 1;
+		int max_path_tmp = 0, path_tmp;
+		for (int i = 0; i < 26; i ++)
+		{
+			if (m_edge[edge_num][i] == true)
+			{
+				path_tmp = get_max_path_dfs(i, max_path_sum);
+				if (max_path_tmp < path_tmp)
+				{
+					max_path_tmp = path_tmp;
+				}
+			}
+		}
+		max_path_sum[edge_num] += max_path_tmp;
+		return max_path_sum[edge_num];
+	}
+	bool m_edge[26][26];
+}	CGraph;
+int main()
+{
+	int obj_sum, rel_sum, obj1, obj2, max_path, tra[26];
+	string rel_str;
+	CGraph obj_graph;
+	bool flag;
+	while (cin>>obj_sum>>rel_sum && obj_sum != NULL && rel_sum != NULL)
+	{
+		obj_graph.Clear();
+		max_path = 0;
+		flag = false;
+		for (int i = 0; i < rel_sum; i ++)
+		{
+			cin>>rel_str;
+			if (flag == true)
+			{
+				continue;
+			}
+			obj1 = int(rel_str.at(0) - 'A');
+			obj2 = int(rel_str.at(2) - 'A');
+			obj_graph.AddEdge(obj1, obj2);
+			if (obj_graph.HasLoop(obj_sum) == false)
+			{
+				max_path = obj_graph.GetMaxPath();
+				if (max_path == obj_sum)
+				{
+					obj_graph.Sort();
+					obj_graph.traverse(tra);
+					cout<<"Sorted sequence determined after "<<i + 1<<" relations: ";
+					for (int j = obj_sum - 1; j >= 0; j --)
+					{
+						cout<<char(tra[j] + 'A');
+					}
+					cout<<"."<<endl;
+					flag = true;
+					continue;
+				}
+			}
+			else
+			{
+				cout<<"Inconsistency found after "<<i + 1<<" relations."<<endl;
+				flag = true;
+				continue;
+			}
+		}
+		if (flag == false && max_path < obj_sum)
+		{
+			cout<<"Sorted sequence cannot be determined."<<endl;
+		}
+	}
+	//system("pause");
+	return 0;
+}

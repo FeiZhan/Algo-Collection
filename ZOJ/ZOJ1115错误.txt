@@ -1,0 +1,25 @@
+/*ÓÃµÝ¹é×ö*/
+
+#include <stdio.h>
+
+int sum(int n)
+{
+	int root=0;
+	while(n>0)
+	{
+		root+=n%10;
+		n/=10;
+	}
+	if(root<10) return root;
+	else sum(root);
+}
+
+int main()
+{
+	int n;
+	while(scanf("%d",&n) && n!=0)
+	{
+		printf("%d\n",sum(n));
+	}
+	return 0;
+}

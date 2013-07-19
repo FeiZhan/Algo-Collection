@@ -1,0 +1,134 @@
+//1119SPF
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#define MAX_NUM 1010
+bool graph[MAX_NUM][MAX_NUM], is_visited[MAX_NUM];
+int node_sum, count, son, low[MAX_NUM], dfn[MAX_NUM], subnet[MAX_NUM];
+bool dfs(int now)
+{
+	for (int i = 1; i <= node_sum; ++ i)
+	{
+		if (graph[now][i])
+		{
+			if (! is_visited[i])
+			{
+				is_visited[i] = true;
+				++ count;
+				low[i] = dfn[i] = count;
+				dfs(i);
+				low[now] = (low[now] < low[i]) ? low[now] : low[i];
+				if (low[i] >= dfn[now])
+				{
+					if (now != 1)
+					{
+						++ subnet[now];
+					}
+					else
+					{
+						++ son;
+					}
+				}
+			}
+			else
+			{
+				low[now] = (low[now] < dfn[i]) ? low[now] : dfn[i];
+			}
+		}
+	}
+	return true;
+}
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf());
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf());
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int tmp0, tmp1, case_num = 1;
+	bool if_find;
+	while (cin >> tmp0 && tmp0 != 0)
+	{
+		node_sum = son = 0;
+		count = 1;
+		memset(graph, 0, sizeof(graph));
+		memset(is_visited, 0, sizeof(is_visited));
+		memset(subnet, 0, sizeof(subnet));
+
+		cin >> tmp1;
+		graph[tmp0][tmp1] = graph[tmp1][tmp0] = true;
+		if (tmp0 > node_sum)
+		{
+			node_sum = tmp0;
+		}
+		if (tmp1 > node_sum)
+		{
+			node_sum = tmp1;
+		}
+		while (cin >> tmp0 && tmp0 != 0)
+		{
+			cin >> tmp1;
+			graph[tmp0][tmp1] = graph[tmp1][tmp0] = true;
+			if (tmp0 > node_sum)
+			{
+				node_sum = tmp0;
+			}
+			if (tmp1 > node_sum)
+			{
+				node_sum = tmp1;
+			}
+		}
+		is_visited[1] = true;
+		low[1] = dfn[1] = 1;
+		dfs(1);
+		if (case_num > 1)
+		{
+			cout << endl;
+		}
+		cout << "Network #" << case_num << endl;
+		++ case_num;
+		if (son > 1)
+		{
+			subnet[1] = son - 1;
+		}
+		if_find = false;
+		for (int i = 1; i <= node_sum; ++ i)
+		{
+			if (subnet[i])
+			{
+				if (! if_find)
+				{
+					if_find = true;
+				}
+				cout << "  SPF node " << i << " leaves " << subnet[i] + 1
+					<< " subnets" << endl;
+			}
+		}
+		if (! if_find)
+		{
+			cout << "  No SPF nodes" << endl;
+		}
+	}
+
+	return 0;
+}

@@ -1,0 +1,80 @@
+//1789The Suspects
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#define MAX_NUM 30010
+int parent[MAX_NUM], num[MAX_NUM];
+int Find(int x)
+{
+	while (x != parent[x])
+	{
+		x = parent[x];
+	}
+	return x;
+}
+void Union(int x, int y)
+{
+	int a = Find(x), b = Find(y);
+	parent[x] = a;
+	parent[y] = b;
+	if (a == b)
+		return;
+	if (a < b)
+	{
+		num[a] += num[b];
+		parent[b] = a;
+	}
+	else
+	{
+		num[b] += num[a];
+		parent[a] = b;
+	}
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int stu_sum, grp_sum, grp_num, stu_num[2];
+	while (cin >> stu_sum >> grp_sum && (stu_sum || grp_sum))
+	{
+		for (int i = 0; i < stu_sum; i ++)
+		{
+			num[i] = 1;
+			parent[i] = i;
+		}
+		for (int i = 0; i < grp_sum; i ++)
+		{
+			cin >> grp_num >> stu_num[0];
+			for (int j = 1; j < grp_num; j ++)
+			{
+				cin >> stu_num[1];
+				Union(stu_num[0], stu_num[1]);
+			}
+		}
+		cout << num[0] << endl;
+	}
+
+	return 0;
+}

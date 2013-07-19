@@ -1,0 +1,100 @@
+//2165Red and Black
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+void dfs(int size[2], int map[25][25], int now[2])
+{
+	const int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+	int next[2];
+	bool is_out;
+	map[now[0]][now[1]] = 2;
+	for (int i = 0; i < 4; i ++)
+	{
+		is_out = false;
+		for (int j = 0; j < 2; j ++)
+		{
+			next[j] = now[j] + dir[i][j];
+			if (next[j] < 0 || next[j] >= size[j])
+			{
+				is_out = true;
+				break;
+			}
+		}
+		if (is_out == true)
+		{
+			continue;
+		}
+		if (map[next[0]][next[1]] == 0)
+		{
+			dfs(size, map, next);
+		}
+	}
+}
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int size[2], map[25][25], begin[2], cnt;
+	char tmp;
+	while (cin >> size[1] >> size[0] && (size[0] || size[1]))
+	{
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				cin >> tmp;
+				switch (tmp)
+				{
+				case '.':
+					map[i][j] = 0;
+					break;
+				case '@':
+					map[i][j] = 0;
+					begin[0] = i;
+					begin[1] = j;
+					break;
+				case '#':
+					map[i][j] = 1;
+					break;
+				}
+			}
+		}
+		dfs(size, map, begin);
+		cnt = 0;
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				if (map[i][j] == 2)
+				{
+					cnt ++;
+				}
+			}
+		}
+		cout << cnt << endl;
+	}
+
+	return 0;
+}

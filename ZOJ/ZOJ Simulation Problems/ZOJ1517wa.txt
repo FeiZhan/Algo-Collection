@@ -1,0 +1,217 @@
+//1517Grandpa's Rubik Cube
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+void swap(int a[3][3], int b[3][3], int c[3][3], int d[3][3])
+{
+	int temp[3], i;
+	for (i=0; i<3; i++)
+	{
+		temp[i] = a[i][0];
+	}
+	for (i=0; i<3; i++)
+	{
+		a[i][0] = b[i][0];
+	}
+	for (i=0; i<3; i++)
+	{
+		b[i][0] = c[i][0];
+	}
+	for (i=0; i<3; i++)
+	{
+		c[i][0] = d[i][0];
+	}
+	for (i=0; i<3; i++)
+	{
+		d[i][0] = temp[i];
+	}
+}
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int CaseNum, i, j, k, cube[6][3][3], xAxis, yAxis, FaceNum
+		, rotation, RotFace, temp[3][3], TempColor, NoRotFace;
+	char char1;
+	bool ExitFlag;
+	cin>>CaseNum;
+	while (CaseNum --)
+	{
+		xAxis = -1;
+		FaceNum = -1;
+		for (i=0; i<9; i++)
+		{
+			if (i % 3 == 0)
+			{
+				FaceNum ++;
+			}
+			if (FaceNum > 5)
+			{
+				FaceNum = 5;
+			}
+			xAxis ++;
+			if (xAxis > 2)
+			{
+				xAxis = 0;
+			}
+			if ((i >= 0 && i <= 2) || (i >= 6 && i <= 8))
+			{
+				for (j=0; j<3; j++)
+				{
+					cin>>char1;
+					switch (char1)
+					{
+					case 'Y':
+						cube[FaceNum][xAxis][j] = 1;
+						break;
+					case 'R':
+						cube[FaceNum][xAxis][j] = 2;
+						break;
+					case 'B':
+						cube[FaceNum][xAxis][j] = 3;
+						break;
+					case 'G':
+						cube[FaceNum][xAxis][j] = 4;
+						break;
+					case 'W':
+						cube[FaceNum][xAxis][j] = 5;
+						break;
+					case 'M':
+						cube[FaceNum][xAxis][j] = 6;
+						break;
+					default:
+						j --;
+						break;
+					}
+				}
+			}
+			else if (i >= 3 && i <= 5)
+			{
+				FaceNum = 1;
+				for (j=0; j<4; j++)
+				{
+					for (k=0; k<3; k++)
+					{
+						cin>>char1;
+						switch (char1)
+						{
+						case 'Y':
+							cube[FaceNum][xAxis][k] = 1;
+							break;
+						case 'R':
+							cube[FaceNum][xAxis][k] = 2;
+							break;
+						case 'B':
+							cube[FaceNum][xAxis][k] = 3;
+							break;
+						case 'G':
+							cube[FaceNum][xAxis][k] = 4;
+							break;
+						case 'W':
+							cube[FaceNum][xAxis][k] = 5;
+							break;
+						case 'M':
+							cube[FaceNum][xAxis][k] = 6;
+							break;
+						default:
+							k --;
+							break;
+						}
+					}
+					FaceNum ++;
+				}
+			}
+		}
+		while (cin>>rotation && rotation != 0)
+		{
+			switch (abs(rotation))
+			{
+			case 1:
+				RotFace = abs(rotation);
+				NoRotFace = 3;
+				swap(cube[0], cube[2], cube[4], cube[5]);
+				break;
+			case 2:
+				RotFace = abs(rotation);
+				NoRotFace = 4;
+				//swap()
+				break;
+			case 3:
+				RotFace = abs(rotation);
+				NoRotFace = 1;
+				break;
+			case 4:
+				RotFace = abs(rotation);
+				NoRotFace = 2;
+				break;
+			case 5:
+				RotFace = 0;
+				NoRotFace = 5;
+				break;
+			case 6:
+				RotFace = 5;
+				NoRotFace = 0;
+				break;
+			default:
+				break;
+			}
+			if (rotation > 0)
+			{
+				for (i=0; i<3; i++)
+				{
+					for (j=0; j<3; j++)
+					{
+						temp[i][j] = cube[RotFace][2-j][i];
+					}
+				}
+				for (i=0; i<3; i++)
+				{
+					for (j=0; j<3; j++)
+					{
+						cube[RotFace][i][j] = temp[i][j];
+					}
+				}
+			}
+			else
+			{
+				for (i=0; i<3; i++)
+				{
+					for (j=0; j<3; j++)
+					{
+						temp[i][j] = cube[RotFace][j][2-i];
+					}
+				}
+				for (i=0; i<3; i++)
+				{
+					for (j=0; j<3; j++)
+					{
+						cube[RotFace][i][j] = temp[i][j];
+					}
+				}
+			}
+		}
+		ExitFlag = false;
+		for (i=0; i<9; i++)
+		{
+			for (j=0; j<3; j++)
+			{
+				TempColor = cube[i][j][0];
+				for (k=0; k<3; k++)
+				{
+					if (cube[i][j][k] != TempColor)
+					{
+						cout<<"No, you are wrong!"<<endl;
+						ExitFlag = true;
+						break;
+					}
+				}
+			}
+		}
+		if (ExitFlag == false)
+		{
+			cout<<"Yes, grandpa!"<<endl;
+		}
+	}
+	getchar();getchar();
+	return 0;
+}

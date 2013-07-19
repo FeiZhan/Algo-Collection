@@ -1,0 +1,66 @@
+//1086Octal Fractions
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+#include <memory.h>
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	string octal;
+	int decimal[110], max;
+	int tmp;
+	while (cin >> octal)
+	{
+		max = 1;
+		memset(decimal, 0, sizeof(decimal));
+		for (int i = octal.size() - 1; i >= 2; -- i)
+		{
+			decimal[0] = octal.at(i) - '0';
+			tmp = 0;
+			for (int j = 0; true; ++ j)
+			{
+				tmp = tmp * 10 + decimal[j];
+				decimal[j] = tmp / 8;
+				tmp %= 8;
+				if (tmp == 0 && j > max)
+				{
+					max = j;
+					break;
+				}
+			}
+		}
+		//0.75 [8] = 0.953125 [10]
+		cout << octal << " [8] = " << decimal[0] << ".";
+		for (int i = 1; i <= max; ++ i)
+		{
+			cout << decimal[i];
+		}
+		cout << " [10]" << endl;
+	}
+
+	return 0;
+}

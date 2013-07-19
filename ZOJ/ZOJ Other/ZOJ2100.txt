@@ -1,0 +1,102 @@
+//2100Seeding
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+bool dfs(int size[2], int map[10][10], int pos_x, int pos_y, int cnt)
+{
+	if (cnt <= 0)
+	{
+		return true;
+	}
+	if (pos_x - 1 >= 0 && map[pos_x - 1][pos_y] == 0)
+	{
+		map[pos_x - 1][pos_y] = 2;
+		if (dfs(size, map, pos_x - 1, pos_y, cnt - 1))
+			return true;
+		map[pos_x - 1][pos_y] = 0;
+	}
+	if (pos_x + 1 < size[0] && map[pos_x + 1][pos_y] == 0)
+	{
+		map[pos_x + 1][pos_y] = 2;
+		if (dfs(size, map, pos_x + 1, pos_y, cnt - 1))
+			return true;
+		map[pos_x + 1][pos_y] = 0;
+	}
+	if (pos_y - 1 >= 0 && map[pos_x][pos_y - 1] == 0)
+	{
+		map[pos_x][pos_y - 1] = 2;
+		if (dfs(size, map, pos_x, pos_y - 1, cnt - 1))
+			return true;
+		map[pos_x][pos_y - 1] = 0;
+	}
+	if (pos_y + 1 < size[1] && map[pos_x][pos_y + 1] == 0)
+	{
+		map[pos_x][pos_y + 1] = 2;
+		if (dfs(size, map, pos_x, pos_y + 1, cnt - 1))
+			return true;
+		map[pos_x][pos_y + 1] = 0;
+	}
+	return false;
+}
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int size[2], map[10][10], cnt;
+	char tmp;
+	while (cin >> size[0] >> size[1] && (size[0] || size[1]))
+	{
+		cnt = 0;
+		for (int i = 0; i < size[0]; i ++)
+		{
+			for (int j = 0; j < size[1]; j ++)
+			{
+				cin >> tmp;
+				switch (tmp)
+				{
+				case '.':
+					map[i][j] = 0;
+					cnt ++;
+					break;
+				case 'S':
+					map[i][j] = 1;
+					break;
+				}
+			}
+		}
+		map[0][0] = 2;
+		cnt --;
+		if (dfs(size, map, 0, 0, cnt))
+		{
+			cout << "YES" << endl;
+		}
+		else
+		{
+			cout << "NO" << endl;
+		}
+	}
+
+	return 0;
+}

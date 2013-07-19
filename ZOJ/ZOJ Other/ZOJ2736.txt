@@ -1,0 +1,47 @@
+//2736Daffodil number
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num, digit[3];
+	while (cin >> num)
+	{
+		digit[0] = num / 100;
+		digit[1] = num / 10 - digit[0] * 10;
+		digit[2] = num % 10;
+		if (num == digit[0] * digit[0] * digit[0] + digit[1] * digit[1] * digit[1]
+			+ digit[2] * digit[2] * digit[2])
+		{
+			cout << "Yes" << endl;
+		}
+		else
+			cout << "No" << endl;
+	}
+
+	return 0;
+}

@@ -1,0 +1,47 @@
+//1405Tanning Salon
+#include<iostream>
+#include<string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int bed, cusnum, i, letter1, cusleft, letter[26];
+	string customer;
+	while(cin>>bed && bed != NULL)
+	{
+		cin>>customer;
+		cusnum = cusleft = 0;
+		for(i=0; i<26; i++)
+			letter[i] = false;
+		for(i=0; i<customer.size(); i++)
+		{
+			letter1 = int(customer.at(i) - 'A');
+			if(letter[letter1] == true)//走了
+			{
+				letter[letter1] = false;
+				cusnum --;
+			}
+			else if(letter[letter1] == false && cusnum <bed)//来了，有空位
+			{
+				letter[letter1] = true;
+				cusnum ++;
+			}
+			else if(letter[letter1] == false && cusnum >= bed)//来了，没空位
+			{
+				letter[letter1] = 2;
+			}
+			else if(letter[letter1] == 2)//没空位走了
+			{
+				letter[letter1] = false;
+				cusleft ++;
+			}
+		}
+		if(cusleft == 0)
+			cout<<"All customers tanned successfully."<<endl;
+		else cout<<cusleft<<" customer(s) walked away."<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

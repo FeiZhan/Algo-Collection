@@ -1,0 +1,60 @@
+// 1160Biorhythms
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf());
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf());
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, phy, emo, inte, day, j, case_cnt;
+	while (cin >> case_sum)
+	{
+		while (case_sum --)
+		{
+			case_cnt = 0;
+			while (cin >> phy >> emo >> inte >> day
+				&& phy != -1 && emo != -1 && inte != -1 && day != -1)
+			{
+				case_cnt ++;
+				for (j = day + 1; true; ++ j)
+				{
+					if ((j - phy) % 23 == 0 && (j - emo) % 28 == 0
+						&& (j - inte) % 33 == 0)
+					{
+						break;
+					}
+				}
+				cout << "Case " << case_cnt << ": the next triple peak occurs in "
+					<< j - day << " days." << endl;
+			}
+			if (case_sum)
+			{
+				cout << endl;
+			}
+		}
+	}
+
+	return 0;
+}

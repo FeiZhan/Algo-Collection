@@ -1,0 +1,92 @@
+//1061Web Navigation
+//#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	bool is_first = true;
+	int case_sum;
+	string cmd;
+	vector<string> page_vec;
+	vector<string>::iterator page_it;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		page_vec.push_back("http://www.acm.org/");
+		page_it = page_vec.begin();
+#ifdef _DEBUG_OUTPUT_
+		cout << page_it - page_vec.begin() << " "
+			<< page_vec.end() - page_vec.begin() << endl;
+#endif
+		is_first = true;
+		while(getline(cin, cmd) && cmd.compare("QUIT") != 0)
+		{
+			if (cmd.size() <= 0)
+				continue;
+			if (is_first == true)
+				is_first = false;
+			else
+				cout << endl;
+			switch (cmd.at(0))
+			{
+			case 'B':
+				if (page_it == page_vec.begin())
+					cout << "Ignored" ;
+				else
+				{
+					page_it --;
+					cout << *page_it;
+				}
+				break;
+			case 'F':
+				if (page_it == page_vec.end() - 1)
+					cout << "Ignored";
+				else
+				{
+					page_it ++;
+					cout << *page_it;
+				}
+				break;
+			case 'V':
+				if (page_vec.end() - page_it > 1)
+					page_vec.erase(page_it + 1, page_vec.end());
+				page_vec.push_back(cmd.substr(6));
+				page_it = page_vec.end() - 1;
+				cout << *page_it;
+				break;
+			default:
+				break;
+			}
+		}
+		if (case_sum > 0)
+			cout << endl << endl;
+	}
+
+	return 0;
+}

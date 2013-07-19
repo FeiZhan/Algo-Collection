@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main()
+{
+	int i,j,k;
+	long sum,exponent;
+	char a[40];
+	
+	while(1)
+	{
+		a[0]=getchar();
+		if(a[0]=='0') break;
+		for(i=1;i<40;i++)
+		{
+			a[i]=getchar();
+			if(a[i]=='\n' || a[i]=='\r') break; 
+		}
+		sum=0;
+		for(j=0;j<i;j++)
+		{
+			exponent=1;
+			for(k=0;k<i-j;k++)
+			{
+				exponent*=2;
+			}
+			sum+=(a[j]-48)*(exponent-1);
+		}
+		printf("%ld\n",sum);
+	}
+	return 0;
+}

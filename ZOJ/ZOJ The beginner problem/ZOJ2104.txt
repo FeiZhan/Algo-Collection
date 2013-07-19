@@ -1,0 +1,49 @@
+//2104Let the Balloon Rise
+#include<iostream>
+#include <string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int BalNum, i, j, color[1000], ColorNum, ColorMax;
+	string balloon[1000], ColorStr[1000], ColorStrMax;
+	bool FindFlag;
+	while (cin>>BalNum && BalNum != 0)
+	{
+		ColorNum = 0;
+		for (i=0; i<BalNum; i++)
+		{
+			cin>>balloon[i];
+			FindFlag = false;
+			for (j=0; j<ColorNum; j++)
+			{
+				if (balloon[i].compare(ColorStr[j]) == NULL)
+				{
+					color[j] ++;
+					FindFlag = true;
+					break;
+				}
+			}
+			if (FindFlag == false || ColorNum == 0)
+			{
+				ColorNum ++;
+				color[ColorNum - 1] = 1;
+				ColorStr[ColorNum - 1] = balloon[i];
+			}
+		}
+		ColorMax = 0;
+		for (i=0; i<ColorNum; i++)
+		{
+			if (color[i] > ColorMax)
+			{
+				ColorMax = color[i];
+				ColorStrMax = ColorStr[i];
+			}
+		}
+		cout<<ColorStrMax<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

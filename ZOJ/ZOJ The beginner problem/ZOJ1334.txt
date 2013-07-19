@@ -1,0 +1,47 @@
+//1334Basically Speaking
+#include<iostream>
+#include<math.h>
+#include<string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	string str;
+	int base1, base2, i, number;
+	long long num;
+	while(cin>>str>>base1>>base2 != NULL)
+	{
+		num = 0;
+		for(i=0; i<str.size(); i++)
+		{
+			if(str.at(i) >= '0' && str.at(i) <= '9')
+				num += long(pow(double(base1), int(str.size() - i - 1))) * (str.at(i) - '0');
+			else if(str.at(i) >= 'A' && str.at(i) <= 'F')
+				num += long(pow(double(base1), int(str.size() - i - 1))) * (str.at(i) - 'A' + 10);
+		}
+		str.clear();
+		while(num > 0)
+		{
+			number = num % base2;
+			if(number < 10)
+				str = str + char(number + '0');
+			else str = str + char(number - 10 + 'A');
+			num /= base2;
+		}
+		number = str.size();
+		if(number > 7)
+			cout<<"  ERROR"<<endl;
+		else
+		{
+			for(i=number+1; i<=7; i++)
+				cout<<" ";
+			for(i=number-1; i>=0; i--)
+				cout<<str.at(i);
+			cout<<endl;
+		}
+	}
+	//getchar();
+	return 0;
+}

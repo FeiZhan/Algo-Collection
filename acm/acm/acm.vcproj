@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="acm"
+	ProjectGUID="{01CC96A5-0F7F-4B16-AC36-958CFCDF3E89}"
+	RootNamespace="acm"
+	TargetFrameworkVersion="196613"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="源文件"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath="..\main.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="资源文件"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+			<File
+				RelativePath="..\..\ACM经验.xlsx"
+				>
+			</File>
+			<File
+				RelativePath="..\input.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\output.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\template.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\ZOJ1086WA.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\ZOJ1205WA.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\ZOJ1909WA.txt"
+				>
+			</File>
+			<Filter
+				Name="ZOJ The beginner problem"
+				>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ The beginner problem.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1037不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1048C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1049C++.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1049C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1051.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1061.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1067.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1115.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1151.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1151不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1201.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1205WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1216.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1240.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1241.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1242.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1251.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1292.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1331.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1334.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1337.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1338.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1350C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1365.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1382.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1383.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1394.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1402.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1405.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1414.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1494.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1514.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1622.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1715.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1730不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1755.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1760C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1763.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1796WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1813.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1879.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1915.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1949.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2001.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2099.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2104.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2388.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2417.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2807.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2812.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2857.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2886.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2947.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2954WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2987.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Simulation Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ Simulation Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1006.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1009WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1012WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1016.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1016C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1057.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1058.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1068.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1073.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1111.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1133.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1146WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1152WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1154.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1175.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1178.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1244.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1259.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1259mle.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1267tle.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1278.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1295.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1392.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1517wa.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1569.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1610.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1657.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1708.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ1712.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ2000WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ2101RE.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ2421.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Simulation Problems\ZOJ2613.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Greedy Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Greedy Problems\ZOJ 1025.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Greedy Problems\ZOJ 1029.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Greedy Problems\ZOJ Greedy Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Greedy Problems\ZOJ1239.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Dynamic programming Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ Dynamic programming Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1027.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1074.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1076.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1093.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1136.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1196.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1234.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1602.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1986不懂.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ2042.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ2202.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ2401.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Search Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ Search Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ1060.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ1103.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ1217.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ1530.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ2165.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ2416.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ2416TLE.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ other"
+				>
+				<File
+					RelativePath="..\..\ZOJ other\1056ac.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\1058wa.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\1088 wa.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ1019WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1045C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1047.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1057C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1078C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1086.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1091.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\ZOJ1107.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1108.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1109.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1113C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1115错误.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1137.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1159.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1160 不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1170.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1178C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1180.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1188.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1195C.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1203.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1221.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1243.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1284.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1294.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1307.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1312.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1314.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1315.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1326.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1366.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1406.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1476.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1484.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1489.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1539.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1543.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1577.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1582.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1608.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1628.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1629不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1635.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1649.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1657不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1666.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1698.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1709.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1711.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1730.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1733.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1789.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1796.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1797.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1797不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1808.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1813C（错误）.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1828.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1871.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1871不会.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1874.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1884.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ1905.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1915.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1926.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1951.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ1970.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2008.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\ZOJ2022.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\ZOJ2060.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2095.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2100.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2104错误.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2105.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2107.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2108.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2109.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2110.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2136.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2172.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2176.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2191.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2256WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2358.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2476.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2478.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2480.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2481.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2482.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2514.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2540.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2679.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2722.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2724.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2727.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2736.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2744.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2772.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2773.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2818.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2829.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ2835.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2840WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2850.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2932.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ other\ZOJ2970.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ The beginner problem\ZOJ2974WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3123.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3124.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3167.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3168.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3171.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3174.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3182.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3197.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3198.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3202.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3203.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3207.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3210.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3322.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other\ZOJ3323.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="UVa"
+				>
+				<File
+					RelativePath="..\..\UVa\UVa10035.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10038.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10050.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10142WA.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10188.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10189.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10191 Queueing.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa10420.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa127.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa152.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa156.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa299.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa424.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa458.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa532.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa572.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa579.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa639.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\uva657_wa.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\UVa\UVa699.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="POJ"
+				>
+				<File
+					RelativePath="..\..\POJ\POJ1004.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1005.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1007.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1028.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1035.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1046.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\POJ\POJ1056.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ String Management Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ String Management Problems\ZOJ String Management Problems.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Abstract Struct Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Abstract Struct Problems\ZOJ Abstract Struct Problems.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Number Theory Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Number Theory Problems\ZOJ Number Theory Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Number Theory Problems\ZOJ1160.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Number Theory Problems\ZOJ1906.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Number Theory Problems\ZOJ2277.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Number Theory Problems\ZOJ2723.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Geometry Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Geometry Problems\ZOJ Geometry Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Geometry Problems\ZOJ1139.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Geometry Problems\ZOJ1453.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Tree Struct Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Tree Struct Problems\ZOJ Tree Struct Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Search Problems\ZOJ1268.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Graph Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Graph Problems\ZOJ Graph Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\ZOJ1119.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Graph Problems\ZOJ1140.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Graph Problems\ZOJ1492.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Graph Problems\ZOJ2966.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Combination Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Combination Problems\ZOJ Combination Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Combination Problems\ZOJ1202.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Combination Problems\ZOJ1938.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Shortest Path Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Shortest Path Problems\ZOJ Shortest Path Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Dynamic programming Problems\ZOJ1082.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Game Theory Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Game Theory Problems\ZOJ Game Theory Problems.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Maximum Flow Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Maximum Flow Problems\ZOJ Maximum Flow Problems.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ZOJ Other Problems"
+				>
+				<File
+					RelativePath="..\..\ZOJ Other Problems\ZOJ Other Problems.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\ZOJ Other Problems\ZOJ2132.txt"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CF"
+				>
+				<File
+					RelativePath="..\..\CF\CF118A.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CF\CF158A.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CF\CF158B.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CF\CF4A.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CF\CF71A.txt"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CF\CF82A.txt"
+					>
+				</File>
+			</Filter>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
