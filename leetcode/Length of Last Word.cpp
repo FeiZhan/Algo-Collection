@@ -3,29 +3,48 @@ public:
     int lengthOfLastWord(const char *s) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        int length = strlen(s);
-        // a virtual space behind the string
-        int end = length;
-        for (int i = length - 1; i >= 0; -- i)
+        int lastspace = -1, lastspace2 = -1, length = strlen(s);
+        bool consec = false;
+        for (int i = 0; i < length; ++ i)
         {
-			if (' ' != s[i])
-			{
-				break;
-			} else
-			{
-				end = i;
-			}
-		}
-        // a virtual space before the string
-		int begin = -1;
-		for (int i = 0; i < end; ++ i)
-		{
 			if (' ' == s[i])
 			{
-				begin = i;
+				if (! consec)
+				{
+					consec = true;
+					lastspace2 = lastspace;
+					lastspace = i;
+				} else
+				{
+					lastspace2 = i;
+				}
+			} else
+			{
+				consec = false;
 			}
 		}
-        // distance between two spaces minus one
-		return end - begin - 1;
+		if (0 == length)
+		{
+			return 0;
+		} else if (-1 == lastspace)
+		{
+			if (consec)
+			{
+				return 0;
+			} else
+			{
+				return length;
+			}
+		} else if (' ' == s[length - 1])
+		{
+			if (-1 == lastspace2)
+			{
+				return lastspace;
+			} else
+				return lastspace - lastspace2 - 1;
+		} else
+		{
+			return length - 1 - lastspace;
+		}
     }
 };
