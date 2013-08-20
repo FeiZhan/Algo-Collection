@@ -28,11 +28,9 @@ public:
 		}
 		if (matrix.size() > level * 2 + 1)
 		{
-		cout << "levelc " << level << endl;
 			// down
 			for (int i = level + 1; i < matrix[0].size() - level; ++ i)
 			{
-		cout << " " << matrix[matrix.size() - level - 1][matrix[0].size() - i - 1] << endl;
 				ans.push_back(matrix[matrix.size() - level - 1][matrix[0].size() - i - 1]);
 			}
 		}
