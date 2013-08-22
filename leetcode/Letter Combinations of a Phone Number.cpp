@@ -1,4 +1,3 @@
-//doing
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
@@ -7,39 +6,19 @@ public:
 		vector<string> ans;
 		if (0 == digits.length())
 		{
+			ans.push_back("");
 			return ans;
 		}
-		switch(digits[0])
+		const std::string LETTERS[10] = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+		vector<string> last( letterCombinations(digits.substr(1)) );
+		for (int i = 0; i < last.size(); ++ i)
 		{
-		case '0':
-		case '1':
-			ans.push_back("");
-			break;
-		case '2':
-			ans.push_back("a");
-			ans.push_back("b");
-			ans.push_back("c");
-			break;
-		case '3':
-			ans.push_back("d");
-			ans.push_back("e");
-			ans.push_back("f");
-			break;
-		case '4':
-			ans.push_back("g");
-			ans.push_back("h");
-			ans.push_back("i");
-			break;
-		case '5':
-			ans.push_back("j");
-			ans.push_back("k");
-			ans.push_back("l");
-			break;
-		case '6':
-			ans.push_back("m");
-			ans.push_back("n");
-			ans.push_back("o");
-			break;
+			int digit = static_cast<int>(digits[0] - '0');
+			for (int j = 0; j < LETTERS[digit].length(); ++ j)
+			{
+				ans.push_back(LETTERS[digit][j] + last[i]);
+			}
 		}
+		return ans;
     }
 };
