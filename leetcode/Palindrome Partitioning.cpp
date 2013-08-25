@@ -1,81 +1,71 @@
-//WA
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     vector<vector<string> > partition(string s) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        vector<vector<int> > is_palin;
-        for (int i = 0; i < s.length(); ++ i)
-        {
-			vector<int> tmp;
-			for (int j = i; j < s.length(); ++ j)
-			{
-				tmp.push_back(isPalin(s.substr(i, j - i)));
-			}
-			is_palin.push_back(tmp);
+		vector<vector<string> > ans;
+		std::vector<std::vector<bool> > palin;
+		for (int i = 0; i < s.length(); ++ i)
+		{
+			palin.push_back(std::vector<bool>(s.length()));
 		}
-		return parti(s, is_palin, 0, s.length() - 1);
+		for (int i = 0; i < s.length(); ++ i)
+		{
+			// odd
+			palin[i][i] = true;
+			for (int j = 1; i - j >= 0 && i + j < s.length(); ++ j)
+			{
+				palin[i - j][i + j] = palin[i - j + 1][i + j - 1] && s[i - j] == s[i + j];
+			}
+			// even
+			for (int j = 0; i - j >= 0 && i + j + 1 < s.length(); ++ j)
+			{
+				palin[i - j][i + j + 1] = (0 == j || palin[i - j + 1][i + j]) && s[i - j] == s[i + j + 1];
+			}
+		}
+		getPalin(s, 0, vector<string>(), ans, palin);
+		return ans;
     }
-	bool isPalin(string s)
-    {
-		for (int i = 0; i < s.length() / 2; ++ i)
+	void getPalin(const std::string &s, const int begin, const std::vector<std::string> &past, std::vector<std::vector<std::string> > &ans, const std::vector<std::vector<bool> > &palin)
+	{
+		if (begin == s.length())
 		{
-			if (s[i] != s[s.length() - i - 1])
+			ans.push_back(past);
+			return;
+		}
+		if (begin > s.length())
+		{
+			return;
+		}
+		for (int i = begin; i < s.length(); ++ i)
+		{
+			if (palin[begin][i])
 			{
-				return false;
+				std::vector<std::string> now = past;
+				now.push_back(s.substr(begin, i - begin + 1));
+				getPalin(s, i + 1, now, ans, palin);
 			}
 		}
-		return true;
-	}
-    vector<vector<string> > parti(const string &s, const vector<vector<int> > &is_palin, int begin, int end)
-    {
-		vector<vector<string> > p;
-		if (begin > end)
-		{
-			return p;
-		}
-		if (begin == end && is_palin[begin][end])
-		{
-			vector<string> tmp;
-			tmp.push_back(s.substr(begin, end - begin));
-			p.push_back(tmp);
-			return p;
-		}
-		vector<vector<string> > first;
-		for (int i = begin; i <= end; ++ i)
-		{
-			vector<string> tmp;
-			if (is_palin[begin][i])
-			{
-				tmp.push_back(s.substr(i, i - begin));
-			}
-			//vector<vector<string> > first; // = parti(s, is_palin, begin, i);
-			first.push_back(tmp);
-			/*if (is_palin[i + 1][end])
-			{
-				tmp.clear();
-				tmp.push_back(s.substr(end, end - i - 1));
-			}
-			vector<vector<string> > second; // = parti(s, is_palin, i + 1, end);
-			second.push_back(tmp);
-			if (first.size() == 0 || second.size() == 0)
-			{
-				continue;
-			}
-			for (int j = 0; j < first.size(); ++ j)
-			{
-				for (int k = 0; k < second.size(); ++ k)
-				{
-					vector<string> tmp;
-					// preallocate memory
-					tmp.reserve( first[j].size() + second[k].size() );
-					tmp.insert( tmp.end(), first[j].begin(), first[j].end() );
-					tmp.insert( tmp.end(), second[k].begin(), second[k].end() );
-					p.push_back(tmp);
-				}
-			}*/
-		}
-		//unique(p.begin(), p.end());
-		return first; //p;
 	}
 };
+int main()
+{
+	Solution s;
+	vector<vector<string> > ans;
+	ans = s.partition("cdd");
+	for (int i = 0; i < ans.size(); ++ i)
+	{
+		for (int j = 0; j < ans[i].size(); ++ j)
+		{
+			std::cout << ans[i][j] << "+";
+		}
+		std::cout << ", ";
+	}
+	std::cout << std::endl;
+	return 0;
+}
