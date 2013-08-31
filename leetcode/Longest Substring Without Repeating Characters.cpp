@@ -1,34 +1,34 @@
-//WA
-
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        if (s.length() == 0)
-        {
-			return 0;
-		}
-        int begin = 0, max = 1;
-        for (int i = 1; i < s.length(); ++ i)
-        {
-			if (max > i - begin)
+		int max = 0;
+		// begin
+		int i = 0;
+		// end
+		int j = 0;
+		bool exist[256] = {false};
+		while (j < s.length())
+		{
+			if (exist[s[j]])
 			{
-				continue;
-			}
-			string target = s.substr(begin, i - begin);
-			unsigned pos = target.find(s[i]);
-			if (pos == string::npos)
-			{
-				if (i - begin + 1 > max)
+				max = std::max(max, j - i);
+				// remove same char
+				while (s[i] != s[j])
 				{
-					max = i - begin + 1;
+					exist[s[i]] = false;
+					++ i;
 				}
+				++ i;
+				++ j;
 			} else
 			{
-				begin += pos;
+				exist[s[j]] = true;
+				++ j;
 			}
 		}
+		max = std::max(max, static_cast<int>( s.length() ) - i);
 		return max;
     }
 };

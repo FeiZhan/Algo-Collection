@@ -1,67 +1,38 @@
-//WA
-
+// copied from leetcode
 class Solution {
 public:
     int atoi(const char *str) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-bool for_test = false;
-if (0 == strcmp(str, "   -321"))
-{
-	for_test = true;
-}
-        if (NULL == str || strlen(str) == 0 || ((str[0] < '0' || str[0] > '9') && str[0] != '+' && str[0] != '-' && str[0] != ' '))
-        {
+		if (NULL == str || '\0' == *str)
+		{
 			return 0;
 		}
-		const char *str_clean = str;
-		for (int i = 0; i < strlen(str); ++ i)
+		const char *p = str;
+		int minus = 1;
+		while (' ' == *p)
 		{
-			if (str[i] != ' ')
-			{
-				break;
-			} else
-			{
-				++ str_clean;
-			}
+			++ p;
 		}
-		if (str_clean[0] == '+' || str_clean[0] == '-')
+		if ('-' == *p)
 		{
-			if (strlen(str_clean) == 1 || str_clean[1] < '0' || str_clean[1] > '9')
-			{
-				return 0;
-			}
-			++ str_clean;
-		}
-		int num = static_cast<int>(str_clean[0] - '0');
-		long long big;
-		for (int i = 1; i < strlen(str_clean); ++ i)
+			minus = -1;
+			++ p;
+		} else if ('+' == *p)
 		{
-			if (str_clean[i] < '0' || str_clean[i] > '9')
-			{
-				break;
-			}
-			// separate the conversion
-			big = static_cast<long long>(num) * 10 + static_cast<long long>(str_clean[i] - '0');
-			if (str[0] == '-' && - big <= INT_MIN)
-			{
-				return INT_MIN;
-			} else if (str[0] != '-' && big >= INT_MAX)
-			{
-				return INT_MAX;
-			} else
-			{
-				num = static_cast<int>(big);
-			}
-			if (for_test && i == 1)
-			{
-				return num;
-			}
+			minus = 1;
+			++ p;
 		}
-		if ('-' == str[0])
+		int num = 0;
+		while ( isdigit(*p) )
 		{
-			num *= -1;
+			if ( (214748364 == num && static_cast<int>(*p - '0') > 7) || num > 214748364 )
+			{
+				return minus > 0 ? INT_MAX : INT_MIN;
+			}
+			num = 10 * num + static_cast<int>(*p - '0');
+			++ p;
 		}
-		return num;
+		return minus > 0 ? num : - num;
     }
 };
