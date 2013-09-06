@@ -1,86 +1,77 @@
-//WA
-#include <iostream>
-#include <vector>
-#include <climits>
-using namespace std;
-void printMat(const vector<vector<int> > &matrix)
-{
-	for (unsigned i = 0; i < matrix.size(); ++ i)
-	{
-		for (unsigned j = 0; j <matrix[i].size(); ++ j)
-		{
-			cout << matrix[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
+// idea from leetcode
+
 class Solution {
 public:
     void setZeroes(vector<vector<int> > &matrix) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        for (unsigned i = 0; i < matrix.size(); ++ i)
-        {
-			for (unsigned j = 0; j < matrix[i].size(); ++ j)
+		if (matrix.size() == 0 || 0 == matrix[0].size())
+		{
+			return;
+		}
+		bool zero_column = false, zero_row = false;
+		for (int i = 0; i < matrix.size(); ++ i)
+		{
+			if (0 == matrix[i][0])
+			{
+				zero_column = true;
+				break;
+			}
+		}
+		for (int i = 0; i < matrix[0].size(); ++ i)
+		{
+			if (0 == matrix[0][i])
+			{
+				zero_row = true;
+				break;
+			}
+		}
+		for (int i = 1; i < matrix.size(); ++ i)
+		{
+			for (int j = 1; j < matrix[i].size(); ++ j)
 			{
 				if (0 == matrix[i][j])
 				{
-//cout << "testing ij " << i << " " << j << endl;
-					for (unsigned k = 0; k < matrix.size(); ++ k)
-					{
-//cout << "testing k1 " << k << endl;
-						if (INT_MIN == matrix[k][j] || 0 == matrix[k][j])
-						{
-							continue;
-						} else
-						{
-							matrix[k][j] = INT_MIN;
-						}
-					}
-					for (unsigned k = 0; k < matrix[i].size(); ++ k)
-					{
-//cout << "testing k2 " << k << endl;
-						if (INT_MIN == matrix[i][k] || 0 == matrix[i][k])
-						{
-//cout << "testing k2 case2 " << k << endl;
-							continue;
-						} else
-						{
-//cout << "testing k2 case3 " << k << endl;
-							matrix[i][k] = INT_MIN;
-						}
-					}
+					matrix[i][0] = matrix[0][j] = 0;
 				}
-//cout << "testing " << endl;
-	//printMat(matrix);
 			}
 		}
-        for (unsigned i = 0; i < matrix.size(); ++ i)
-        {
-			for (unsigned j = 0; j < matrix[i].size(); ++ j)
+		for (int i = 1; i < matrix.size(); ++ i)
+		{
+			if (0 == matrix[i][0])
 			{
-				if (INT_MIN == matrix[i][j])
+				for (int j = 1; j < matrix[i].size(); ++ j)
 				{
 					matrix[i][j] = 0;
 				}
 			}
 		}
+		for (int i = 1; i < matrix[0].size(); ++ i)
+		{
+			if (0 == matrix[0][i])
+			{
+				for (int j = 1; j < matrix.size(); ++ j)
+				{
+					matrix[j][i] = 0;
+				}
+			}
+		}
+		if (zero_column)
+		{
+			for (int i = 1; i < matrix.size(); ++ i)
+			{
+				matrix[i][0] = 0;
+			}
+		}
+		if (zero_row)
+		{
+			for (int i = 0; i < matrix[0].size(); ++ i)
+			{
+				matrix[0][i] = 0;
+			}
+		} else if (zero_column)
+		{
+			matrix[0][0] = 0;
+		}
     }
 };
-int main(int argc, char *argv[])
-{
-	vector<vector<int> > matrix;
-	vector<int> tmp;
-	Solution s;
-	//[[0,1]]
-	matrix.clear();
-	tmp.clear();
-	tmp.push_back(0);
-	tmp.push_back(1);
-	matrix.push_back(tmp);
-	s.setZeroes(matrix);
-	printMat(matrix);
-	//[[0,0,0,5],[4,3,1,4],[0,1,1,4],[1,2,1,3],[0,0,1,1]]	[[0,0,0,0],[0,0,0,4],[0,0,0,4],[0,0,0,3],[0,0,0,1]]	[[0,0,0,0],[0,0,0,4],[0,0,0,0],[0,0,0,3],[0,0,0,0]]	
-
-	return 0;
-}

@@ -1,4 +1,4 @@
-//WA
+//
 #define _FILE_DEBUG_
 //#define _C_LAN_
 //#define _DEBUG_OUTPUT_
@@ -9,17 +9,21 @@
 #include <stdio.h>
 using namespace std;
 
-#include <string>
 #include <vector>
-#include <map>
-
-class compare { // simple comparison function
-public:
-	bool operator()(const int x,const int y)
-	{
-		return (x-y)>0; 
-	} // returns x>y
+#include <algorithm>
+struct Testee
+{
+	std::string id;
+	int loc, score;
+	size_t local_rank, rank;
+	Testee(std::string i, int l, int s) : id(i), loc(l), score(s), local_rank(-1), rank(-1)
+	{}
 };
+bool comp (const Testee &t1, const Testee &t2)
+{
+	return t1.score > t2.score || (t1.score == t2.score && t1.id < t2.id);
+}
+
 int main(int argc, char *argv[])
 {
 #ifdef _FILE_DEBUG_
@@ -39,59 +43,44 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
-	int loc_num, testee_num, score;
-	std::string tmp1;
-	std::map<std::string, int> loc;
-	std::multimap<int, std::string> rank, rank_tmp;
-	std::vector<std::multimap<int, std::string> > local_rank;
-	cin >> loc_num;
+	int loc_num;
+	std::cin >> loc_num;
+	int testee_num, score;
+	std::string id;
+	vector<Testee> local_test, test;
 	for (int i = 0; i < loc_num; ++ i)
 	{
-		cin >> testee_num;
-		rank_tmp.clear();
+		std::cin >> testee_num;
+		local_test.clear();
 		for (int j = 0; j < testee_num; ++ j)
 		{
-			cin >> tmp1 >> score;
-			loc.insert(std::make_pair(tmp1, i));
-			rank.insert(std::make_pair(score, tmp1));
-			rank_tmp.insert(std::make_pair(score, tmp1));
+			std::cin >> id >> score;
+			local_test.push_back( Testee(id, i, score) );
 		}
-		local_rank.push_back(rank_tmp);
-	}
-	std::cout << rank.size() << std::endl;
-	int count = 0, count2 = 0, erase_count = 0;
-	for (std::multimap<int, std::string>::reverse_iterator it = rank.rbegin(); it != rank.rend();)
-	{
-		std::multimap<int, std::string>::reverse_iterator it2;
-		for (it2 = it; it2 != rank.rend() && it2->first != it->first; ++ it2)
-		{}
-		std::multimap<int, std::string>::reverse_iterator min_it = it;
-		for (std::multimap<int, std::string>::reverse_iterator it3 = it; it3 != it2 && it3 != rank.rend(); ++ it3)
+		std::sort(local_test.begin(), local_test.end(), comp);
+		for (int j = 0, rank = 0, previous = -1; j < local_test.size(); ++ j)
 		{
-			if (it3->second < min_it->second)
+			if (local_test[j].score != previous)
 			{
-				min_it = it3;
+				previous = local_test[j].score;
+				rank = j + 1;
 			}
+			local_test[j].local_rank = rank;
 		}
-		count2 = 0;
-		for (std::multimap<int, std::string>::reverse_iterator it4 = local_rank[loc[min_it->second]].rbegin(); it4->second != min_it->second && it4 != local_rank[loc[min_it->second]].rend(); ++ it4)
-		{
-			++ count2;
-		}
-		// registration_number final_rank location_number local_rank
-		std::cout << min_it->second << " " << 1 + count << " " << loc[min_it->second] + 1 << " " << count2 + 1 << std::endl;
-		if (min_it == it)
-		{
-			count += erase_count + 1;
-			erase_count = 0;
-			++ it;
-		} else
-		{
-			++ erase_count;
-			//( --rev_iter.base());
-			rank.erase( --min_it.base());
-		}
+		test.insert(test.end(), local_test.begin(), local_test.end());
 	}
-
+	std::sort(test.begin(), test.end(), comp);
+	std::cout << test.size() << std::endl;
+	for (int i = 0, rank = 0, previous = -1; i < test.size(); ++ i)
+	{
+		if (test[i].score != previous)
+		{
+			previous = test[i].score;
+			rank = i + 1;
+		}
+		test[i].rank = rank;
+		// registration_number final_rank location_number local_rank
+		std::cout << test[i].id << " " << rank << " " << test[i].loc + 1 << " " << test[i].local_rank << std::endl;
+	}
 	return 0;
 }
