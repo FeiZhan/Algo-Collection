@@ -1,4 +1,6 @@
 // Partly WA
+// compute the entire charge between two days, and subtract to hour and minute
+
 #define _FILE_DEBUG_
 //#define _C_LAN_
 //#define _DEBUG_OUTPUT_

@@ -1,4 +1,6 @@
 // Partly WA
+// query table
+
 #define _FILE_DEBUG_
 //#define _C_LAN_
 //#define _DEBUG_OUTPUT_
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
 	}
 	if (! flag)
 	{
-			std::cout << "No Solution" << std::endl;
+		std::cout << "No Solution" << std::endl;
 	}
 
 	return 0;
