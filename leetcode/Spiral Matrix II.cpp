@@ -1,3 +1,5 @@
+// simply iterate, copied from leetcode
+
 class Solution {
 public:
     vector<vector<int> > generateMatrix(int n) {
