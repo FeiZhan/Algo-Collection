@@ -1,4 +1,4 @@
-// my own idea
+// a stack directly
 
 /**
  * Definition for binary tree

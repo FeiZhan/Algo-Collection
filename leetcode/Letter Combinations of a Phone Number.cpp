@@ -10,7 +10,7 @@ public:
 			return ans;
 		}
 		const std::string LETTERS[10] = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-		vector<string> last( letterCombinations(digits.substr(1)) );
+		std::vector<std::string> last( letterCombinations(digits.substr(1)) );
 		for (int i = 0; i < last.size(); ++ i)
 		{
 			int digit = static_cast<int>(digits[0] - '0');

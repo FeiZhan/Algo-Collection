@@ -3,16 +3,9 @@ public:
     int uniquePaths(int m, int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        vector<vector<int> > path;
-        for (int i = 0; i < m; ++ i)
-        {
-			vector<int> tmp;
-			for (int j = 0; j < n; ++ j)
-			{
-				tmp.push_back(0);
-			}
-			path.push_back(tmp);
-		}
+
+		// initialize a m * n matrix
+        vector<vector<int> > path(m, std::vector<int>(n));
 		for (int i = m - 1; i >= 0; -- i)
 		{
 			for (int j = n - 1; j >= 0; -- j)

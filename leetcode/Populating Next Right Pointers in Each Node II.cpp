@@ -1,4 +1,4 @@
-// copied from leetcode
+// copied from leetcode, redo at 2013-09-22
 
 /**
  * Definition for binary tree with next pointer.
