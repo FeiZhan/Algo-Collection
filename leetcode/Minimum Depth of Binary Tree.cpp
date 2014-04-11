@@ -35,3 +35,25 @@ public:
 		return (left < right) ? left : right;
 	}
 };
+
+// accepted 2014-03-21
+class Solution {
+public:
+	int minDepth(TreeNode *root) {
+		if (NULL == root)
+		{
+			return 0;
+		}
+		if (NULL == root->left)
+		{
+			return 1 + minDepth(root->right);
+		}
+		if (NULL == root->right)
+		{
+			return 1 + minDepth(root->left);
+		}
+		int left = minDepth(root->left);
+		int right = minDepth(root->right);
+		return 1 + (left < right ? left : right);
+	}
+};

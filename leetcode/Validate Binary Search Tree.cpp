@@ -56,3 +56,32 @@ public:
 		return true;
 	}
 };
+// 2014-04-11
+class Solution {
+public:
+	bool isValidBST(TreeNode *root) {
+		if (NULL == root)
+		{
+			return true;
+		}
+		TreeNode *temp = root->left;
+		while (NULL != temp && NULL != temp->right)
+		{
+			temp = temp->right;
+		}
+		if (NULL != temp && temp->val >= root->val)
+		{
+			return false;
+		}
+		temp = root->right;
+		while (NULL != temp && NULL != temp->left)
+		{
+			temp = temp->left;
+		}
+		if (NULL != temp && temp->val <= root->val)
+		{
+			return false;
+		}
+		return isValidBST(root->left) && isValidBST(root->right);
+	}
+};

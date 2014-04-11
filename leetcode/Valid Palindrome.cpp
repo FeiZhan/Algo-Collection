@@ -29,3 +29,31 @@ public:
 		return flag;
     }
 };
+// accepted 2014-03-21
+class Solution {
+public:
+	bool isPalindrome(string s) {
+		for (size_t i = 0, j = s.length() - 1; i < s.length() && j < s.length() && i <= j; ++i, --j)
+		{
+			while (i < s.length() && !isAlphanumeric(s[i]))
+			{
+				++i;
+			}
+			while (j < s.length() && !isAlphanumeric(s[j]))
+			{
+				--j;
+			}
+			//std::cout << i << " " << s[i] << " " << isAlphanumeric(s[i]) << std::endl;
+			//std::cout << j << " " << s[j] << " " << isAlphanumeric(s[j]) << std::endl;
+			if (i < s.length() && j < s.length() && s[i] != s[j] && s[i] != s[j] - 'a' + 'A' && s[i] - 'a' + 'A' != s[j])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	bool isAlphanumeric(char c)
+	{
+		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+	}
+};

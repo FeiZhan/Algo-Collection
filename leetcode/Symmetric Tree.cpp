@@ -36,3 +36,22 @@ public:
 		return false;
 	}
 };
+// 2014-04-11
+class Solution {
+public:
+	bool isSymmetric(TreeNode *root) {
+		if (NULL == root)
+		{
+			return true;
+		}
+		return isSymmetric(root->left, root->right);
+	}
+	bool isSymmetric(TreeNode *left, TreeNode *right)
+	{
+		if (NULL == left || NULL == right)
+		{
+			return NULL == left && NULL == right;
+		}
+		return left->val == right->val && isSymmetric(left->left, right->right) && isSymmetric(left->right, right->left);
+	}
+};

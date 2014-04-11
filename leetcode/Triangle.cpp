@@ -101,3 +101,22 @@ public:
 	std::cout << s.minimumTotal(triangle) << std::endl;
     return 0;
 }*/
+// 2014-04-11, DP from bottom to top
+class Solution {
+public:
+	int minimumTotal(vector<vector<int> > &triangle) {
+		if (triangle.size() == 0)
+		{
+			return 0;
+		}
+		std::vector<int> sums(triangle.back());
+		for (std::vector<std::vector<int> >::reverse_iterator it = triangle.rbegin() + 1; it != triangle.rend(); ++it)
+		{
+			for (size_t j = 0; j < it->size(); ++j)
+			{
+				sums[j] = it->at(j) + std::min(sums[j], sums[j + 1]);
+			}
+		}
+		return sums[0];
+	}
+};

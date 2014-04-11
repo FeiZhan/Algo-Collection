@@ -47,3 +47,30 @@ public:
 		}
 	}
 };
+// accepted 2014-03-21
+class Solution {
+public:
+	vector<vector<int> > pathSum(TreeNode *root, int sum) {
+		std::vector< std::vector<int> > ans;
+		if (NULL == root)
+		{
+			return ans;
+		}
+		std::vector< std::vector<int> > left(pathSum(root->left, sum - root->val));
+		std::vector< std::vector<int> > right(pathSum(root->right, sum - root->val));
+		ans.reserve(left.size() + right.size()); // preallocate memory
+		ans.insert(ans.end(), left.begin(), left.end());
+		ans.insert(ans.end(), right.begin(), right.end());
+		for (std::vector< std::vector<int> >::iterator it = ans.begin(); it != ans.end(); ++it)
+		{
+			it->insert(it->begin(), root->val);
+		}
+		if (NULL == root->left && NULL == root->right && sum == root->val)
+		{
+			std::vector<int> tmp;
+			tmp.push_back(sum);
+			ans.push_back(tmp);
+		}
+		return ans;
+	}
+};
