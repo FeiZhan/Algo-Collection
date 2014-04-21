@@ -52,3 +52,42 @@ int main(int argc, char *argv[])
 	cout << s.addBinary("11", "1") << endl;
 	return 0;
 }
+// 2014-04-20 AC
+class Solution {
+public:
+    string addBinary(string a, string b) {
+		string ans;
+		int carry = 0;
+		size_t i;
+		for (i = 0; i < a.length() && i < b.length(); ++ i)
+		{
+			int sum = (a[a.length() - 1 - i] - '0') + (b[b.length() - 1 - i] - '0') + carry;
+			carry = sum / 2;
+			sum %= 2;
+			ans += static_cast<char>(sum + '0');
+		}
+		for (; i < a.length(); ++ i)
+		{
+			int sum = (a[a.length() - 1 - i] - '0') + carry;
+			carry = sum / 2;
+			sum %= 2;
+			ans += static_cast<char>(sum + '0');
+		}
+		for (; i < b.length(); ++ i)
+		{
+			int sum = (b[b.length() - 1 - i] - '0') + carry;
+			carry = sum / 2;
+			sum %= 2;
+			ans += static_cast<char>(sum + '0');
+		}
+		while (carry)
+		{
+			int sum = carry;
+			carry = sum / 2;
+			sum %= 2;
+			ans += static_cast<char>(sum + '0');
+		}
+		std::reverse(ans.begin(), ans.end());
+		return ans;
+    }
+};

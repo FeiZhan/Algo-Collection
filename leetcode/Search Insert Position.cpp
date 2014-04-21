@@ -35,3 +35,29 @@ public:
 		}
     }
 };
+// 2014-04-20 AC, recursive binary search
+class Solution {
+public:
+    int searchInsert(int A[], int n, int target) {
+		return searchInsert(A, 0, n, target);
+    }
+    int searchInsert(int A[], int left, int right, int target) {
+		if (left >= right)
+		{
+			return right;
+		}
+		int mid = (left + right) / 2;
+		if (A[mid] == target)
+		{
+			return mid;
+		}
+		else if (target > A[mid])
+		{
+			return searchInsert(A, mid + 1, right, target);
+		}
+		else
+		{
+			return searchInsert(A, left, mid, target);
+		}
+	}
+};

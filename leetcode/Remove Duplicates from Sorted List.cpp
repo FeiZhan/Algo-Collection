@@ -41,3 +41,20 @@ public:
 		return head;
     }
 };
+// 2014-04-20 AC, simply discard duplicates recursively
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+		if (NULL == head || NULL == head->next)
+		{
+			return head;
+		}
+		ListNode *current(head);
+		while (current && head->val == current->val)
+		{
+			current = current->next;
+		}
+		head->next = deleteDuplicates(current);
+		return head;
+    }
+};

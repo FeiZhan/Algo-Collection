@@ -57,3 +57,31 @@ void generate(vector<string> &ans, string s, int l, int r, int n)
 		generate(ans, s + ")", l, r + 1, n);
 	}
 }
+// 2014-04-20 AC
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+		string paren;
+		generateParenthesis(n, 0, 0, paren);
+		return ans;
+    }
+    void generateParenthesis(int n, int left, int right, const string &paren)
+    {
+		if (left == n && right == n)
+		{
+			ans.push_back(paren);
+			return;
+		}
+		if (left < n)
+		{
+			string temp(paren + string("("));
+			generateParenthesis(n, left + 1, right, temp);
+		}
+		if (left > right)
+		{
+			string temp(paren + string(")"));
+			generateParenthesis(n, left, right + 1, temp);
+		}
+	}
+    vector<string> ans;
+};
