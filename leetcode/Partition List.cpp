@@ -29,3 +29,34 @@ public:
 		return less_head->next;
     }
 };
+// 2014-04-22 AC, don't create new nodes
+class Solution {
+public:
+	ListNode *partition(ListNode *head, int x) {
+		ListNode *less(new ListNode(0)), *greater(new ListNode(0)), *less_cur(less), *greater_cur(greater), *current(head);
+		while (current)
+		{
+			if (current->val < x)
+			{
+				less_cur->next = current;
+				less_cur = less_cur->next;
+			}
+			else
+			{
+				greater_cur->next = current;
+				greater_cur = greater_cur->next;
+			}
+			current = current->next;
+		}
+		if (less_cur)
+		{
+			less_cur->next = greater->next;
+		}
+		// put an end to the multiple connected link
+		if (greater_cur)
+		{
+			greater_cur->next = NULL;
+		}
+		return less->next;
+	}
+};

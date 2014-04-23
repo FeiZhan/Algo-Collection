@@ -50,3 +50,40 @@ public:
 		return now;
 	}
 };
+// 2014-04-23 AC without vector
+class Solution {
+public:
+	TreeNode *sortedListToBST(ListNode *head) {
+		if (NULL == head)
+		{
+			return NULL;
+		}
+		// special case for a single node
+		if (NULL == head->next)
+		{
+			return new TreeNode(head->val);
+		}
+		ListNode *fast(head), *slow(head);
+		while (slow && fast && fast->next && fast->next->next && fast->next->next->next)
+		{
+			fast = fast->next->next;
+			slow = slow->next;
+		}
+		TreeNode *root(new TreeNode(0));
+		if (slow && slow->next)
+		{
+			root->val = slow->next->val;
+			if (slow->next)
+			{
+				root->right = sortedListToBST(slow->next->next);
+			}
+			slow->next = NULL;
+			root->left = sortedListToBST(head);
+		}
+		else
+		{
+			return NULL;
+		}
+		return root;
+	}
+};

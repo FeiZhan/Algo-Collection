@@ -38,3 +38,54 @@ public:
 		return ans;
     }
 };
+// 2014-04-22 AC recursive version
+class Solution {
+public:
+	vector<int> searchRange(int A[], int n, int target) {
+		vector<int> ans = searchRange(A, 0, n, target);
+		while (ans.size() < 2)
+		{
+			ans.push_back(-1);
+		}
+		return ans;
+	}
+	vector<int> searchRange(int A[], int left, int right, int target)
+	{
+		vector<int> ans;
+		if (left >= right)
+		{
+			return ans;
+		}
+		int mid = (left + right) / 2;
+		if (A[mid] < target)
+		{
+			return searchRange(A, mid + 1, right, target);
+		}
+		else if (A[mid] > target)
+		{
+			return searchRange(A, left, mid, target);
+		}
+		else
+		{
+			vector<int> right_ans = searchRange(A, mid + 1, right, target);
+			vector<int> left_ans = searchRange(A, left, mid, target);
+			if (left_ans.size() > 0)
+			{
+				ans.push_back(left_ans[0]);
+			}
+			else
+			{
+				ans.push_back(mid);
+			}
+			if (right_ans.size() >= 2)
+			{
+				ans.push_back(right_ans[1]);
+			}
+			else
+			{
+				ans.push_back(mid);
+			}
+		}
+		return ans;
+	}
+};
