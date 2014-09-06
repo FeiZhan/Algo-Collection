@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/acm.dir/main.cpp.o CMakeFiles/acm.dir/include/dbg-1.20/dbg.cpp.o  -o acm -rdynamic -lcwd 

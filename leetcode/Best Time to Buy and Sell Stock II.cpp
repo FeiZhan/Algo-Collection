@@ -14,3 +14,22 @@ public:
 		return price;
     }
 };
+
+// greedy
+// 2014-09-06
+class Solution {
+public:
+	int maxProfit(vector<int> &prices) {
+		size_t buy = 0;
+		int sum = 0;
+		for (size_t i = 1; i < prices.size(); ++ i)
+		{
+			if (prices[i] > prices[buy])
+			{
+				sum += prices[i] - prices[buy];
+			}
+			buy = i;
+		}
+		return sum;
+    }
+};
