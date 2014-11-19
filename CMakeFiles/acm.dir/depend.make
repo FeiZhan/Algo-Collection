@@ -4,6 +4,7 @@
 CMakeFiles/acm.dir/include/dbg-1.20/dbg.cpp.o: include/dbg-1.20/dbg.cpp
 CMakeFiles/acm.dir/include/dbg-1.20/dbg.cpp.o: include/dbg-1.20/dbg.h
 
-CMakeFiles/acm.dir/main.cpp.o: include/dbg-1.20/dbg.h
+CMakeFiles/acm.dir/main.cpp.o: include/acm_headers.h
+CMakeFiles/acm.dir/main.cpp.o: include/leetcode_helper.h
 CMakeFiles/acm.dir/main.cpp.o: main.cpp
 
