@@ -1,86 +1,38 @@
-//WA
-
 class Solution {
 public:
     vector<vector<int> > threeSum(vector<int> &num) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        multiset<int> num_set;
-        for (int i = 0; i < num.size(); ++ i)
-        {
-			num_set.insert(num[i]);
-		}
-        vector<vector<int> > ans;
-        for (multiset<int>::iterator it = num_set.begin(); it != num_set.end(); ++ it)
-        {
-			for (multiset<int>::iterator it2 = num_set.begin(); it2 != it; ++ it2)
-			{
-				multiset<int>::iterator it3 = num_set.find(- *it - *it2);
-				if (it3 != num_set.end() && it3 != it && it3 != it2)
-				{
-					vector<int> tmp;
-					tmp.push_back(*it);
-					tmp.push_back(*it2);
-					tmp.push_back(- *it - *it2);
-					sort(tmp.begin(), tmp.end());
-					//if (! duplicate(tmp, ans))
-					//{
-						ans.push_back(tmp);
-					//}
-				}
-			}
-		}
-		Unique(ans.begin(), ans.end(), ans);
-		return ans;
+        std::vector<std::vector<int> > ans;
+        if (num.size() < 3) {
+            return ans;
+        }
+        std::map<int, int> num_map;
+        for (size_t i = 0; i < num.size(); ++ i) {
+            ++ num_map[num[i]];
+        }
+        int largest = num_map.rbegin()->first;
+        for (std::map<int, int>::iterator it = num_map.begin(); it != num_map.end(); ++ it) {
+            for (std::map<int, int>::iterator it1 = it; it1 != num_map.end() && it->first + it1->first <= largest; ++ it1) {
+                if (it->second < 2 && it1 == it) {
+                    continue;
+                }
+                if (- it->first - it1->first < it1->first) {
+                    continue;
+                }
+                std::map<int, int>::iterator it2 = num_map.find(- it->first - it1->first);
+                if (num_map.end() != it2 ) {
+                    if ((it2 == it1 && it1->second < 2) || (it2 == it1 && it2 == it && it->second < 3)) {
+                        continue;
+                    }
+                    std::vector<int> temp;
+                    temp.push_back(it->first);
+                    temp.push_back(it1->first);
+                    temp.push_back(it2->first);
+                    std::sort(temp.begin(), temp.end());
+                    ans.push_back(temp);
+                }
+            }
+        }
+        //ans.erase(std::unique(ans.begin(), ans.end()), ans.end());
+        return ans;
     }
-    bool duplicate(const vector<int> &ele, const vector<vector<int> > &array)
-    {
-		for (int i = 0; i < array.size(); ++ i)
-		{
-			if (ele.size() != array[i].size())
-			{
-				continue;
-			}
-			bool same_flag = true;
-			for (int j = 0; j < array[i].size(); ++ j)
-			{
-				if (ele[j] != array[i][j])
-				{
-					same_flag = false;
-					break;
-				}
-			}
-			if (same_flag)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	void Unique(vector<vector<int> >::iterator begin, vector<vector<int> >::iterator end, vector<vector<int> > &array)
-	{
-		for (vector<vector<int> >::iterator i = begin; i != end; ++ i)
-		{
-			for (vector<vector<int> >::iterator j = i + 1; j != end; ++ j)
-			{
-				if ((*i).size() != (*j).size())
-				{
-					continue;
-				}
-				bool flag = false;
-				for (int k = 0; k < (*i).size(); ++ k)
-				{
-					if ((*i)[k] != (*j)[k])
-					{
-						flag = true;
-						break;
-					}
-				}
-				if (false == flag)
-				{
-					j = array.erase(j, j + 1);
-				}
-			}
-		}
-	}
 };
