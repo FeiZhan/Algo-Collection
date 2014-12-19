@@ -96,3 +96,107 @@ public:
 		}
 	}
 };
+
+//2014-12-17
+//TLE
+class Solution {
+public:
+	vector<vector<string> > findLadders(string start, string end, unordered_set<string> &dict) {
+		dict_list = vector<string>(dict.begin(), dict.end());
+		std::vector<string>::iterator find_it = std::find(dict_list.begin(), dict_list.end(), start);
+		if (dict_list.end() != find_it) {
+			*find_it = dict_list[0];
+			dict_list[0] = start;
+		} else {
+			dict_list.insert(dict_list.begin(), start);
+		}
+		find_it = std::find(dict_list.begin(), dict_list.end(), end);
+		if (dict_list.end() != find_it) {
+			*find_it = dict_list[dict_list.size() - 1];
+			dict_list[dict_list.size() - 1] = end;
+		} else {
+			dict_list.push_back(end);
+		}
+
+		ladder_map[0] = 0;
+		for (size_t i = 1; i < dict_list.size(); ++ i) {
+			ladder_map[i] = INT_MAX;
+		}
+		queue<size_t> ladder_queue;
+		set<size_t> ladder_list;
+		ladder_queue.push(0);
+		ladder_list.insert(0);
+		while (ladder_queue.size()) {
+			size_t current = ladder_queue.front();
+			ladder_queue.pop();
+			ladder_list.erase(current);
+			if (ladder_map[current] >= ladder_map[dict_list.size() - 1]) {
+				continue;
+			}
+			for (size_t i = 0; i < dict_list.size(); ++ i) {
+				if (dict_map[current].end() == dict_map[current].find(i)) {
+					int count = 0;
+					for (size_t j = 0; j < dict_list[current].size() && j < dict_list[i].size(); ++ j) {
+						if (dict_list[current][j] != dict_list[i][j]) {
+							++ count;
+						}
+						if (count > 1) {
+							break;
+						}
+					}
+					if (1 != count) {
+						continue;
+					}
+				}
+				if (ladder_list.end() != ladder_list.find(i)) {
+					continue;
+				}
+				if (ladder_map[i] < INT_MAX) {
+					continue;
+				}
+				if (ladder_map[current] + 1 < ladder_map[i]) {
+					dict_map[current].insert(i);
+					dict_map[i].insert(current);
+					ladder_map[i] = ladder_map[current] + 1;
+					if (dict_list.size() - 1 == i) {
+						break;
+					}
+					ladder_queue.push(i);
+					ladder_list.insert(i);
+				}
+			}
+		}
+		vector<vector<size_t> > ans = dfs(0);
+		vector<vector<string> > ans1;
+		for (size_t i = 0; i < ans.size(); ++ i) {
+			vector<string> temp;
+			for (size_t j = 0; j < ans[i].size(); ++ j) {
+				temp.push_back(dict_list[ans[i][j]]);
+			}
+			ans1.push_back(temp);
+		}
+		return ans1;
+	}
+	vector<vector<size_t> > dfs(size_t root) {
+		vector<vector<size_t> > ans;
+		if (dict_list.size() - 1 == root) {
+			vector<size_t> temp;
+			temp.push_back(root);
+			ans.push_back(temp);
+		} else {
+			for (size_t j = 0; j < dict_list.size(); ++ j) {
+				if (ladder_map[root] + 1 == ladder_map[j]) {
+					vector<vector<size_t> > temp = dfs(j);
+					for (size_t i = 0; i < temp.size(); ++ i) {
+						temp[i].insert(temp[i].begin(), root);
+						ans.push_back(temp[i]);
+					}
+				}
+			}
+		}
+		return ans;
+	}
+	vector<string> dict_list;
+	map<size_t, set<size_t> > dict_map;
+	map<size_t, int> ladder_map;
+};

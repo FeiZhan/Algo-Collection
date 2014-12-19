@@ -29,3 +29,31 @@ public:
 		return ans;
     }
 };
+
+// 2014-12-18
+class Solution {
+public:
+    string countAndSay(int n) {
+		string ans("1");
+		for (int i = 0; i < n - 1; ++ i) {
+			string new_ans;
+			int count = 1;
+			for (size_t j = 1; j <= ans.size(); ++ j) {
+				if (ans.size() == j) {
+					new_ans += static_cast<char> (count + '0');
+					new_ans += ans[j - 1];
+				}
+				else if (ans[j] == ans[j - 1]) {
+					++ count;
+				}
+				else {
+					new_ans += static_cast<char> (count + '0');
+					new_ans += ans[j - 1];
+					count = 1;
+				}
+			}
+			ans = new_ans;
+		}
+		return ans;
+    }
+};

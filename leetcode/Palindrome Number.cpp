@@ -1,30 +1,33 @@
-//doing
 class Solution {
 public:
     bool isPalindrome(int x) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        if (x < 0)
-        {
+		if (x < 0) {
 			return false;
 		}
-        return (isPalin(x, 0) < 0);
+		int num = x;
+		int count = 0;
+		while (num) {
+			num /= 10;
+			++ count;
+		}
+		-- count;
+		num = x;
+		while (num) {
+			int temp = num;
+			for (int j = 0; j < count; ++ j) {
+				temp /= 10;
+			}
+			//cout << num << " " << num % 10 << " " << temp << endl;
+			if (num % 10 != temp) {
+				return false;
+			}
+			for (int j = 0; j < count; ++ j) {
+				temp *= 10;
+			}
+			num -= temp;
+			num /= 10;
+			count -= 2;
+		}
+		return true;
     }
-    int isPalin(int num, int pos)
-    {
-		if (num / get10(pos) < 10)
-		{
-			return -1;
-		}
-		int comp = isPalin()
-	}
-	long long get10(int order)
-	{
-		long long ten = 1;
-		for (int i = 0; i < order; ++ i)
-		{
-			ten *= 10;
-		}
-		return ten;
-	}
 };
