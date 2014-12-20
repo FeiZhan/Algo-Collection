@@ -35,3 +35,48 @@ public:
 		traverse(root->right, level + 1, ans);
 	}
 };
+
+// 2014-12-19
+class Solution {
+public:
+	vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+		vector<vector<int> > ans;
+		if (NULL == root) {
+			return ans;
+		}
+		std::stack<TreeNode *> node_stack;
+		std::vector<TreeNode *> node_list;
+		node_stack.push(root);
+		vector<int> level_ans;
+		bool left_flag = true;
+		while (!node_stack.empty()) {
+			TreeNode *current = node_stack.top();
+			node_stack.pop();
+			if (current) {
+				level_ans.push_back(current->val);
+				if (left_flag) {
+					node_list.push_back(current->left);
+					node_list.push_back(current->right);
+				} else {
+					node_list.push_back(current->right);
+					node_list.push_back(current->left);
+				}
+			}
+			if (node_stack.empty()) {
+				if (level_ans.size()) {
+					ans.push_back(level_ans);
+				}
+				level_ans.clear();
+				left_flag = ! left_flag;
+				for (size_t i = 0; i < node_list.size(); ++ i) {
+					node_stack.push(node_list[i]);
+				}
+				node_list.clear();
+			}
+		}
+		if (level_ans.size()) {
+			ans.push_back(level_ans);
+		}
+		return ans;
+	}
+};

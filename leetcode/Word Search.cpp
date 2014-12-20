@@ -1,66 +1,38 @@
 class Solution {
 public:
     bool exist(vector<vector<char> > &board, string word) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		if (0 == word.length())
-		{
-			return true;
-		}
-		std::vector<std::vector<bool> > used;
-		for (int i = 0; i < board.size(); ++ i)
-		{
-			used.push_back( std::vector<bool>(board[i].size(), false) );
-		}
-		for (int i = 0; i < board.size(); ++ i)
-		{
-			for (int j = 0; j < board[i].size(); ++ j)
-			{
-				if (word[0] != board[i][j])
-				{
-					continue;
-				}
-				used[i][j] = true;
-				if (exist(board, word, used, 0, i, j))
-				{
+		this->board = board;
+		this->word = word;
+		for (size_t i = 0; i < board.size(); ++ i) {
+			for (size_t j = 0; j < board[i].size(); ++ j) {
+				if (board[i][j] == word[0] && exist(i, j, 0)) {
 					return true;
 				}
-				used[i][j] = false;
 			}
 		}
 		return false;
     }
-    bool exist(const std::vector<std::vector<char> > &board, const std::string &word, std::vector<std::vector<bool> > &used, const int pos, const int x, const int y)
-    {
-		if (word.length() == pos + 1)
-		{
+    bool exist(size_t row, size_t column, size_t pos) {
+		if (pos + 1 >= word.length()) {
 			return true;
 		}
-		if (x < 0 || x >= board.size() || y < 0 || y >= board[x].size())
-		{
-			return false;
+		char temp = board[row][column];
+		board[row][column] = '-';
+		if (row > 0 && board[row - 1][column] == word[pos + 1] && exist(row - 1, column, pos + 1)) {
+			return true;
 		}
-		const char target = word[pos + 1];
-		const int DIR[4][2] = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
-		for (int i = 0; i < 4; ++ i)
-		{
-			int loc[2];
-			loc[0] = x + DIR[i][0];
-			loc[1] = y + DIR[i][1];
-			if (loc[0] < 0 || loc[0] >= board.size() || loc[1] < 0 || loc[1] >= board[x].size())
-			{
-				continue;
-			}
-			if (! used[loc[0]][loc[1]] && board[loc[0]][loc[1]] == target)
-			{
-				used[loc[0]][loc[1]] = true;
-				if ( exist(board, word, used, pos + 1, loc[0], loc[1]) )
-				{
-					return true;
-				}
-				used[loc[0]][loc[1]] = false;
-			}
+		if (row + 1 < board.size() && board[row + 1][column] == word[pos + 1] && exist(row + 1, column, pos + 1)) {
+			return true;
 		}
+		if (column > 0 && board[row][column - 1] == word[pos + 1] && exist(row, column - 1, pos + 1)) {
+			return true;
+		}
+		if (column + 1 < board[row].size() && board[row][column + 1] == word[pos + 1] && exist(row, column + 1, pos + 1)) {
+			return true;
+		}
+		board[row][column] = temp;
 		return false;
 	}
+	vector<vector<char> > board;
+	string word;
 };

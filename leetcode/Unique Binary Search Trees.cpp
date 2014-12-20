@@ -1,26 +1,19 @@
 class Solution {
 public:
+	Solution(void) {
+		num_map[0] = 1;
+		num_map[1] = 1;
+	}
     int numTrees(int n) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        if (n <= 0)
-        {
-			return 0;
-		} else if (1 == n)
-		{
-			return 1;
+		if (num_map.end() != num_map.find(n)) {
+			return num_map[n];
 		}
-		int count = 0;
-		for (int i = 0; i < n; ++ i)
-		{
-			if (0 == i || n - 1 == i)
-			{
-				count += numTrees(n - 1);
-			} else
-			{
-				count += numTrees(i) * numTrees(n - i - 1);
-			}
+		int num = 0;
+		for (int i = 0; i < n; ++ i) {
+			num += numTrees(i) * numTrees(n - 1 - i);
 		}
-		return count;
+		num_map[n] = num;
+		return num;
     }
+    std::map<int, int> num_map;
 };

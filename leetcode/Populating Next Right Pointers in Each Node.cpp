@@ -1,3 +1,5 @@
+// recursive version, not good
+
 /**
  * Definition for binary tree with next pointer.
  * struct TreeLinkNode {
@@ -9,39 +11,59 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        vector<TreeLinkNode *> node_vec, child_vec;
-        node_vec.push_back(root);
-        while (node_vec.size())
-        {
-			child_vec.clear();
-			for (int i = 0; i < node_vec.size(); ++ i)
-			{
-				// maybe the root is NULL
-				if (NULL == node_vec[i])
-				{
-					continue;
-				}
-				if (node_vec.size() > i + 1)
-				{
-					node_vec[i]->next = node_vec[i + 1];
-				}
-				if (NULL != node_vec[i]->left)
-				{
-					child_vec.push_back(node_vec[i]->left);
-				}
-				if (NULL != node_vec[i]->right)
-				{
-					child_vec.push_back(node_vec[i]->right);
-				}
-			}
-			node_vec.clear();
-			for (int i = 0; i < child_vec.size(); ++ i)
-			{
-				node_vec.push_back(child_vec[i]);
-			}
+		if (NULL == root) {
+			return;
 		}
-		return;
+		TreeLinkNode *current_parent = root;
+		TreeLinkNode *current = NULL;
+		while (current_parent) {
+			if (current_parent->left) {
+				current = current_parent->left;
+				current->next = current_parent->right;
+			}
+			if (current_parent->right) {
+				current = current_parent->right;
+			}
+			if (current_parent->next) {
+				if (current_parent->next->left) {
+					current->next = current_parent->next->left;
+					current = current_parent->next->left;
+				}
+				else if (current_parent->next->right) {
+					current->next = current_parent->next->right;
+					current = current_parent->next->right;
+				}
+			}
+			current_parent = current_parent->next;
+		}
+		connect(root->left);
+		connect(root->right);
+    }
+};
+
+
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+		TreeLinkNode *level = root;
+		while (level) {
+			TreeLinkNode *current_parent = level;
+			TreeLinkNode *current = NULL;
+			while (current_parent) {
+				if (current_parent->left) {
+					current = current_parent->left;
+					current->next = current_parent->right;
+				}
+				if (current_parent->right) {
+					current = current_parent->right;
+				}
+				// if no children
+				if (current && current_parent->next) {
+					current->next = current_parent->next->left ? current_parent->next->left : current_parent->next->right;
+				}
+				current_parent = current_parent->next;
+			}
+			level = level->left ? level->left : level->right;
+		}
     }
 };

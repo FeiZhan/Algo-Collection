@@ -1,36 +1,23 @@
-// just greedy algorithm, not sound but works
+// http://fisherlei.blogspot.ca/2012/12/leetcode-jump-ii.html
 
 class Solution {
 public:
-    int jump(int A[], int n) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		int count = 0, begin = 0, reach = 0, next = 0;
-		while (begin < n - 1)
-		{
-			if (begin + A[begin] >= n - 1)
-			{
-				return count + 1;
-			}
-			for (int i = begin; i <= begin + A[begin] && i < n; ++ i)
-			{
-				if (i + A[i] > next)
-				{
-					reach = i;
-					next = i + A[i];
-				}
-			}
-			if (reach == begin)
-			{
-				return INT_MAX;
-			}
-			++ count;
-			if (reach >= n - 1)
-			{
-				return count;
-			}
-			begin = reach;
-			next = 0;
+	int jump(int A[], int n) {
+		if (n <= 1) {
+			return 0;
 		}
-    }
+		int start = 0;
+		int end = 0;
+		int count = 0;
+		while (end < n - 1) {
+			int max = 0;
+			++ count;
+			for (int i = start; i <= end; ++ i) {
+				max = std::max(max, i + A[i]);
+			}
+			start = end + 1;
+			end = max;
+		}
+		return count;
+	}
 };
