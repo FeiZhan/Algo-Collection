@@ -1,27 +1,34 @@
-// copied from leetcode discussion
 class Solution {
 public:
-    int divide(int dividend, int divisor) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		long long div1 = abs(static_cast<double>(dividend));
-		long long div2 = abs(static_cast<double>(divisor));
-		int ans = 0;
-		while (div1 >= div2)
-		{
-			long long tmp = div2;
-			for (int i = 0; div1 >= tmp; ++ i, tmp <<= 1)
-			{
-				div1 -= tmp;
-				ans += 1 << i;
+	int divide(int dividend, int divisor) {
+		if (0 == divisor) {
+			return INT_MAX;
+		}
+		long long divid = dividend;
+		long long divis = divisor;
+		bool negative_flag = (divid < 0) ^ (divis < 0);
+		divid = std::abs(divid);
+		divis = std::abs(divis);
+		long long ans = 0;
+		// speed up
+		if (1 == divis) {
+			ans = divid;
+		} else {
+			while (divid > 0) {
+				long long div = divis;
+				long long count = 1;
+				while (divid >= div) {
+					div <<= 1;
+					count <<= 1;
+				}
+				ans += count >> 1;
+				divid -= div >> 1;
 			}
 		}
-		if ((dividend >= 0 && divisor >= 0) || (dividend < 0 && divisor < 0))
-		{
-			return ans;
-		} else
-		{
-			return - ans;
+		// overflow
+		if (ans - 1 > INT_MAX || (ans > INT_MAX && ! negative_flag)) {
+			return INT_MAX;
 		}
-    }
+		return ans * (negative_flag ? -1 : 1);
+	}
 };

@@ -8,6 +8,10 @@
 #include <stack>
 #include <deque>
 #include <set>
-//#include <unordered_set>
 #include <map>
 #include <algorithm>
+
+#if __cplusplus >= 201103L
+#include <iterator>
+#include <unordered_set>
+#endif
