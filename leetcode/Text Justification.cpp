@@ -109,3 +109,50 @@ int main()
 	s.Output(ans);
 	return 0;
 }
+
+
+// 2015-1-2
+class Solution {
+public:
+	vector<string> fullJustify(vector<string> &words, int L) {
+		vector<vector<string> > word_mat;
+		int current_size = 0;
+		for (size_t i = 0; i < words.size(); ++ i) {
+			if (word_mat.size() == 0 || current_size + words[i].length() + (current_size > 0) > L) {
+				word_mat.push_back(vector<string> ());
+				current_size = 0;
+			}
+			word_mat.back().push_back(words[i]);
+			if (current_size > 0) {
+				++ current_size;
+			}
+			current_size += words[i].length();
+		}
+		vector<string> ans(word_mat.size());
+		for (size_t i = 0; i < word_mat.size(); ++ i) {
+			size_t word_size = 0;
+			for (size_t j = 0; j < word_mat[i].size(); ++ j) {
+				word_size += word_mat[i][j].length();
+			}
+			if (word_mat[i].size() > 1) {
+				size_t space_count = 1;
+				size_t space_residue = 0;
+				if (i + 1 < word_mat.size()) {
+					space_count = (L - word_size) / (word_mat[i].size() - 1);
+					space_residue = (L - word_size) % (word_mat[i].size() - 1);
+				}
+				for (size_t j = 0; j < space_residue && j + 1 < word_mat[i].size(); ++ j) {
+					ans[i] += word_mat[i][j] + string(space_count + 1, ' ');
+				}
+				for (size_t j = space_residue; j + 1 < word_mat[i].size(); ++ j) {
+					ans[i] += word_mat[i][j] + string(space_count, ' ');
+				}
+			}
+			ans[i] += word_mat[i].back();
+			if (ans[i].length() < L) {
+				ans[i] += string(L - ans[i].length(), ' ');
+			}
+		}
+		return ans;
+	}
+};

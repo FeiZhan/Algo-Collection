@@ -40,3 +40,26 @@ public:
 		return water;
     }
 };
+
+//2015-1-2
+class Solution {
+public:
+	int trap(int A[], int n) {
+		int sum = 0;
+		stack<int> container_stack;
+		for (int i = 0; i < n; ++ i) {
+			int previous = 0;
+			while (! container_stack.empty()) {
+				int index = container_stack.top();
+				sum += (std::min(A[index], A[i]) - previous) * (i - index - 1);
+				if (A[index] > A[i]) {
+					break;
+				}
+				container_stack.pop();
+				previous = std::min(A[index], A[i]);
+			}
+			container_stack.push(i);
+		}
+		return sum;
+	}
+};

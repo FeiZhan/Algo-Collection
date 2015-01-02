@@ -1,22 +1,40 @@
-//undone
 class Solution {
 public:
-    bool isMatch(const char *s, const char *p) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function    
-		if (strcmp(s, p) == 0)
-		{
-			return true;
+	bool isMatch(const char *s, const char *p) {
+		if (0 == strlen(p)) {
+			return 0 == strlen(s);
 		}
-		int len = strlen(p);
-		int last = 0;
-		for (int i = 0; i < len; ++ i)
-		{
-			if ('.' == p[i])
-			{
-				if ()
+		if (1 == strlen(p)) {
+			if (strlen(s) < 1) {
+				return false;
+			}
+			else if (p[0] != s[0] && p[0] != '.') {
+				return false;
+			} else {
+				return isMatch(s + 1, p + 1);
 			}
 		}
-		return false;
-    }
+		if ('*' != p[1]) {
+			if (strlen(s) < 1) {
+				return false;
+			}
+			if (p[0] != s[0] && p[0] != '.') {
+				return false;
+			} else {
+				return isMatch(s + 1, p + 1);
+			}
+		} else {
+			if (isMatch(s, p + 2)) {
+				return true;
+			}
+			int i = 0;
+			while (i < strlen(s) && (s[i] == p[0] || p[0] == '.')) {
+				if (isMatch(s + i + 1, p + 2)) {
+					return true;
+				}
+				++ i;
+			}
+			return false;
+		}
+	}
 };
