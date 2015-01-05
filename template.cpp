@@ -9,6 +9,8 @@
 #include <stdio.h>
 using namespace std;
 
+#include <string>
+
 int main(int argc, char *argv[])
 {
 #ifdef _FILE_DEBUG_
@@ -32,21 +34,6 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

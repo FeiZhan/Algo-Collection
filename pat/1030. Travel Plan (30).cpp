@@ -1,4 +1,4 @@
-// SF
+//
 #define _FILE_DEBUG_
 //#define _C_LAN_
 //#define _DEBUG_OUTPUT_
@@ -9,128 +9,86 @@
 #include <stdio.h>
 using namespace std;
 
-#include <algorithm>
+#include <climits>
+#include <string>
 #include <vector>
 #include <stack>
-#include <climits>
-struct Node
-{
-	int dist, cost, path;
-	Node() : dist(INT_MAX), cost(INT_MAX), path(-1)
+
+struct Highway {
+	int from, to, dist, cost;
+	Highway(int f, int t, int d, int c) : from(f), to(t), dist(d), cost(c)
 	{}
 };
-struct Edge
-{
-	int end, dist, cost;
-	Edge(int e, int d, int c) : end(e), dist(d), cost(c)
-	{}
-};
-//int n, m, s, t;
-int city_num, high_num, start, dest;
-std::vector<std::vector<Edge> > edge;
-std::vector<int> path;
-std::vector<Node> city;
-std::vector<bool> visited;
-int findMin()
-{
-	int mmin = INT_MAX;
-	int k = -1;
-	for (int i = 0; i < city_num; ++ i)
-	{
-		if (! visited[i] && city[i].dist < mmin)
-		{
-			mmin = city[i].dist;
-			k = i;
+int city_num, high_num, start, target;
+
+void dfs(int current, vector<int> &path, int dist, int cost, const vector<int> &prev_list, const vector<vector<Highway> > &city_list) {
+	path.insert(path.begin(), current);
+	if (start == current) {
+		for (size_t i = 0; i < path.size(); ++ i) {
+			cout << path[i] << " ";
 		}
+		cout << dist << " " << cost << endl;
+		return;
 	}
-	return k;
-}
-void Dijkstra(int start, int dest)
-{
-	visited.assign(city_num, false);
-	city.clear();
-	city.resize(city_num);
-	city[start].dist = 0;
-	city[start].cost = 0;
-	while (true)
-	{
-		int u = findMin();
-		if (-1 == u)
-		{
-			return;
-		}
-		visited[u] = true;
-		for (int i = 0; i < edge[u].size(); ++ i)
-		{
-			int v = edge[u][i].end;
-			int cost = edge[u][i].cost;
-			int dist = edge[u][i].dist;
-			if (! visited[v])
-			{
-				if (city[v].dist > city[u].dist + dist)
-				{
-					city[v].dist = city[u].dist + dist;
-					city[v].cost = city[u].cost + cost;
-					city[v].path = u;
-				}
-				else if (city[v].dist == city[u].dist + dist && city[v].cost > city[u].cost + cost)
-				{
-					city[v].cost = city[u].cost + cost;
-					city[v].path = u;
-				}
-			}
+	int prev = prev_list[current];
+	for (size_t j = 0; j < city_list[prev].size(); ++ j) {
+		if (city_list[prev][j].to == current) {
+			dfs(prev, path, dist + city_list[prev][j].dist, cost + city_list[prev][j].cost, prev_list, city_list);
 		}
 	}
 }
-void outputPath(int t)
-{
-	std::stack<int> ans;
-	ans.push(t);
-	while (-1 != city[t].path)
-	{
-		t = city[t].path;
-		ans.push(t);
-	}
-	while (! ans.empty())
-	{
-		std::cout << ans.top() << " ";
-		ans.pop();
-	}
-}
+
 int main(int argc, char *argv[])
 {
 #ifdef _FILE_DEBUG_
 	ifstream fin;
-	fin.open("../input.txt");
+	fin.open("input.txt");
 	cin.rdbuf(fin.rdbuf());
 #ifdef _C_LAN_
-	freopen("../input.txt", "r", stdin);
+	freopen("input.txt", "r", stdin);
 #endif
 #endif
 #ifdef _FILE_DEBUG_
 	ofstream fout;
-	fout.open("../output.txt");
+	fout.open("output.txt");
 	cout.rdbuf(fout.rdbuf());
 #ifdef _C_LAN_
-	freopen("../output.txt", "w", stdout);
+	freopen("output.txt", "w", stdout);
 #endif
 #endif
 
-	while (std::cin >> city_num >> high_num >> start >> dest)
-	{
-		edge.clear();
-		edge.resize(city_num);
-		while (-- high_num)
-		{
-			int u, v, d, c;
-			//std::cin >> u >> v >> d >> c;
-			//edge[u].push_back(Edge(v, d, c));
-			//edge[v].push_back(Edge(u, d, c));
-		}
-		//Dijkstra(start, dest);
-		//outputPath(dest);
-		//std::cout << city[dest].dist << " " << city[dest].cost << std::endl;
+	cin >> city_num >> high_num >> start >> target;
+	vector<vector<Highway> > city_list(city_num);
+	for (int i = 0; i < high_num; ++ i) {
+		int from, to, dist, cost;
+		cin >> from >> to >> dist >> cost;
+		city_list[from].push_back(Highway(from, to, dist, cost));
+		city_list[to].push_back(Highway(to, from, dist, cost));
 	}
+	vector<int> dist_list(city_num, INT_MAX);
+	vector<int> cost_list(city_num, INT_MAX);
+	vector<int> prev_list(city_num, INT_MAX);
+	stack<int> city_stack;
+	city_stack.push(start);
+	dist_list[start] = 0;
+	while (! city_stack.empty()) {
+		int current = city_stack.top();
+		city_stack.pop();
+		for (size_t i = 0; i < city_list[current].size(); ++ i) {
+			int next = city_list[current][i].to;
+			if (dist_list[next] > dist_list[current] + city_list[current][i].dist || (dist_list[next] == dist_list[current] + city_list[current][i].dist && cost_list[next] > cost_list[current] + city_list[current][i].cost)) {
+				dist_list[next] = dist_list[current] + city_list[current][i].dist;
+				cost_list[next] = cost_list[current] + city_list[current][i].cost;
+				prev_list[next] = current;
+				city_stack.push(next);
+			}
+		}
+	}
+	vector<int> path;
+	dfs(target, path, 0, 0, prev_list, city_list);
 
 	return 0;
 }
+
+
+
