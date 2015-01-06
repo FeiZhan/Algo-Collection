@@ -1,47 +1,38 @@
-// copied from leetcode
-
 class Solution {
 public:
-    string minWindow(string S, string T) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		std::string ans;
-		int slen = S.length(), tlen = T.length(), min_len = INT_MAX, count = 0;
-		int needtofind[256] = {0}, hasfound[256] = {0};
-		for (int i = 0; i < tlen; ++ i)
-		{
-			++ needtofind[T[i]];
+	string minWindow(string S, string T) {
+		if (0 == S.size() || S.size() < T.size()) {
+			return "";
 		}
-		for (int begin = 0, end = 0; end < slen; ++ end)
-		{
-			// skip chars not in T
-			if (0 == needtofind[S[end]])
-			{
-				continue;
-			}
-			++ hasfound[S[end]];
-			if (hasfound[S[end]] <= needtofind[S[end]])
-			{
-				++ count;
-			}
-			if (count == tlen)
-			{
-				while (0 == needtofind[S[begin]] || hasfound[S[begin]] > needtofind[S[begin]])
-				{
-					if (hasfound[S[begin]] > needtofind[S[begin]])
-					{
-						-- hasfound[S[begin]];
-					}
-					++ begin;
+		vector<int> appear_count(256, 0);
+		vector<int> expect_count(256, 0);
+		for (size_t i = 0; i < T.size(); ++ i) {
+			++expect_count[T[i]];
+		}
+		size_t min_v = INT_MAX, min_start = 0;
+		int wid_start = 0;
+		int appeared = 0;
+		for (size_t wid_end = 0; wid_end < S.size(); ++ wid_end) {
+			if (expect_count[S[wid_end]] > 0) {
+				++ appear_count[S[wid_end]];
+				if (appear_count[S[wid_end]] <= expect_count[S[wid_end]]) {
+					++appeared;
 				}
-				int window_len = end - begin + 1;
-				if (window_len < min_len)
-				{
-					min_len = window_len;
-					ans = S.substr(begin, end - begin + 1);
+			}
+			if (appeared == T.size()) {
+				while (appear_count[S[wid_start]] > expect_count[S[wid_start]] || 0 == expect_count[S[wid_start]]) {
+					-- appear_count[S[wid_start]];
+					++wid_start;
+				}
+				if (min_v > wid_end - wid_start + 1) {
+					min_v = wid_end - wid_start + 1;
+					min_start = wid_start;
 				}
 			}
 		}
-		return ans;
-    }
+		if (INT_MAX == min_v) {
+			return "";
+		}
+		return S.substr(min_start, min_v);
+	}
 };

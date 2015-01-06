@@ -61,3 +61,76 @@ public:
 		return 1 == state || 4 == state || 7 == state || 8 == state;
     }
 };
+
+
+// 2015-01-06
+class Solution {
+public:
+	bool isNumber(const char *s) {
+		if (NULL == s) {
+			return false;
+		}
+		while (isspace(*s)) {
+			++ s;
+		}
+		if ('+' == *s || '-' == *s) {
+			++ s;
+		}
+		bool e_flag = false;
+		bool dot_flag = false;
+		bool first_part = false;
+		bool second_part = false;
+		bool space_flag = false;
+		while (*s) {
+			if ('.' == *s) {
+				if (dot_flag || e_flag || space_flag) {
+					return false;
+				}
+				else {
+					dot_flag = true;
+				}
+			}
+			else if ('e' == *s || 'E' == *s) {
+				if (e_flag || ! first_part || space_flag) {
+					return false;
+				}
+				else {
+					e_flag = true;
+				}
+			}
+			else if (isdigit(*s)) {
+				if (space_flag) {
+					return false;
+				}
+				if (! e_flag) {
+					first_part = true;
+				}
+				else {
+					second_part = true;
+				}
+			}
+			else if ('+' == *s || '-' == *s) {
+				if (space_flag) {
+					return false;
+				}
+				if (!e_flag || !('e' == *(s - 1) || 'E' == *(s - 1))) {
+					return false;
+				}
+			}
+			else if (isspace(*s)) {
+				space_flag = true;
+			}
+			else {
+				return false;
+			}
+			++ s;
+		}
+		if (!first_part) {
+			return false;
+		}
+		else if (e_flag && !second_part) {
+			return false;
+		}
+		return true;
+	}
+};
