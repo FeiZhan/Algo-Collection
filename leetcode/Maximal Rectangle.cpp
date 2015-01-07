@@ -1,54 +1,60 @@
 class Solution {
 public:
-    int maximalRectangle(vector<vector<char> > &matrix) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		int max = 0;
-		for (int i = 0; i < matrix.size(); ++ i)
-		{
-			for (int j = 0; j < matrix[i].size(); ++ j)
-			{
-				if ('1' != matrix[i][j])
-				{
-					continue;
+	int height[1000][1000];
+	int maximalRectangle(vector<vector<char> > &matrix) {
+		int maxx = 0;
+		int row = matrix.size();
+		if (0 == row) {
+			return 0;
+		}
+		int col = matrix[0].size();
+		if (0 == col) {
+			return 0;
+		}
+		for (int j = 0; j < col; ++j) {
+			for (int i = 0; i < row; ++i) {
+				if ('0' == matrix[i][j]) {
+					height[i][j] = 0;
 				}
-				int width = 1;
-				while (i + width < matrix.size() && matrix[i + width][j] == '1')
-				{
-					++ width;
-					if (i + width >= matrix.size())
-					{
-						width = matrix.size() - 1 - i;
-						break;
-					}
+				else if (0 == i) {
+					height[0][j] = 1;
 				}
-				int height;
-				for (int k = 0; k < width && i + k < matrix.size(); ++ k)
-				{
-					for (height = 1; j + height < matrix[i + k].size(); ++ height)
-					{
-						if (matrix[i + k][j + height] == '0')
-						{
-							break;
-						}
-					}
-					if (matrix[i + k][j + height] == '0')
-					{
-						width = k;
-						-- height;
-						break;
-					}
+				else {
+					height[i][j] = height[i - 1][j] + 1;
 				}
-				for (int k = 0; k < width && i + k < matrix.size(); ++ k)
-				{
-					for (int m = 0; m < height && j + m < matrix[i + k].size(); ++ m)
-					{
-						matrix[i + k][j + m] = '2';
-					}
-				}
-				max = (max > height * width) ? max : height * width;
 			}
 		}
-		return max;
-    }
+		stack<int> s;
+		for (int i = 0; i < row; ++i) {
+			for (int j = 0; j < col; ++j) {
+				if (s.empty()) {
+					s.push(j);
+				}
+				else {
+					while (!s.empty() && height[i][s.top()] > height[i][j]) {
+						int ph = s.top();
+						s.pop();
+						if (!s.empty()) {
+							maxx = max(maxx, (j - s.top() - 1) * height[i][ph]);
+						}
+						else {
+							maxx = max(maxx, j * height[i][ph]);
+						}
+					}
+					s.push(j);
+				}
+			}
+			while (!s.empty()) {
+				int ph = s.top();
+				s.pop();
+				if (!s.empty()) {
+					maxx = max(maxx, (col - s.top() - 1) * height[i][ph]);
+				}
+				else {
+					maxx = max(maxx, col * height[i][ph]);
+				}
+			}
+		}
+		return maxx;
+	}
 };
