@@ -103,3 +103,31 @@ public:
 		return ans;
     }
 };
+
+// 2015-01-10
+// two pointers
+class Solution {
+public:
+	vector<int> twoSum(vector<int> &numbers, int target) {
+		multimap<int, size_t> num_map;
+		for (size_t i = 0; i < numbers.size(); ++i) {
+			num_map.insert(make_pair(numbers[i], i));
+		}
+		multimap<int, size_t>::iterator left_it = num_map.begin(), right_it = num_map.end();
+		--right_it;
+		while (left_it != right_it && left_it->first + right_it->first != target) {
+			int sum = left_it->first + right_it->first;
+			if (sum > target) {
+				--right_it;
+			}
+			else if (sum < target) {
+				++left_it;
+			}
+		}
+		vector<int> ans;
+		ans.push_back(left_it->second + 1);
+		ans.push_back(right_it->second + 1);
+		sort(ans.begin(), ans.end());
+		return ans;
+	}
+};

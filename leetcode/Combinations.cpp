@@ -31,3 +31,36 @@ public:
 		return ans;
     }
 };
+
+// 2015-01-10
+class Solution {
+public:
+	vector<vector<int> > combine(int n, int k) {
+		pair<int, int> p(n, k);
+		if (comb_map.end() != comb_map.find(p)) {
+			return comb_map[p];
+		}
+		vector<vector<int> > comb;
+		if (1 == n && 1 == k) {
+			comb.push_back(vector<int>(1, 1));
+			comb_map[p] = comb;
+			return comb;
+		}
+		if (n > k) {
+			comb = combine(n - 1, k);
+		}
+		if (k > 1) {
+			vector<vector<int> > comb1 = combine(n - 1, k - 1);
+			for (size_t i = 0; i < comb1.size(); ++i) {
+				comb1[i].push_back(n);
+				comb.push_back(comb1[i]);
+			}
+		}
+		else {
+			comb.push_back(vector<int>(1, n));
+		}
+		comb_map[p] = comb;
+		return comb;
+	}
+	map<pair<int, int>, vector<vector<int> > > comb_map;
+};

@@ -23,3 +23,22 @@ public:
 		return dp[0];
     }
 };
+
+// 2015-01-10
+// 2d dp, 1d dp is rolling array
+class Solution {
+public:
+	int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
+		if (0 == obstacleGrid.size() || 0 == obstacleGrid[0].size()) {
+			return 0;
+		}
+		vector<vector<int> > dp(obstacleGrid.size(), vector<int>(obstacleGrid[0].size(), 0));
+		for (size_t i = 0; i < obstacleGrid.size(); ++i) {
+			dp[i][0] = obstacleGrid[i][0] ? 0 : (i ? dp[i - 1][0] : 1);
+			for (size_t j = 1; j < obstacleGrid[i].size(); ++j) {
+				dp[i][j] = obstacleGrid[i][j] ? 0 : dp[i][j - 1] + (i ? dp[i - 1][j] : 0);
+			}
+		}
+		return dp[obstacleGrid.size() - 1][obstacleGrid[0].size() - 1];
+	}
+};

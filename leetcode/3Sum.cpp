@@ -36,3 +36,45 @@ public:
         return ans;
     }
 };
+
+// 2015-01-10
+// two pointers
+class Solution {
+public:
+	vector<vector<int> > threeSum(vector<int> &num) {
+		std::sort(num.begin(), num.end());
+		vector<vector<int> > ans;
+		if (num.size() < 3) {
+			return ans;
+		}
+		for (size_t i = 0; i < num.size(); ++i) {
+			// just search the right side
+			size_t left = i + 1, right = num.size() - 1;
+			while (left < num.size() && right < num.size() && left < right) {
+				int sum = num[left] + num[right] + num[i];
+				if (0 == sum) {
+					vector<int> temp;
+					temp.push_back(num[i]);
+					temp.push_back(num[left]);
+					temp.push_back(num[right]);
+					ans.push_back(temp);
+					int temp1 = num[left];
+					while (num[++left] == temp1) {}
+				}
+				else if (sum > 0) {
+					int temp = num[right];
+					while (num[--right] == temp) {}
+				}
+				else if (sum < 0) {
+					int temp = num[left];
+					while (num[++left] == temp) {}
+				}
+			}
+			// skip duplicates
+			while (i + 1 < num.size() && num[i] == num[i + 1]) {
+				++i;
+			}
+		}
+		return ans;
+	}
+};
