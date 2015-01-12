@@ -60,7 +60,8 @@ public:
 		return can[0];
     }
 };
-// ac, only one loop
+
+//@type greedy, only one loop
 class Solution {
 public:
     bool canJump(int A[], int n) {

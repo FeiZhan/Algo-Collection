@@ -1,3 +1,5 @@
+// http://fisherlei.blogspot.ca/2013/03/leetcode-palindrome-partitioning-ii.html
+//@type dp
 class Solution {
 public:
 	int minCut(string s) {

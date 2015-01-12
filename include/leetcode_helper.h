@@ -48,7 +48,7 @@ ListNode &operator<< (ListNode &ln, const std::vector<int> &list)
 	{
 		current = current->next;
 	}
-	for (size_t i = 0; i < list.size(); ++ i)
+	for (size_t i = 0; i < list.size(); ++i)
 	{
 		current->next = new ListNode(list[i]);
 		current = current->next;
@@ -64,7 +64,8 @@ std::ostream &operator<< (std::ostream &os, ListNode *ln)
 		if (flag)
 		{
 			flag = false;
-		} else
+		}
+		else
 		{
 			std::cout << ", ";
 		}
@@ -86,7 +87,7 @@ public:
 	friend TreeNode &operator<< (TreeNode &tn, int x);
 	friend TreeNode &operator<< (TreeNode &tn, const std::vector<int> &list);
 	friend std::ostream &operator<< (std::ostream &os, TreeNode *tn);
-private:
+protected:
 	bool left_empty;
 };
 TreeNode::TreeNode(int x, TreeNode *l, TreeNode *r) : val(x), left(l), right(r)
@@ -110,23 +111,23 @@ void TreeNode::load(const std::vector<int> &list)
 {
 	/*if (0 == list.size())
 	{
-		return;
+	return;
 	}
 	this->val = list[0];
 	std::queue<TreeNode *> q;
 	q.push(this);
 	for (size_t i = 1; i < list.size(); i += 2)
 	{
-		while (! q.empty())
-		{
-			TreeNode *current = q.top();
-			q.pop();
-			if (current->left && current->right)
-			{
-				continue;
-			}
-			if (NULL == current->left)
-		}
+	while (! q.empty())
+	{
+	TreeNode *current = q.top();
+	q.pop();
+	if (current->left && current->right)
+	{
+	continue;
+	}
+	if (NULL == current->left)
+	}
 	}*/
 }
 TreeNode &operator<< (TreeNode &tn, int x)
@@ -142,7 +143,35 @@ std::ostream &operator<< (std::ostream &os, TreeNode *tn)
 	if (NULL != tn)
 	{
 		os << "(" << tn->val << ": " << tn->left << ", " << tn->right << ")";
-	} else
+	}
+	else
+	{
+		os << "NULL";
+	}
+	return os;
+}
+
+// Definition for binary tree with next pointer.
+struct TreeLinkNode {
+	int val;
+	TreeLinkNode *left, *right, *next;
+	TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+	virtual ~TreeLinkNode(void) {}
+	friend std::ostream &operator<< (std::ostream &os, TreeLinkNode *tn);
+};
+std::ostream &operator<< (std::ostream &os, TreeLinkNode *tn)
+{
+	if (NULL != tn)
+	{
+		os << "(" << tn->val << ": " << tn->left << ", " << tn->right << ", -> ";
+		if (tn->next) {
+			os << tn->next->val << ")";
+		}
+		else {
+			os << "NULL)";
+		}
+	}
+	else
 	{
 		os << "NULL";
 	}

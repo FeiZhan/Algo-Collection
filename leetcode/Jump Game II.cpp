@@ -21,3 +21,22 @@ public:
 		return count;
 	}
 };
+
+// 2015-01-12
+//@type greedy
+// less space efficient
+class Solution {
+public:
+	int jump(int A[], int n) {
+		vector<int> step(n, INT_MAX);
+		step[0] = 0;
+		int largest = 0;
+		for (int i = 0; i < n; ++i) {
+			for (int j = largest; j <= i + A[i] && j < n; ++j) {
+				step[j] = std::min(step[j], step[i] + 1);
+			}
+			largest = std::max(largest, i + A[i]);
+		}
+		return step[n - 1];
+	}
+};
