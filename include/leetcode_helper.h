@@ -15,10 +15,8 @@ public:
 };
 ListNode::ListNode(int x) : val(x), next(NULL)
 {}
-ListNode::~ListNode(void)
-{
-	if (this->next)
-	{
+ListNode::~ListNode(void) {
+	if (this->next) {
 		delete this->next;
 		this->next = NULL;
 	}
@@ -175,6 +173,20 @@ std::ostream &operator<< (std::ostream &os, TreeLinkNode *tn)
 	{
 		os << "NULL";
 	}
+	return os;
+}
+
+// Definition for an interval.
+struct Interval {
+	int start;
+	int end;
+	Interval() : start(0), end(0) {}
+	Interval(int s, int e) : start(s), end(e) {}
+	virtual ~Interval(void) {}
+	friend std::ostream &operator<< (std::ostream &os, const Interval &in);
+};
+std::ostream &operator<< (std::ostream &os, const Interval &in) {
+	os << "(" << in.start << " - " << in.end << ")";
 	return os;
 }
 

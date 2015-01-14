@@ -10,6 +10,7 @@
 #include <set>
 #include <map>
 #include <algorithm>
+#include <functional>
 
 #if __cplusplus >= 201103L
 #include <iterator>
