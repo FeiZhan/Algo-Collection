@@ -1,84 +1,38 @@
-// TLE because of cin
-#define _FILE_DEBUG_
-//#define _C_LAN_
-//#define _DEBUG_OUTPUT_
-#ifdef _FILE_DEBUG_
-#include <fstream>
-#endif
+// do not use string, map. They caused TLE
 #include <iostream>
-#include <stdio.h>
 using namespace std;
 
-#include <string>
-#include <vector>
-#include <map>
+#include <iomanip>
 
-int main(int argc, char *argv[])
+int main (int argc, char *argv[])
 {
-#ifdef _FILE_DEBUG_
-	ifstream fin;
-	fin.open("../input.txt");
-	cin.rdbuf(fin.rdbuf());
-#ifdef _C_LAN_
-	freopen("../input.txt", "r", stdin);
-#endif
-#endif
-#ifdef _FILE_DEBUG_
-	ofstream fout;
-	fout.open("../output.txt");
-	cout.rdbuf(fout.rdbuf());
-#ifdef _C_LAN_
-	freopen("../output.txt", "w", stdout);
-#endif
-#endif
-
-	std::string begin1, begin2;
-	int add_num;
-	std::cin >> begin1 >> begin2 >> add_num;
-	std::map<std::string, char> char_map;
-	std::map<std::string, std::string> add_map;
-	std::string tmp1, tmp2;
-	char tmp3;
-	for (int i = 0; i < add_num; ++ i)
-	{
-		std::cin >> tmp1 >> tmp3 >> tmp2;
-		char_map.insert(std::make_pair(tmp1, tmp3));
-		add_map.insert(std::make_pair(tmp1, tmp2));
-	}
-	std::vector<std::string> add_vec1, add_vec2;
-	add_vec1.push_back(begin1);
-	while (true)
-	{
-		std::string &next( add_map[ add_vec1[add_vec1.size() - 1] ] );
-		if ( "" == next || "-1" == next )
-		{
-			break;
-		} else
-		{
-			add_vec1.push_back(next);
+	int start[2];
+	size_t node_num(0);
+	while (cin >> start[0] >> start[1] >> node_num) {
+		pair<int, bool> node_map[100000];
+		for (size_t i = 0; i < node_num; ++ i) {
+			int address, next;
+			char letter('\0');
+			cin >> address >> letter >> next;
+			node_map[address] = make_pair(next, false);
+		}
+		while (start[0] >= 0) {
+			node_map[start[0]].second = true;
+			start[0] = node_map[start[0]].first;
+		}
+		bool find_flag(false);
+		while (start[1] >= 0) {
+			if (node_map[start[1]].second) {
+				cout << setfill('0') << setw(5) << start[1] << endl;
+				find_flag = true;
+				break;
+			}
+			start[1] = node_map[start[1]].first;
+		}
+		if (! find_flag) {
+			cout << -1 << endl;
 		}
 	}
-	add_vec2.push_back(begin2);
-	while (true)
-	{
-		std::string &next( add_map[ add_vec2[add_vec2.size() - 1] ] );
-		if ( "" == next || "-1" == next )
-		{
-			break;
-		} else
-		{
-			add_vec2.push_back(next);
-		}
-	}
-	std::string common("-1");
-	for (int i = 0; i < add_vec1.size() && i < add_vec2.size(); ++ i)
-	{
-		if (add_vec1[add_vec1.size() - 1 - i] == add_vec2[add_vec2.size() - 1 - i])
-		{
-			common = add_vec1[add_vec1.size() - 1 - i];
-		}
-	}
-	std::cout << common << std::endl;
 
 	return 0;
 }
