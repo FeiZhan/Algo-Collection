@@ -1,0 +1,140 @@
+===============================================================================
+  dbg library README
+
+  Version:  1.20
+  Homepage: http://dbg.sf.net/
+  Author:   Pete Goodliffe
+===============================================================================
+
+-------------------------------------------------------------------------------
+Introduction
+
+    The dbg library is a set of C++ utilities to facilitate modern debugging
+    idioms.
+
+    It has been designed to support defensive programming techniques in modern
+    C++ code. It integrates well with standard library usage and has been
+    carefully designed to be easy to write, easy to read and very easy to use.
+
+    It provides various constraint checking utilities together with an
+    integrated error logging facility. These utilities are flexible and
+    customisable. They can be enabled and disabled at runtime, and in release
+    builds, dbg library use can be compiled away to nothing.
+
+    Rich debugging can only be implemented in large code bases from the outset,
+    it is hard to retrofit full defensive programming techniques onto existent
+    code. For this reason it is good practice to use a library like dbg when
+    you start a new project. By using dbg extensively you will find bugs
+    quicker, and prevent more insidious problems rearing their head later in
+    the project's life.
+
+    For instructions on the dbg library's use see the @ref dbg namespace
+    documentation.
+
+
+-------------------------------------------------------------------------------
+Licence
+
+    dbg is modifiable/redistributable under the terms of the GNU Lesser
+    General Public License.
+
+
+-------------------------------------------------------------------------------
+Documentation
+
+    The library comes with full documentation. This can be pulled out
+    using the kdoc literate programming tool. The "kdoc" makefile target
+    illustrates how to do this. Doxygen should also produce acceptable
+    documentation.
+
+    The documentation is very clear to read directly in the source file,
+    take a look at <dbg.h> if you don't have kdoc installed.
+
+    There is always a copy of the latest documentation on the dbg homepage.
+
+
+-------------------------------------------------------------------------------
+Compatibility
+
+    dbg has been tested and found to work ok under
+
+        - gcc 2.96
+        - gcc 3.0
+        - gcc 3.1
+        - gcc 3.2
+        - bcc32 5.5.1
+        - MSVC 6.0 (there are nasty code bodges so that this compiler works)
+
+
+-------------------------------------------------------------------------------
+Building dbg
+
+    dbg isn't built as a shared library, you just have to include the files
+    in your project.
+
+    The library ships with a simple makefile that works for Unix platforms
+    that demonstrates building the application and it's simple test harness.
+
+    Build is simple on any platform. For debugging builds, add a macro
+    definition of DBG_ENABLED to your compiler (e.g. for gcc add
+    -DDBG_ENABLED). Add the dbg.cpp file to your build. That's it!
+
+    For non-debug builds, don't define DBG_ENABLED, and don't compile dbg.cpp.
+
+
+-------------------------------------------------------------------------------
+Manifest
+
+    Files included in this distribution:
+
+        README    - This file
+        LICENSE   - GNU LGPL licence. Please read this prior to use.
+        VERSION   - Contains the version number of this release of dbg
+        dbg.h     - dbg header file
+        dbg.cpp   - dbg implementation
+        test.cpp  - Simple test harness
+        Makefile  - Example makefile to build test harness
+
+
+-------------------------------------------------------------------------------
+Author
+
+    dbg is written by Pete Goodliffe
+    (c) Pete Goodliffe, 2001-2003
+    Contact me at <pete@cthree.org>
+    http://homepage.ntlworld.com/petegoodliffe/
+
+
+-------------------------------------------------------------------------------
+Release notes
+
+--> Version 1.20 (2003-07-20)
+    gcc 3.3 compatibility
+    check_ptr takes const pointers (correction)
+
+--> Version 1.10 (2002-10-17)
+    Greatly improved documentation (see KDOC).
+    Added DBG_SOURCE facility.
+    Added convenience stream functions (info_out et al).
+    Extensions following suggestions by Ken Yarnall,
+    Each source has it's own set of independent streams.
+    The dbg::default_source is a "template" for newly created sources.
+    Improved distribution files.
+
+--> Version 1.08 (2002-06-10)
+    Stream buffer behaviour fix.
+
+--> Version 1.07 (2002-12-31)
+    Some bug fixes.
+
+--> Version 1.06 (2002-11-29)
+    Better MSVC 6.0 compatibility.
+
+--> Version 1.05 (2002-08-07)
+    Added compile time assertions.
+
+--> Version 1.00 (2002-06-24)
+    First public release.
+
+
+===============================================================================
