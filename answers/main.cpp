@@ -1,30 +1,15 @@
 class Solution {
 public:
-    /**
-      * @param board: the board
-      * @return: wether the Sudoku is valid
-      */
-    bool isValidSudoku(const vector<vector<char>>& board) {
-		if (0 == board.size() || 0 == board[0].size()) {
-			return true;
-		}
-        for (size_t i = 0; i < board.size(); ++ i) {
-			set<int> sudoku;
-			for (size_t j = 0; j < board[i].size(); ++ j) {
-				if (sudoku.end() != sudoku.find(board[i][j])) {
-					return false;
-				}
-				sudoku.insert(board[i][j]);
+    void recoverRotatedSortedArray(vector<int> &nums) {
+        // write your code here
+        size_t begin = 0;
+        for (size_t i = 1; i < nums.size(); ++ i) {
+			if (nums[i - 1] > nums[i]) {
+				begin = i;
 			}
 		}
-        for (size_t i = 0; i < board[0].size(); ++ i) {
-			set<int> sudoku;
-			for (size_t j = 0; j < board.size(); ++ j) {
-				if (sudoku.end() != sudoku.find(board[j][i])) {
-					return false;
-				}
-				sudoku.insert(board[j][i]);
-			}
+		for (size_t i = begin - 1; i < nums.size(); -- i) {
+			for (size_t j = begin; j < nums.size() - i)
 		}
     }
 };
