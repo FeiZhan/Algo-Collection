@@ -53,3 +53,34 @@ int countUneatenLeaves(int N, vector < int > A) {
         return count;
     }
 }
+
+
+/*
+ * Complete the function below.
+ */
+string compress(string str) {
+    size_t current = 0;
+    int count = 1;
+    for (size_t i = 1; i <= str.length(); ++ i) {
+        // found a new character, or reach the end
+        if (i == str.length() || str[i] != str[i - 1]) {
+            // reuse original string
+            str[current] = str[i - 1];
+            ++ current;
+            // attach a number
+            if (count > 1) {
+                string num(to_string(count));
+                for (size_t j = 0; j < num.length(); ++ j) {
+                    str[current + j] = num[j];
+                }
+                current += num.length();
+            }
+            count = 1;
+        }
+        // found a repeated character
+        else if (str[i] == str[i - 1]) {
+            ++ count;
+        }
+    }
+    return str.substr(0, current);
+}
