@@ -37,3 +37,51 @@ public:
         }
     }
 };
+
+
+class Solution {
+public:
+    /**
+     * @param s: A string
+     * @param p: A string includes "?" and "*"
+     * @return: A boolean
+     */
+    bool isMatch(const char *s, const char *p) {
+        // write your code here
+        bool star = false;
+        const char *sptr = s;
+        const char *pptr = p;
+        for (; '\0' != *sptr; ++ sptr, ++ pptr) {
+            switch (*pptr) {
+            case '?':
+                break;
+            case '*':
+                star = true;
+                s = sptr;
+                p = pptr;
+                while ('*' == *p) {
+                    ++ p;
+                }
+                if ('\0' == *p) {
+                    return true;
+                }
+                sptr = s - 1;
+                pptr = p - 1;
+                break;
+            default:
+                if (*sptr != *pptr) {
+                    if (! star) {
+                        return false;
+                    }
+                    ++ s;
+                    sptr = s - 1;
+                    pptr = p - 1;
+                }
+            }
+        }
+        while ('*' == *pptr) {
+            ++ pptr;
+        }
+        return '\0' == *pptr;
+    }
+};

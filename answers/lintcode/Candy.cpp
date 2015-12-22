@@ -1,5 +1,3 @@
-//@result WA
-
 class Solution {
 public:
     /**
@@ -8,30 +6,13 @@ public:
      */
     int candy(vector<int>& ratings) {
         // Write your code here
-        vector<int> dp(ratings.size(), 0);
-        for (size_t i = 0; i < dp.size(); ++ i) {
-            if (0 == i || ratings[i] == ratings[i - 1]) {
-                dp[i] = 1;
-            }
-            else if (ratings[i] > ratings[i - 1]) {
-                dp[i] = dp[i - 1] + 1;
-            }
-            else {
-                dp[i] = dp[i - 1] - 1;
-            }
-            if (ratings[i] < ratings[i - 1] && (ratings.size() == i + 1 || ratings[i] <= ratings[i + 1])) {
-                int prev = dp[i];
-                dp[i] = 1;
-                size_t j = i - 1;
-                for (; j < dp.size() && ratings[j] > ratings[j + 1]; -- j) {
-                    prev = dp[j];
-                    dp[j] = max(dp[j], dp[j + 1] + 1);
-                }
-            }
+        vector<int> candy_list(ratings.size(), 0);
+        for (size_t i = 0; i < ratings.size(); ++ i) {
+            candy_list[i] = (i > 0 && ratings[i] > ratings[i - 1]) ? candy_list[i - 1] + 1 : 1;
         }
-        for (size_t i = 0; i < dp.size(); ++ i) {
-            cout << "debug " << i << " " << dp[i] << endl;
+        for (size_t i = ratings.size() - 1; i < ratings.size(); -- i) {
+            candy_list[i] = max(candy_list[i], ((i + 1 < ratings.size() && ratings[i] > ratings[i + 1]) ? candy_list[i + 1] + 1 : 1));
         }
-        return std::accumulate(dp.begin(), dp.end(), 0);
+        return std::accumulate(candy_list.begin(), candy_list.end(), 0);
     }
 };
