@@ -1,0 +1,47 @@
+//1608Two Circles and a Rectangle
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <cmath>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	double a, b, r[2], tmp[3];
+	while (cin >> a >> b >> r[0] >> r[1])
+	{
+		tmp[0] = a + b - sqrt(2 * a * b);
+		if (r[0] + r[1] > tmp[0])
+		{
+			cout << "No";
+		}
+		else
+		{
+			cout << "Yes";
+		}
+		cout << endl;
+	}
+	return 0;
+}

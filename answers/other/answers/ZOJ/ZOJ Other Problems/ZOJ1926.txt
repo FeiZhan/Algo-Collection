@@ -1,0 +1,84 @@
+//1926Guessing Game
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <map>
+#include <string>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	map<int, bool> guess_map;
+	int ans, guess;
+	bool if_cheat;
+	string response;
+	while (true)
+	{
+		cin >> guess;
+		if (guess <= 0)
+		{
+			break;
+		}
+		guess_map.clear();
+		while (cin >>response >> response && response.compare("on") != 0)
+		{
+			if (response.compare("high") == 0)
+			{
+				guess_map.insert(pair<int, bool> (guess, true));
+			}
+			else if (response.compare("low") == 0)
+			{
+				guess_map.insert(pair<int, bool> (guess, false));
+			}
+			cin >> guess;
+		}
+		ans = guess;
+		if_cheat = false;
+		for (map<int, bool>::iterator map_it = guess_map.begin()
+			; map_it != guess_map.end(); map_it ++)
+		{
+			if (map_it->second == true && ans >= map_it->first)
+			{
+				if_cheat = true;
+				break;
+			}
+			else if (map_it->second == false && ans <= map_it->first)
+			{
+				if_cheat = true;
+				break;
+			}
+		}
+		if (if_cheat == true)
+		{
+			cout << "Stan is dishonest" << endl;
+		}
+		else
+		{
+			cout << "Stan may be honest" << endl;
+		}
+	}
+
+	return 0;
+}

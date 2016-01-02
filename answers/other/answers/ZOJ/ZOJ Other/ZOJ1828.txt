@@ -1,0 +1,93 @@
+//1828Fibonacci Numbers
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <vector>
+#include <map>
+#include <memory.h>
+#define LEN_MAX 1010
+
+map<int, vector<int> > fi_map;
+map<int, vector<int> >::iterator it;
+vector<int> Add(vector<int> num1, vector<int> num2)
+{
+	vector<int> &max = (num1.size() > num2.size()) ? num1 : num2;
+	int min_size = (num1.size() < num2.size()) ? num1.size() : num2.size();
+	vector<int> ret;
+	int add_tmp, carry = 0;
+	for (int i = 0; i < min_size; i ++)
+	{
+		add_tmp = num1.at(i) + num2.at(i) + carry;
+		carry = add_tmp / 10;
+		add_tmp %= 10;
+		ret.push_back(add_tmp);
+	}
+	if (max.size() > min_size && max.at(min_size) + carry > 0)
+	{
+		ret.push_back(max.at(min_size) + carry);
+	}
+	else if (carry > 0)
+	{
+		ret.push_back(carry);
+	}
+	for (int i = min_size + 1; i < max.size(); i ++)
+	{
+		ret.push_back(max.at(i));
+	}
+	return ret;
+}
+void Fibo(int num)
+{
+	it = fi_map.find(num);
+	if (it != fi_map.end())
+		return;
+	Fibo(num - 1);
+	Fibo(num - 2);
+	vector<int> add[2];
+	add[0] = fi_map.find(num - 1)->second;
+	add[1] = fi_map.find(num - 2)->second;
+	fi_map.insert(pair<int, vector<int> > (num, Add(add[0], add[1])));
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num;
+	fi_map.clear();
+	vector<int> tmp;
+	tmp.push_back(1);
+	fi_map.insert(pair<int, vector<int> > (1, tmp));
+	fi_map.insert(pair<int, vector<int> > (2, tmp));
+	while (cin >> num)
+	{
+		Fibo(num);
+		tmp = fi_map.find(num)->second;
+		for (int i = tmp.size() - 1; i >= 0; i --)
+		{
+			cout << tmp.at(i);
+		}
+		cout << endl;
+	}
+	return 0;
+}

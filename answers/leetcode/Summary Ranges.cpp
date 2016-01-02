@@ -1,4 +1,6 @@
 //@type Array
+//@time complexity O(n)
+//@space complexity O(n)
 //@result 27 / 27 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 1.50% of cpp submissions.
 
 class Solution {

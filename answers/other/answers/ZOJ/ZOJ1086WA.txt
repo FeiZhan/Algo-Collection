@@ -1,0 +1,62 @@
+//1086Octal Fractions
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#define FILE_DEBUG
+
+#ifdef FILE_DEBUG
+#include <fstream>
+#endif
+
+using namespace std;
+string Convert(int oct_num, int times)
+{
+	string dec;
+	dec.clear();
+	if (times <= 0)
+		return dec;
+
+}
+int main(int argc, char *argv[])
+{
+#ifdef FILE_DEBUG
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef FILE_DEBUG
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+      const int CVT_CNST[10][4] = {{0, 0, 0, 0}, {0, 1, 2, 5}, {0, 2, 5, 0}
+            , {0, 3, 7, 5}, {0, 5, 0, 0}, {0, 6, 2, 5}, {0, 7, 5, 0}
+            , {0, 8, 7, 5}, {1, 0, 0, 0}, {1, 1, 2, 5}};
+      string oct, dec;
+      long oct_ptr, dec_ptr;
+      while (cin >> oct && cin.eof() == NULL)
+      {
+            oct_ptr = dec_ptr = 0;
+            dec.clear();
+            for (int i = 0; i < 100; i ++)
+                dec.append("0");
+            while (oct_ptr < oct.size())
+            {
+                  for (int i = 0; i < 4; i ++)
+                  {
+                      dec[dec_ptr + i] += CVT_CNST[oct.at(oct_ptr) - '0'][i];
+                  }
+                  oct_ptr ++;
+            }
+            cout << dec << endl;
+      }
+
+    return 0;
+}

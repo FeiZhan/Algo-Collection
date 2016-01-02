@@ -1,3 +1,5 @@
+//@result 35 / 35 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 39.89% of cpp submissions.
+
 class Solution {
 public:
 	string fractionToDecimal(int numerator, int denominator) {

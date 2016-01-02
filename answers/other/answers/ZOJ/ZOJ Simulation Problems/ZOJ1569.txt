@@ -1,0 +1,60 @@
+//1569Partial Sums
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num_sum, divident, num[10010], sum, div[10010], cnt;
+	while (cin >> num_sum >> divident)
+	{
+		sum = 0;
+		for (int i = 0; i < num_sum; i ++)
+		{
+			cin >> num[i];
+			sum += num[i];
+			div[i] = sum % divident;
+		}
+		cnt = 0;
+		for (int i = 0; i < num_sum; i ++)
+		{
+			if (div[i] == 0)
+			{
+				cnt ++;
+			}
+			for (int j = 0; j < i; j ++)
+			{
+				if (div[i] == div[j])
+				{
+					cnt ++;
+				}
+			}
+		}
+		cout << cnt << endl;
+	}
+
+	return 0;
+}

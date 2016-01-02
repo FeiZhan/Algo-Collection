@@ -1,3 +1,5 @@
+//@result 1000 / 1000 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 8.80% of cpp submissions.
+
 class Solution {
 public:
 	int titleToNumber(string s) {

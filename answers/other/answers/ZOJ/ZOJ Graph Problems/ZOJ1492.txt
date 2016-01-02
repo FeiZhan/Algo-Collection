@@ -1,0 +1,86 @@
+//1492Maximum Clique
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#define MAX_NUM 55
+int ver_sum, map[MAX_NUM][MAX_NUM], pos_max, cnt[MAX_NUM];
+bool dfs(int num, int visit[MAX_NUM], int pos)
+{
+	int j;
+	for (int i = num + 1; i < ver_sum; i ++)
+	{
+		if (cnt[i] + pos <= pos_max)
+			return false;
+		if (map[num][i])
+		{
+			for (j = 0; j < pos; j ++)
+			{
+				if (map[i][visit[j]] == 0)
+				{
+					break;
+				}
+			}
+			if (j == pos)
+			{
+				visit[pos] = i;
+				if (dfs(i, visit, pos + 1))
+					return true;
+			}
+		}
+	}
+	if (pos > pos_max)
+	{
+		pos_max = pos;
+		return true;
+	}
+	else
+		return false;
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int path[MAX_NUM];
+	while (cin >> ver_sum && ver_sum > 0)
+	{
+		for (int i = 0; i < ver_sum; i ++)
+		{
+			for (int j = 0; j < ver_sum; j ++)
+			{
+				cin >> map[i][j];
+			}
+		}
+		pos_max = -1;
+		for (int i = ver_sum - 1; i >= 0; i --)
+		{
+			path[0] = i;
+			dfs(i, path, 1);
+			cnt[i] = pos_max;
+		}
+		cout << cnt[0] << endl;
+	}
+
+	return 0;
+}

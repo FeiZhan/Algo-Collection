@@ -1,0 +1,53 @@
+//1057Undercut
+#include <iostream>
+using namespace std;
+int main()
+{
+	int card_sum, card[2][20], diff, point[2];
+	bool output_flag = false;
+	while (cin>>card_sum && card_sum != NULL)
+	{
+		if (output_flag == true)
+		{
+			cout<<endl;
+		}
+		else
+			output_flag = true;
+		for (int i = 0; i < 2; i ++)
+		{
+			for (int j = 0; j < card_sum; j ++)
+			{
+				cin>>card[i][j];
+			}
+		}
+		point[0] = point[1] = 0;
+		for (int i = 0; i < card_sum; i ++)
+		{
+			diff = card[0][i] - card[1][i];
+			if (diff == 0)
+			{
+				continue;
+			}
+			else if (card[0][i] == 1 && card[1][i] == 2)
+			{
+				point[0] += 6;
+			}
+			else if (card[0][i] == 2 && card[1][i] == 1)
+			{
+				point[1] += 6;
+			}
+			else if (diff == 1 || diff == -1)
+			{
+				(diff > 0) ? (point[1] += card[0][i] + card[1][i])
+					: (point[0] += card[0][i] + card[1][i]);
+			}
+			else
+			{
+				(diff > 0) ? (point[0] += card[0][i]) : (point[1] += card[1][i]);
+			}
+		}
+		cout<<"A has "<<point[0]<<" points. B has "<<point[1]<<" points."<<endl;
+	}
+	//system("pause");
+	return 0;
+}

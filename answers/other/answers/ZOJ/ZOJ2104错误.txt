@@ -1,0 +1,35 @@
+#include <stdio.h>
+int main()
+{
+	int n,i,j,color[1000],max,maximum;
+	char balloon[1000][20];
+
+	while(scanf("%d",&n) && n!=0)
+	{
+		getchar();
+		for(i=0;i<n;i++)
+		{
+			color[i]=1;
+			gets(balloon[i]);
+			for(j=0;j<i;j++)
+			{
+				if(strcmp(balloon[i],balloon[j])==0)
+				{
+					color[j]++;
+					color[i]=0;
+				}
+			}
+		}
+		max=0;
+		for(i=0;i<n;i++)
+		{
+			if(max<color[i])
+			{
+				max=color[i];
+				maximum=i;
+			}
+		}
+		printf("%s",balloon[i]);
+	}
+	return 0;
+}

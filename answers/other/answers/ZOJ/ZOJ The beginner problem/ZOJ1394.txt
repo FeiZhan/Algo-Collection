@@ -1,0 +1,29 @@
+//1394Polar Explorer
+#include<iostream>
+#include<string>
+#define PI (3.14159)
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int radius, gasoline, angle;
+	double dist, fuel, travel;
+	string str;
+	while (cin>>str && str != "ENDOFINPUT")
+	{
+		cin>>radius>>gasoline>>angle>>str;
+		if(angle > 180)
+			angle = 360 - angle;
+		dist = 2. * PI * radius * angle / 360.;
+		fuel = gasoline - dist * 2 / 5.;
+		travel = gasoline * 5.;
+		if(fuel >= 0)
+			cout<<"YES "<<int(fuel)<<endl;
+		else cout<<"NO "<<int(travel)<<endl;
+	}
+
+	//getchar();getchar();
+	return 0;
+}

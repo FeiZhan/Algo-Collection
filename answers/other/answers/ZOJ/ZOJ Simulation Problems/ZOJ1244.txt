@@ -1,0 +1,58 @@
+//1244Definite Values
+#include <iostream>
+#include <string>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int CaseNum = 0, line, i, ab[26], ab1, ab2;
+	string str1;
+	bool flag;
+	while (cin>>line && line != 0)
+	{
+		getchar();
+		CaseNum ++;
+		ab[0] = 2;
+		for (i=1; i<26; i++)
+		{
+			ab[i] = 0;
+		}
+		while (line --)
+		{
+			getline(cin, str1);
+			ab1 = int (str1.at(0) - 'a');
+			ab2 = int (str1.at(4) - 'a');
+			if (ab[ab2] == 2)
+			{
+				ab[ab1] = 2;
+			}
+			else
+			{
+				ab[ab1] = 1;
+			}
+		}
+		cout<<"Program #"<<CaseNum<<endl;
+		flag = false;
+		for (i=0; i<26; i++)
+		{
+			if (ab[i] == 2)
+			{
+				if (flag == false)
+				{
+					//cout<<char(i + 'a');
+					flag = true;
+				}
+				/*else */cout<<char(i + 'a')<<" ";
+			}
+		}
+		if (flag == false)
+		{
+			cout<<"none";
+		}
+		cout<<endl<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

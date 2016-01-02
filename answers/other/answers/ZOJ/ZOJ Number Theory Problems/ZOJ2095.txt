@@ -1,0 +1,46 @@
+//2095Divisor Summation
+//#define DEBUG
+#ifdef DEBUG
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#define MAX 500000
+int DivSum[MAX + 1];
+int main()
+{
+#ifdef DEBUG
+	ifstream fin;
+	fin.open("data.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#endif
+
+	for (int i = 0; i <= MAX; i ++)
+	{
+		DivSum[i] = 1;
+	}
+	DivSum[0] = DivSum[1] = 0;
+	for (int i = 2; i * i <= MAX; i ++)
+	{
+		DivSum[i * i] += i;
+		for (int j = i + 1; i * j <= MAX; j ++)
+		{
+			DivSum[i * j] += i + j;
+		}
+	}
+	int case_sum, num;
+	scanf("%d", &case_sum);
+	while (case_sum --)
+	{
+		scanf("%d", &num);
+		printf("%d\n", DivSum[num]);
+	}
+
+#ifdef DEBUG
+	system("pause");
+#endif
+	return 0;
+}

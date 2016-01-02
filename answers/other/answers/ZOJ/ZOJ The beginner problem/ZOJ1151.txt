@@ -1,0 +1,74 @@
+//1151Word Reversal
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#define ERROR -10
+using namespace std;
+void reverse(string &str_in, const int word_pos[2])
+{
+	int loop_sum = (word_pos[1] - word_pos[0]) / 2;
+	string str_tmp1, str_tmp2;
+	for (int i = 1; i <= loop_sum; i ++)
+	{
+		str_tmp1 = str_in.at(word_pos[0] + i);
+		str_tmp2 = str_in.at(word_pos[1] - i);
+		str_in.replace(word_pos[0] + i, 1, str_tmp2);
+		str_in.replace(word_pos[1] - i, 1, str_tmp1);
+	}
+}
+int main()
+{
+	int case_sum, sen_sum, word_pos[2], pos;
+	string str_in;
+	cin>>case_sum;
+	while (case_sum --)
+	{
+		cin>>sen_sum;
+		getchar();
+		while (sen_sum --)
+		{
+			getline(cin, str_in);
+			word_pos[0] = word_pos[1] = ERROR;
+			for (int i = 0; i < str_in.size(); i ++)
+			{
+				if (i == 0 || str_in.at(i) == ' ' || i == str_in.size() - 1)
+				{
+					if (i == 0)
+					{
+						pos = i - 1;
+					}
+					else if (i == str_in.size() - 1)
+					{
+						pos = i + 1;
+					}
+					else
+					{
+						pos = i;
+					}
+					if (word_pos[0] == ERROR)
+					{
+						word_pos[0] = pos;
+					}
+					else if (i - word_pos[0] <= 1)
+					{
+						word_pos[0] = pos;
+					}
+					else if (word_pos[1] == ERROR)
+					{
+						word_pos[1] = pos;
+						reverse(str_in, word_pos);
+						word_pos[0] = pos;
+						word_pos[1] = ERROR;
+					}
+				}
+			}
+			cout<<str_in<<endl;
+		}
+		if (case_sum > 0)
+		{
+			cout<<endl;
+		}
+	}
+	//system("pause");
+	return 0;
+}

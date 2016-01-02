@@ -1,0 +1,43 @@
+//2105Number Sequence
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int factor[2];
+	long long num, func[50];
+	func[0] = func[1] = func[2] = 1;
+	while (cin >> factor[0] >> factor[1] >> num && (factor[0] || factor[1] || num))
+	{
+		for (int i = 3; i <= 49; i ++)
+		{
+			func[i] = (factor[0] * func[i - 1] + factor[1] * func[i - 2]) % 7;
+		}
+		cout << func[(num - 1) % 48 + 1] << endl;
+	}
+	return 0;
+}

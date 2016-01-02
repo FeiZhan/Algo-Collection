@@ -1,0 +1,50 @@
+//2191Series Determination
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	double f[6], num[3];
+	while (cin >> f[0] >> f[1] >> f[2])
+	{
+		num[2] = f[0];
+		num[0] = .5 * f[2] - f[1] + .5 * f[0];
+		num[1] = 2.0 * f[1] - 3.0 / 2.0 * f[0] - .5 * f[2];
+		for (int i = 3; i < 6; i ++)
+		{
+			f[i] = i * i * num[0] + i * num[1] + num[2];
+			cout << f[i];
+			if (i < 6 - 1)
+			{
+				cout << " ";
+			}
+		}
+		cout << endl;
+	}
+
+	return 0;
+}

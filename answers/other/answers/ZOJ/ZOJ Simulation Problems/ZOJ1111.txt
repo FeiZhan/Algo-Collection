@@ -1,0 +1,246 @@
+//1111Poker Hands
+//10038 - Jolly Jumpers
+#include <iostream>
+//#include <fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+
+	char hand[2][5][3];
+	int hand_num[2][5], num_bucket[2][15], suit_bucket[2][4];
+	while (cin>>hand[0][0] != NULL)
+	{
+		int max_suit_sum, max_suit_num;
+		int max_hand_sum[2], max_hand_num[2];
+		int hand_rank[2][5], score[2], score_hand[4];
+		for (int i=0; i<2; i++)
+		{
+			for (int j=0; j<15; j++)
+			{
+				num_bucket[i][j] = 0;
+			}
+			for (int j=0; j<4; j++)
+			{
+				suit_bucket[i][j] = 0;
+			}
+			for (int j=0; j<5; j++)
+			{
+				hand_rank[i][j] = 0;
+			}
+		}
+		for (int i=0; i<2; i++)
+		{
+			for (int j=0; j<5; j++)
+			{
+				if (i + j != 0)
+				{
+					cin>>hand[i][j];
+				}
+				switch (hand[i][j][0])
+				{
+				case 'T':
+					hand_num[i][j] = 10;
+					break;
+				case 'J':
+					hand_num[i][j] = 11;
+					break;
+				case 'Q':
+					hand_num[i][j] = 12;
+					break;
+				case 'K':
+					hand_num[i][j] = 13;
+					break;
+				case 'A':
+					hand_num[i][j] = 14;
+					break;
+				default:
+					hand_num[i][j] = hand[i][j][0] - '0';
+				}
+				num_bucket[i][hand_num[i][j]] ++;
+				switch (hand[i][j][1])
+				{
+				case 'C':
+					suit_bucket[i][0] ++;
+					break;
+				case 'D':
+					suit_bucket[i][1] ++;
+					break;
+				case 'H':
+					suit_bucket[i][2] ++;
+					break;
+				case 'S':
+					suit_bucket[i][3] ++;
+					break;
+				}
+			}
+			max_suit_sum = max_suit_num = 0;
+			for (int j=0; j<4; j++)
+			{
+				if (suit_bucket[i][j] > max_suit_sum)
+				{
+					max_suit_sum = suit_bucket[i][j];
+					max_suit_num = j;
+				}
+			}
+			max_hand_sum[0] = max_hand_num[0] = 0;
+			for (int j=0; j<15; j++)
+			{
+				if (num_bucket[i][j] > max_hand_sum[0])
+				{
+					max_hand_sum[0] = num_bucket[i][j];
+					max_hand_num[0] = j;
+				}
+			}
+			max_hand_sum[1] = max_hand_num[1] = 0;
+			for (int j=0; j<15; j++)
+			{
+				if (j != max_hand_num[0] && num_bucket[i][j] > max_hand_sum[1])
+				{
+					max_hand_sum[1] = num_bucket[i][j];
+					max_hand_num[1] = j;
+				}
+			}
+			for (int j=14, k=0; j>=0; j--)
+			{
+				if (k >=5 )
+				{
+					break;
+				}
+				else if (num_bucket[i][j] != 0)
+				{
+					hand_rank[i][k] = j;
+					k ++;
+				}
+			}
+			bool consecutive_flag = true;
+			for (int j=0; j<(5 - 1); j++)
+			{
+				if (hand_rank[i][j] != hand_rank[i][j + 1] + 1)
+				{
+					consecutive_flag = false;
+					break;
+				}
+			}
+			if (max_suit_sum == 5 && consecutive_flag == true)	//Straight flush
+			{
+				score[i] = 8;
+				score_hand[i] = hand_rank[i][0];
+				continue;
+			}
+			if (max_hand_sum[0] == 4)	//Four of a kind
+			{
+				score[i] = 7;
+				score_hand[i] = max_hand_num[0];
+				continue;
+			}
+			if (max_hand_sum[0] == 3 && max_hand_sum[1] == 2)	//Full House
+			{
+				score[i] = 6;
+				score_hand[i] = max_hand_num[0];
+				continue;
+			}
+			if (max_suit_sum == 5)	//Flush
+			{
+				score[i] = 5;
+				score_hand[i] = hand_rank[i][0];
+				continue;
+			}
+			if (consecutive_flag == true)	//Straight
+			{
+				score[i] = 4;
+				score_hand[i] = hand_rank[i][0];
+				continue;
+			}
+			if (max_hand_sum[0] == 3)	//Three of a Kind
+			{
+				score[i] = 3;
+				score_hand[i] = max_hand_num[0];
+				continue;
+			}
+			if (max_hand_sum[0] == 2 && max_hand_sum[1] == 2)	//Two Pairs
+			{
+				score[i] = 2;
+				score_hand[i] = ((max_hand_num[0] > max_hand_num[1])
+					? max_hand_num[0] : max_hand_num[1]);
+				score_hand[i + 2] = ((max_hand_num[0] < max_hand_num[1])
+					? max_hand_num[0] : max_hand_num[1]);
+				continue;
+			}
+			if (max_hand_sum[0] == 2)	//Pair
+			{
+				score[i] = 1;
+				score_hand[i] = max_hand_num[0];
+				continue;
+			}
+			else
+			{
+				score[i] = 0;
+				score_hand[i] = hand_rank[i][0];
+				continue;
+			}
+		}
+		if (score[0] != score[1])
+		{
+			cout<<((score[0] > score[1]) ? "Black" : "White");
+		}
+		else if (score_hand[0] != score_hand[1])
+		{
+			cout<<((score_hand[0] > score_hand[1]) ? "Black" : "White");
+		}
+		else if (score[0] == 2)
+		{
+			if (score_hand[2] != score_hand[3])
+				cout<<((score_hand[2] > score_hand[3]) ? "Black" : "White");
+			else
+			{
+				int last_hand[2];
+				for (int i=0; i<2; i++)
+				{
+					for (int j=0; j<5; j++)
+					{
+						if (hand_rank[i][j] != score_hand[i]
+							&& hand_rank[i][j] != score_hand[i + 2])
+						{
+							last_hand[i] = hand_rank[i][j];
+							break;
+						}
+					}
+
+				}
+				if (last_hand[0] != last_hand[1])
+				{
+					cout<<((last_hand[0] > last_hand[1]) ? "Black" : "White");
+				}
+				else
+				{
+					cout<<"Tie."<<endl;
+					continue;
+				}
+			}
+		}
+		else/* if (score[0] == 0 || score[0] == 1	|| score[0] == 4
+			|| score[0] == 5 || score[0] == 8)*/
+		{
+			bool tie_flag = true;
+			for (int i=0; i<5; i++)
+			{
+				if (hand_rank[0][i] != hand_rank[1][i])
+				{
+					cout<<((hand_rank[0][i] > hand_rank[1][i]) ? "Black" : "White");
+					tie_flag = false;
+					break;
+				}
+			}
+			if (tie_flag == true)
+			{
+				cout<<"Tie."<<endl;
+				continue;
+			}
+		}
+		cout<<" wins."<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

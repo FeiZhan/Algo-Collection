@@ -1,0 +1,41 @@
+//1402Magnificent Meatballs
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int n, ball[40], i, sum, num;
+	bool flag;
+	while(cin>>n && n != 0)
+	{
+		sum = 0;
+		for(i=0; i<n; i++)
+		{
+			cin>>ball[i];
+			sum += ball[i];
+		}
+		num = 0;
+		flag = false;
+		for(i=0; i<n; i++)
+		{
+			num += ball[i];
+			if(double(num) == sum / 2.)
+			{
+				flag = true;
+				break;
+			}
+			else if(double(num) == sum / 2.)
+			{
+				flag = false;
+				break;
+			}
+		}
+		if(flag == true)
+			cout<<"Sam stops at position "<<i+1<<" and Ella stops at position "<<i+2<<"."<<endl;
+		else cout<<"No equal partitioning."<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

@@ -1,0 +1,13 @@
+#include <stdio.h>
+int main()
+{
+	float tem,tem2;
+	scanf("%f",&tem2);
+	while(scanf("%f",&tem) && tem!=999.0)
+	{
+		printf("%.2f\n",tem-tem2);
+		tem2=tem;
+	}
+	printf("End of Output");
+	return 0;
+}

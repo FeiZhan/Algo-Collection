@@ -1,0 +1,32 @@
+/* Note:Your choice is C IDE */
+#include "stdio.h"
+#include "string.h"
+void main()
+{
+    int n,i,a,b,c,max,min;
+    char name[10],student1[10],student2[10];
+    
+    scanf("%d",&n);
+    while(n!=-1)
+    {
+    	max=0;
+    	min=250;
+    	for(i=0;i<n;i++)
+    	{
+    		scanf("%d%d%d%s",&a,&b,&c,name);
+    		if(a*b*c>max) 
+    		{
+    			strcpy(student1,name);
+    			max=a*b*c;
+    		}
+    		if(a*b*c<min) 
+    		{
+    			strcpy(student2,name);
+    			min=a*b*c;
+    		}
+    	}
+    	printf("%s took clay from %s.\n",student1,student2);
+    	
+    	scanf("%d",&n);
+    }
+}

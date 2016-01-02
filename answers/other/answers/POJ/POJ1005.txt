@@ -1,0 +1,54 @@
+//1005 I Think I Need a Houseboat
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, year;
+	double x, y;
+
+	cin >> case_sum;
+	for (int i = 0; i < case_sum; i ++)
+	{
+		cin >> x >> y;
+		year = int (ceil (M_PI * (x * x + y * y) / 100.0));
+		cout << "Property " << i + 1 << ": This property will begin eroding in year "
+			<< year << "." << endl;
+	}
+	cout << "END OF OUTPUT." << endl;
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

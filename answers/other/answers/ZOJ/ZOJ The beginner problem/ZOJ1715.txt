@@ -1,0 +1,38 @@
+//1715When Can We Meet?
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int member, quorum, datenum, date[100], i, j, datesheet[100], largenum, large;
+	while(cin>>member>>quorum && member != 0)
+	{
+		for(i=0; i<100; i++)
+			datesheet[i] = 0;
+		for(i=0; i<member; i++)
+		{
+			cin>>datenum;
+			for(j=0; j<datenum; j++)
+			{
+				cin>>date[i];
+				datesheet[date[i]] ++;
+			}
+		}
+		large = 0;
+		for(i=0; i<100; i++)
+		{
+			if(datesheet[i] > large)
+			{
+				largenum = i;
+				large = datesheet[i];
+			}
+		}
+		if(large < quorum)
+			cout<<0<<endl;
+		else cout<<largenum<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

@@ -1,0 +1,48 @@
+//1884WERTYU
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	const string KEY_BOARD = "`1234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./";
+	int find_str;
+	string line;
+	while (getline(cin, line))
+	{
+		for (int i = 0; i < line.size(); i ++)
+		{
+			find_str = KEY_BOARD.find(line.at(i));
+			if (find_str != string::npos)
+			{
+				line[i] = KEY_BOARD.at(find_str - 1);
+			}
+		}
+		cout << line << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,75 @@
+//2478Encoding
+#include <iostream>
+#include <string>
+//#include <fstream>
+using namespace std;
+string itoa(int num)
+{
+	string ret;
+	ret.clear();
+	if (num >= 10)
+	{
+		ret.append(itoa(num / 10));
+	}
+	ret += '0' + num % 10;
+	return ret;
+}
+int main()
+{
+	//ifstream fin;
+	//fin.open("data.txt");
+	//cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+
+	int case_sum, count;
+	string str_in, str_cmp, str_tmp, str_out;
+	cin>>case_sum;
+	while (case_sum --)
+	{
+		cin>>str_in;
+		str_cmp = str_in.at(0);
+		str_out.clear();
+		str_tmp.clear();
+		count = 1;
+		for (int i = 1; i <str_in.size(); i ++)
+		{
+			str_tmp = str_in.at(i);
+			if (str_cmp.compare(str_tmp) != 0)
+			{
+				if (count > 1)
+				{
+					str_out.append(itoa(count));
+				}
+				str_out.append(str_cmp);
+				str_cmp = str_tmp;
+				count = 1;
+				if (i == str_in.size() - 1)
+				{
+					if (count > 1)
+					{
+						str_out.append(itoa(count));
+					}
+					str_out.append(str_cmp);
+				}
+			}
+			else
+			{
+				count ++;
+				if (i == str_in.size() - 1)
+				{
+					if (count > 1)
+					{
+						str_out.append(itoa(count));
+					}
+					str_out.append(str_cmp);
+				}
+			}
+		}
+		if (str_out.size() == 0)
+		{
+			str_out.append(str_cmp);
+		}
+		cout<<str_out<<endl;
+	}
+	//system("pause");
+	return 0;
+}

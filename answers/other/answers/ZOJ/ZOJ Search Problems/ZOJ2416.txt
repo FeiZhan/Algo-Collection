@@ -1,0 +1,133 @@
+//2416Open the Lock
+//#define _USE_FILE_
+//#define _C_LAN_
+#ifdef _USE_FILE_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <memory.h>
+#include <vector>
+using namespace std;
+int LockStep[10000];
+vector<int> LockState;
+void LockPushBack(int lock_change, int lock)
+{
+	if (LockStep[lock_change] > 0)
+	{
+		return;
+	}
+	LockState.push_back(lock_change);
+	LockStep[lock_change] = LockStep[lock] + 1;
+}
+int Bfs(int pswd)
+{
+	int lock = LockState.at(0);
+	LockState.erase(LockState.begin());
+	int digit[4], lock_change, digit_reserve;
+	//cout << lock << " " << LockStep[lock] << endl;
+	if (lock == pswd)
+	{
+		return LockStep[lock];
+	}
+	for (int i = 0; i < 4; i ++)
+	{
+		digit[i] = lock % 10;
+		lock /= 10;
+	}
+	lock = digit[0] + digit[1] * 10 + digit[2] * 100 + digit[3] * 1000;
+	for (int i = 0; i < 4; i ++)
+	{
+		digit_reserve = digit[i];
+		digit[i] += 1;
+		if (digit[i] > 9)
+		{
+			digit[i] = 1;
+		}
+		lock_change = digit[0] + digit[1] * 10 + digit[2] * 100 + digit[3] * 1000;
+		LockPushBack(lock_change, lock);
+		digit[i] = digit_reserve;
+	}
+	for (int i = 0; i < 4; i ++)
+	{
+		digit_reserve = digit[i];
+		digit[i] -= 1;
+		if (digit[i] < 1)
+		{
+			digit[i] = 9;
+		}
+		lock_change = digit[0] + digit[1] * 10 + digit[2] * 100 + digit[3] * 1000;
+		LockPushBack(lock_change, lock);
+		digit[i] = digit_reserve;
+	}
+	for (int i = 0; i < 3; i ++)
+	{
+		if (digit[i] == digit[i + 1])
+		{
+			continue;
+		}
+		digit_reserve = digit[i];
+		digit[i] = digit[i + 1];
+		digit[i + 1] = digit_reserve;
+		lock_change = digit[0] + digit[1] * 10 + digit[2] * 100 + digit[3] * 1000;
+		LockPushBack(lock_change, lock);
+		digit_reserve = digit[i];
+		digit[i] = digit[i + 1];
+		digit[i + 1] = digit_reserve;
+	}
+	//if (digit[3] != digit[0])
+	//{
+	//	digit_reserve = digit[3];
+	//	digit[3] = digit[0];
+	//	digit[0] = digit_reserve;
+	//	lock_change = digit[0] + digit[1] * 10 + digit[2] * 100 + digit[3] * 1000;
+	//	LockPushBack(lock_change, lock);
+	//	digit_reserve = digit[3];
+	//	digit[3] = digit[0];
+	//	digit[0] = digit_reserve;
+	//}
+	return 0;
+}
+int main()
+{
+#ifdef _USE_FILE_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _USE_FILE_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, init_num, pswd, min_step;
+
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> init_num >> pswd;
+		memset(LockStep, 0, sizeof(LockStep));
+		LockStep[init_num] = 1;
+		LockState.clear();
+		LockState.push_back(init_num);
+		while (true)
+		{
+			min_step = Bfs(pswd);
+			if (min_step > 0)
+			{
+				cout << min_step - 1 << endl;
+				break;
+			}
+		}
+	}
+
+	return 0;
+}

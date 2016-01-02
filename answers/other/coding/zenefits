@@ -1,0 +1,156 @@
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+// O(S ^ P)
+bool isMatchRecursively(size_t sbegin, const string &s, size_t pbegin, const string &p, map<char, string> &str_map) {
+    //cout << "debug " << sbegin << " " << pbegin << endl;
+    if (pbegin >= p.length()) {
+        for (map<char, string>::iterator it = str_map.begin(); it != str_map.end(); ++ it) {
+            //cout << "map " << it->first << " " << it->second << endl;
+        }
+        return sbegin >= s.length();
+    }
+    else if (str_map.end() != str_map.find(p[pbegin])) {
+        return str_map[ p[pbegin] ] == s.substr(sbegin, str_map[ p[pbegin] ].length()) && isMatchRecursively(sbegin + str_map[ p[pbegin] ].length(), s, pbegin + 1, p, str_map);
+    }
+    else {
+        for (size_t i = sbegin; i < s.length(); ++ i) {
+            str_map[ p[pbegin] ] = s.substr(sbegin, i - sbegin + 1);
+            if (isMatchRecursively(i + 1, s, pbegin + 1, p, str_map)) {
+                return true;
+            }
+        }
+        str_map.erase(p[pbegin]);
+        return false;
+    }
+
+}
+bool isMatch(const string &s, const string &p) {
+    map<char, string> str_map;
+    return isMatchRecursively(0, s, 0, p, str_map);
+}
+int main (int argc, char *argv[]) {
+    string s("hihellohi");
+    string p("aba");
+    bool answer = isMatch(s, p);
+    cout << answer << endl;
+    s = "hihellohill";
+    p = "aba";
+    answer = isMatch(s, p);
+    cout << answer << endl;
+    return 0;
+}
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+
+// O(n * klogk) -> O(n * k)
+vector<vector<string> > anagram(const vector<string> &input) {
+
+    /*unordered_map<string, vector<string> > anagram_map;
+    for (size_t i = 0; i < input.size(); ++ i) {
+        string temp(input[i]);
+        sort(temp.begin(), temp.end());
+        anagram_map[temp].push_back(input[i]);
+    }*/
+    unordered_map<unordered_map<char, int>, vector<string> > anagram_map;
+    for (size_t i = 0; i < input.size(); ++ i) {
+        unordered_map<char, int> char_map;
+        for (size_t j = 0; j < input[i].size(); ++ j) {
+            ++ char_map[input[i][j]];
+        }
+        anagram_map[char_map].push_back(input[i]);
+    }
+
+    vector<vector<string> > output;
+    for (unordered_map<string, vector<string> >::iterator it = anagram_map.begin(); it != anagram_map.end(); ++ it) {
+        output.push_back(it->second);
+    }
+    return output;
+}
+int main (int argc, char *argv[]) {
+    vector<string> input;
+    vector<vector<string> > output = anagram(input);
+    return 0;
+}
+
+
+#include <iostream>
+#include <climits>
+#include <string>
+#include <vector>
+using namespace std;
+
+void dfs(size_t x, size_t y, int distance, vector<vector<int> > &dist_mat, const vector<string > &matrix) {
+    if (x >= matrix.size() || y >= matrix[x].size() || 'x' == matrix[x][y] || distance >= dist_mat[x][y]) {
+        return;
+    }
+    //cout << "dfs " << x << " " << y << " " << distance << endl;
+    dist_mat[x][y] = min(dist_mat[x][y], distance);
+    dfs(x - 1, y, distance + 1, dist_mat, matrix);
+    dfs(x + 1, y, distance + 1, dist_mat, matrix);
+    dfs(x, y - 1, distance + 1, dist_mat, matrix);
+    dfs(x, y + 1, distance + 1, dist_mat, matrix);
+}
+vector<size_t> mergePoint(const vector<string> &matrix) {
+    vector<size_t> merge(2, 0);
+    if (0 == matrix.size() || 0 == matrix[0].size()) {
+        // throw exception
+        return merge;
+    }
+    vector<vector<int> > dist_mat(matrix.size(), vector<int> (matrix[0].size(), 0));
+    for (size_t i = 0; i < matrix.size(); ++ i) {
+        for (size_t j = 0; j < matrix[i].size(); ++ j) {
+            if ('1' == matrix[i][j]) {
+                vector<vector<int> > dists(matrix.size(), vector<int> (matrix[0].size(), INT_MAX));
+                dfs(i, j, 0, dists, matrix);
+                cout << "debug " << i << " " << j << endl;
+                for (size_t m = 0; m < dist_mat.size(); ++ m) {
+                    for (size_t n = 0; n < dist_mat[i].size(); ++ n) {
+                        cout << dists[m][n] << " ";
+                        if (INT_MAX == dists[m][n]) {
+                            dist_mat[m][n] = INT_MAX;
+                        }
+                        else {
+                            dist_mat[m][n] += dists[m][n];
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+        }
+    }
+    cout << "merge ";
+    for (size_t i = 0; i < dist_mat.size(); ++ i) {
+        for (size_t j = 0; j < dist_mat[i].size(); ++ j) {
+            cout << dist_mat[i][j] << " ";
+            if (dist_mat[i][j] < dist_mat[merge[0]][merge[1]]) {
+                merge[0] = i;
+                merge[1] = j;
+            }
+        }
+    }
+    cout << endl;
+    return merge;
+}
+int main (int argc, char *argv[]) {
+    vector<string> matrix;
+    string line("1x0");
+    matrix.push_back(line);
+    line = "0x0";
+    matrix.push_back(line);
+    line = "001";
+    matrix.push_back(line);
+    vector<size_t> answer = mergePoint(matrix);
+    for (size_t i = 0; i < answer.size(); ++ i) {
+        cout << i << ": " << answer[i] << endl;
+    }
+    return 0;
+}

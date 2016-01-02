@@ -1,0 +1,61 @@
+//2954Hanoi Tower
+#include<iostream>
+#include <vector>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("data.txt", ios::in);
+	int CaseNum, disk, MoveNum, i, j, peg[3][10], move[2], PegFlag[3], temp1, temp2;
+	bool exit;
+	cin>>CaseNum;
+	while(CaseNum --)
+	{
+		cin>>disk>>MoveNum;
+		for (i=0; i<disk; i++)
+			peg[0][i] = disk - i;
+		PegFlag[0] = disk;
+		for (i=1; i<3; i++)
+		{
+			PegFlag[i] = 0;
+			for (j=0; j<10; j++)
+				peg[i][j] = 0;
+		}
+		exit = false;
+		for (i=0; i<MoveNum; i++)
+		{
+			cin>>move[0]>>move[1];
+			if (exit == true)
+				continue;
+			if (PegFlag[move[0] - 1] <= 0)
+			{
+				exit = true;
+				cout<<"-"<<i+1<<endl;
+				continue;
+			}
+			temp1 = peg[move[0] - 1][PegFlag[move[0] - 1] - 1];
+			temp2 = peg[move[1] - 1][PegFlag[move[1] - 1] - 1];
+			if (temp1 >= temp2 && temp2 > 0)
+			{
+				exit = true;
+				cout<<"-"<<i+1<<endl;
+				continue;
+			}
+			peg[move[0] - 1][PegFlag[move[0] - 1] - 1] = 0;
+			PegFlag[move[0] - 1] --;
+			peg[move[1] - 1][PegFlag[move[1] - 1]] = temp1;
+			PegFlag[move[1] - 1] ++;
+			if (PegFlag[2] >= disk)
+			{
+				exit = true;
+				cout<<i+1<<endl;
+				continue;
+			}
+		}
+		if (exit == false)
+			cout<<0<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

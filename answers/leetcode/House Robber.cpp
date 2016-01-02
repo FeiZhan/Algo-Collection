@@ -1,8 +1,5 @@
 //@type Dynamic Programming
-//@result 69 / 69 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago
-
-#include <iostream>
-using namespace std;
+//@result 69 / 69 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 8.63% of cpp submissions.
 
 class Solution {
 public:
@@ -23,8 +20,3 @@ public:
 		return dp[nums.size() - 1];
     }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

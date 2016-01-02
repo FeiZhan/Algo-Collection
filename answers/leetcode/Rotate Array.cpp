@@ -1,3 +1,5 @@
+//@result Status: Accepted Runtime: 24 ms Submitted: 2 months, 4 weeks ago You are here! Your runtime beats 22.92% of cpp submissions.
+
 #include <iostream>
 #include <vector>
 using namespace std;

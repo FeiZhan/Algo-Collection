@@ -1,0 +1,28 @@
+//1240IBM Minus One
+#include<iostream>
+#include<string>
+#include<fstream>
+//#define cin filein
+using namespace std;
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int n, i, j;
+	string str1, str2, str3;
+	cin>>n;
+	for(i=0; i<n; i++)
+	{
+		cin>>str1;
+		str3.clear();
+		for(j=0; j<str1.size(); j++)
+		{
+			str2 = char(str1.at(j) + 1);
+			if(str1.at(j) == 'Z')
+				str2 = 'A';
+			str3 = str3 + str2;
+		}
+		cout<<"String #"<<i+1<<endl<<str3<<endl<<endl;
+	}
+	//getchar();
+	return 0;
+}

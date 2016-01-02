@@ -1,45 +1,25 @@
+//@result 58 / 58 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 95.79% of cpp submissions
+
 class Solution {
 public:
-    int findPeakElement(const vector<int> &num) {
-        std::vector<int>::const_iterator peak = findPeakElement(num.begin(), num.end());
-		if (num.end() == peak) {
-			return NULL;
-		}
-		return peak - num.begin();
+    int findPeakElement(vector<int>& nums) {
+        size_t left = 0;
+        size_t right = nums.size() - 1;
+        while (left <= right && right < nums.size()) {
+            size_t middle = (left + right) / 2;
+            if ((0 == middle || nums[middle - 1] < nums[middle]) && (nums.size() == middle + 1 || nums[middle] > nums[middle + 1])) {
+                return middle;
+            }
+            else if (middle > 0 && nums[middle - 1] > nums[middle] && (nums.size() == middle + 1 || nums[middle] > nums[middle + 1])) {
+                right = middle - 1;
+            }
+            else if ((0 == middle || nums[middle - 1] < nums[middle]) && middle + 1 < nums.size() && nums[middle] < nums[middle + 1]) {
+                left = middle + 1;
+            }
+            else {
+                ++ left;
+            }
+        }
+        return nums.size();
     }
-    std::vector<int>::const_iterator findPeakElement(const std::vector<int>::const_iterator num_begin, const std::vector<int>::const_iterator num_end) {
-		if (num_begin >= num_end) {
-			// set num_end as invalid
-			return num_end;
-		}
-		else if (num_end - num_begin == 1) {
-			return num_begin;
-		}
-		else if (num_end - num_begin == 2) {
-			return *num_begin > *(num_begin + 1) ? num_begin : num_begin + 1;
-		}
-		else {
-			std::vector<int>::const_iterator num_median = num_begin + (num_end - num_begin) / 2;
-			if (*num_median > *(num_median - 1) && *num_median > *(num_median + 1)) {
-				return num_median;
-			}
-			else {
-				std::vector<int>::const_iterator peak_left = findPeakElement(num_begin, num_median);
-				if (peak_left == num_begin && *peak_left > *(peak_left + 1)) {
-					return peak_left;
-				}
-				else if (*peak_left > *(peak_left - 1) && *peak_left > *(peak_left + 1)) {
-					return peak_left;
-				}
-				std::vector<int>::const_iterator peak_right = findPeakElement(num_median, num_end);
-				if (peak_right == num_end - 1 && *peak_right > *(peak_right - 1)) {
-					return peak_right;
-				}
-				else if (*peak_right > *(peak_right - 1) && *peak_right > *(peak_right + 1)) {
-					return peak_right;
-				}
-			}
-		}
-		return num_end;
-	}
 };

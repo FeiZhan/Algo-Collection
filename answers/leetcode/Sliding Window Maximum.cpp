@@ -20,3 +20,30 @@ public:
 		return max_list;
     }
 };
+
+//@algorithm deque
+//@time complexity O(n)
+//@space complexity O(k)
+//@result 18 / 18 test cases passed. Status: Accepted Runtime: 108 ms Submitted: 0 minutes ago You are here! Your runtime beats 25.65% of cpp submissions.
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        vector<int> max_window;
+        deque<size_t> window;
+        for (size_t i = 0; i < nums.size(); ++ i) {
+            // not in the window
+            while (i >= k && window.size() > 0 && window.front() <= i - k) {
+                window.pop_front();
+            }
+            // too small
+            while (window.size() && nums[window.back()] < nums[i]) {
+                window.pop_back();
+            }
+            window.push_back(i);
+            if (i + 1 >= k) {
+                max_window.push_back(nums[window.front()]);
+            }
+        }
+        return max_window;
+    }
+};

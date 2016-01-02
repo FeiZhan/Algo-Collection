@@ -1,0 +1,43 @@
+//2818Root of the Problem
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <math.h>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	double b, n, root;
+	int x, y;
+	while (cin >> b >> n && (b || n))
+	{
+		root = pow(b, 1.0 / n);
+		x = int(root);
+		y = int(root) + 1;
+		cout << ((b - pow(x, n) <= pow(y, n) - b) ? x : y) << endl;
+	}
+
+	return 0;
+}

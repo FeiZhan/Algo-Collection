@@ -1,8 +1,6 @@
 //@type Dynamic Programming
-//@result 67 / 67 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 1 minute ago
-
-#include <iostream>
-using namespace std;
+//@result 67 / 67 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 1 minute ago You are here! Your runtime beats 32.31% of cpp submissions.
+//@todo don't understand
 
 class Solution {
 public:
@@ -30,8 +28,3 @@ public:
 		return max_size * max_size;
     }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

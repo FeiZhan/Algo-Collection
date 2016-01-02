@@ -1,0 +1,72 @@
+//1188DNA Sorting
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int case_sum, dna_len, dna_sum, inversion;
+	string dna;
+	vector<string> dna_vec;
+	vector<int> dna_inv;
+	multimap<int, string> dna_map;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> dna_len >> dna_sum;
+		dna_map.clear();
+		for (int i = 0; i < dna_sum; i ++)
+		{
+			cin >> dna;
+			//dna_vec.push_back(dna);
+			inversion = 0;
+			for (int j = 0; j < dna.size(); j ++)
+			{
+				for (int k = 0; k < j; k ++)
+				{
+					if (dna.at(j) < dna.at(k))
+					{
+						inversion ++;
+					}
+				}
+			}
+			//dna_inv.push_back(inversion);
+			dna_map.insert(pair<int, string> (inversion, dna));
+		}
+		for (multimap<int, string>::iterator it = dna_map.begin()
+			; it != dna_map.end(); it ++)
+		{
+			cout << it->second << endl;
+		}
+		if (case_sum > 0)
+			cout << endl;
+	}
+
+	return 0;
+}

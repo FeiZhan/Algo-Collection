@@ -1,0 +1,86 @@
+//2966Build The Electric System
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+#include <memory.h>
+#include <limits.h>
+using namespace std;
+
+int case_sum, vil_sum, line_sum, map[510][510], begin, end, cost
+	, now, dist[510], dist_min, sum;
+bool is_visited[510];
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		for (int i = 0; i < 510; i ++)
+			for (int j = 0; j < 510; j ++)
+			{
+				map[i][j] = INT_MAX;
+			}
+		memset(is_visited, 0, sizeof(is_visited));
+		cin >> vil_sum >> line_sum;
+		for (size_t i = 0; i < line_sum; i ++)
+		{
+			cin >> begin >> end >> cost;
+			map[begin][end] = map[end][begin] = cost;
+		}
+		for (int i = 0; i < 510; i ++)
+		{
+			dist[i] = INT_MAX;
+		}
+		now = dist[0] = 0;
+		is_visited[now] = true;
+		for (size_t i = 0; i < vil_sum; ++ i)
+		{
+			for (size_t j = 0; j < vil_sum; ++ j)
+			{
+				if (! is_visited[j] && dist[j] > map[now][j])
+				{
+					dist[j] = map[now][j];
+				}
+			}
+			dist_min = INT_MAX;
+			for (size_t j = 0; j < vil_sum; ++ j)
+			{
+				if (! is_visited[j] && dist[j] < dist_min)
+				{
+					dist_min = dist[now = j];
+				}
+			}
+			is_visited[now] = true;
+		}
+		sum = 0;
+		for (size_t i = 0; i < vil_sum; ++ i)
+		{
+			sum += dist[i];
+		}
+		cout << sum << endl;
+	}
+
+	return 0;
+}

@@ -1,8 +1,5 @@
 //@type Array Two Pointers Binary Search
-//@result 13 / 13 test cases passed. Status: Accepted Runtime: 8 ms
-
-#include <iostream>
-using namespace std;
+//@result 13 / 13 test cases passed. Status: Accepted Runtime: 8 ms You are here! Your runtime beats 11.63% of cpp submissions.
 
 class Solution {
 public:
@@ -32,8 +29,3 @@ public:
 		return INT_MAX == min_len ? 0 : min_len;
     }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

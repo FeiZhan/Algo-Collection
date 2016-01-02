@@ -1,0 +1,103 @@
+//1711Sum It Up
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <vector>
+#include <set>
+
+int sum, num_sum;
+vector<int> num_vec;
+set<vector<int> > add_set;
+void Dfs(vector<int> now, int depth)
+{
+	//for (int i = 0; i < now.size(); i ++)
+	//	cout << now.at(i) << " ";
+	//cout << endl;
+	if (depth >= num_vec.size())
+		return;
+	int now_sum = 0;
+	for (int i = 0; i < now.size(); i ++)
+	{
+		now_sum += now.at(i);
+	}
+	if (now_sum > sum || (now_sum != sum && depth == num_vec.size() - 1))
+		return;
+	if (now_sum == sum)
+	{
+		add_set.insert(now);
+		return;
+	}
+	for (int i = depth + 1; i < num_vec.size(); i ++)
+	{
+		vector<int> next;
+		next.clear();
+		for (int j = 0; j < now.size(); j ++)
+		{
+			next.push_back(now.at(j));
+		}
+		next.push_back(num_vec.at(i));
+		Dfs(next, i);
+	}
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int tmp;
+	vector<int> add_vec;
+	
+	while (cin >> sum >> num_sum && sum > 0 && num_sum > 0)
+	{
+		num_vec.clear();
+		for (int i = 0; i < num_sum; i ++)
+		{
+			cin >> tmp;
+			num_vec.push_back(tmp);
+		}
+		add_set.clear();
+		for (int i = 0; i < num_vec.size(); i ++)
+		{
+			add_vec.clear();
+			add_vec.push_back(num_vec.at(i));
+			Dfs(add_vec, i);
+		}
+		cout << "Sums of " << sum << ":" << endl;
+		if (add_set.size() == 0)
+		{
+			cout << "NONE" << endl;
+			continue;
+		}
+		for (set<vector<int> >::reverse_iterator rit = add_set.rbegin()
+			; rit != add_set.rend(); rit ++)
+		{
+			for (int i = 0; i < (*rit).size() - 1; i ++)
+			{
+				cout << (*rit).at(i) << "+";
+			}
+			cout << (*rit).at((*rit).size() - 1) << endl;
+		}
+	}
+
+	return 0;
+}

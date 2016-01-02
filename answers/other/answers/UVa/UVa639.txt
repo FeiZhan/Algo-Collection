@@ -1,0 +1,164 @@
+//639 - Don't Get Rooked
+//#define _FILE_IN_
+//#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int max_rook = 0;
+void GetRook(int board[4][4], int board_size, int axis_x, int axis_y, int rook)
+{
+	bool is_rooked;
+	for (int i = 0; i < board_size; i ++)
+	{
+		for (int j = 0; j < board_size; j ++)
+		{
+			if (board[i][j] == 1)
+			{
+				is_rooked = false;
+				for (int k = i - 1; k >= 0 && board[k][j] != 2; k --)
+				{
+					if (board[k][j] == 3)
+					{
+						is_rooked = true;
+						break;
+					}
+				}
+				if (is_rooked == true)
+				{
+					continue;
+				}
+				is_rooked = false;
+				for (int k = i + 1; k < board_size && board[k][j] != 2; k ++)
+				{
+					if (board[k][j] == 3)
+					{
+						is_rooked = true;
+						break;
+					}
+				}
+				if (is_rooked == true)
+				{
+					continue;
+				}
+				is_rooked = false;
+				for (int k = j - 1; k >= 0 && board[i][k] != 2; k --)
+				{
+					if (board[i][k] == 3)
+					{
+						is_rooked = true;
+						break;
+					}
+				}
+				if (is_rooked == true)
+				{
+					continue;
+				}
+				is_rooked = false;
+				for (int k = j + 1; k < board_size && board[i][k] != 2; k ++)
+				{
+					if (board[i][k] == 3)
+					{
+						is_rooked = true;
+						break;
+					}
+				}
+				if (is_rooked == true)
+				{
+					continue;
+				}
+				else
+				{
+					board[i][j] = 3;
+					GetRook(board, board_size, i, j, rook + 1);
+					board[i][j] = 1;
+				}
+			}
+		}
+	}
+	if (rook > max_rook)
+	{
+		max_rook = rook;
+	}
+}
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	int board_size;
+	int board[4][4];
+	char input;
+	while (cin >> board_size && board_size > 0)
+	{
+		for (int i = 0; i < board_size; i ++)
+		{
+			for (int j = 0; j < board_size; j ++)
+			{
+				cin >> input;
+				switch (input)
+				{
+				case '.':
+					board[i][j] = 1;
+					break;
+				case 'x':
+				case 'X':
+					board[i][j] = 2;
+					break;
+				default:
+					board[i][j] = 0;
+					break;
+				}
+			}
+		}
+		max_rook = 0;
+		for (int i = 0; i < board_size; i ++)
+		{
+			for (int j = 0; j < board_size; j ++)
+			{
+				// ÏëÌ«¶àÁË [6/17/2011 zf]
+				//if ((board_size - i - 1) * (board_size - j - 1) < max_rook)
+				//{
+				//	break;
+				//}
+				if (board[i][j] == 1)
+				{
+					board[i][j] = 3;
+					GetRook(board, board_size, i, j, 1);
+					board[i][j] = 1;
+				}
+			}
+			//if ((board_size - i - 1) * board_size < max_rook)
+			//{
+			//	break;
+			//}
+		}
+		cout << max_rook << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

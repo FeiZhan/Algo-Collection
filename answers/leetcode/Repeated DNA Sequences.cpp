@@ -1,3 +1,5 @@
+//@result Status: Accepted Runtime: 210 ms Submitted: 10 months, 2 weeks ago You are here! Your runtime beats 23.59% of cpp submissions.
+
 #include "include/acm_headers.h"
 #include "include/leetcode_helper.h"
 using namespace std;
@@ -50,7 +52,7 @@ public:
 		}
 		std::reverse(ans.begin(), ans.end());
 		return ans;
-		
+
 	}
 	map<char, int> DNA_MAP;
 	map<char, int> NUM_MAP;
@@ -66,11 +68,3 @@ int main(int argc, char *argv[])
 	cout << endl;
 	return 0;
 }
-
-
-
-
-
-
-
-

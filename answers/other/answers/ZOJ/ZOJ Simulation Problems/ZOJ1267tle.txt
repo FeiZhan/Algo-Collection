@@ -1,0 +1,173 @@
+//1267Mapping the Route
+#include<iostream>
+//#include<fstream>
+//#define cin filein
+using namespace std;
+int FindMoveDir (int MyX, int MyY, int height, int width, int cell[12][12][2])
+{
+	int testX = MyX, testY = MyY;
+	if (testY > 1)
+	{
+		testX = MyX;
+		testY = MyY - 1;
+		if (cell[testX-1][testY-1][0] != 1 && cell[testX-1][testY-1][0] != 3
+			&& cell[testX-1][testY-1][1] == 0)
+		{
+			return 1;
+		}
+	}
+	if (testX > 1)
+	{
+		testY = MyY;
+		testX = MyX - 1;
+		if (cell[testX-1][testY-1][0] != 2 && cell[testX-1][testY-1][0] != 3
+			&& cell[testX-1][testY-1][1] == 0)
+		{
+			return 2;
+		}
+	}
+	if (testY < width)
+	{
+		testX = MyX;
+		testY = MyY + 1;
+		if (cell[testX-1][testY-2][0] != 1 && cell[testX-1][testY-2][0] != 3
+			&& cell[testX-1][testY-1][1] == 0)
+		{
+			return 3;
+		}
+	}
+	if (testX < height)
+	{
+		testY = MyY;
+		testX = MyX + 1;
+		if (cell[testX-2][testY-1][0] != 2 && cell[testX-2][testY-1][0] != 3
+			&& cell[testX-1][testY-1][1] == 0)
+		{
+			return 4;
+		}
+	}
+	return 0;
+}
+int main()
+{
+	//ifstream filein("..//data.txt", ios::in);
+	int CaseNum = 0, height, width, StartX, StartY, GoalX, GoalY, i, j, cell[12][12][2]
+		, MyX, MyY, PathNum, MoveDir;
+	while (cin>>height>>width>>StartX>>StartY>>GoalX>>GoalY
+		&& (height + width + StartX + StartY + GoalX + GoalY != 0))
+	{
+		CaseNum ++;
+		for (i=0; i<height; i++)
+		{
+			for (j=0; j<width; j++)
+			{
+				cin>>cell[i][j][0];
+				cell[i][j][1] = 0;
+			}
+		}
+		cell[StartX-1][StartY-1][1] = 1;
+		MyX = StartX;
+		MyY = StartY;
+		PathNum = 1;
+		while (PathNum <= height * width)
+		{
+			PathNum ++;
+			MoveDir = FindMoveDir (MyX, MyY, height, width, cell);
+			switch (MoveDir)
+			{
+			case 1:
+				MyY --;
+				cell[MyX-1][MyY-1][1] = PathNum;
+				break;
+			case 2:
+				MyX --;
+				cell[MyX-1][MyY-1][1] = PathNum;
+				break;
+			case 3:
+				MyY ++;
+				cell[MyX-1][MyY-1][1] = PathNum;
+				break;
+			case 4:
+				MyX ++;
+				cell[MyX-1][MyY-1][1] = PathNum;
+				break;
+			case 0:
+				PathNum -= 2;
+				cell[MyX-1][MyY-1][1] = -1;
+				for (i=0; i<height; i++)
+				{
+					for (j=0; j<width; j++)
+					{
+						if (cell[i][j][1] == PathNum)
+						{
+							MyX = i + 1;
+							MyY = j + 1;
+						}
+					}
+				}
+				break;
+			}
+			if (MyX == GoalX && MyY == GoalY)
+			{
+				break;
+			}
+		}
+		cout<<"Maze "<<CaseNum<<endl<<endl<<"+";
+		for (i=0; i<width; i++)
+		{
+			cout<<"---+";
+		}
+		cout<<endl;
+		for (i=0; i<height; i++)
+		{
+			cout<<"|";
+			for (j=0; j<width; j++)
+			{
+				if (cell[i][j][1] > 0)
+				{
+					cout<<"  "<<cell[i][j][1];
+				}
+				else if (cell[i][j][1] == 0)
+				{
+					cout<<"   ";
+				}
+				else if (cell[i][j][1] == -1)
+				{
+					cout<<"???";
+				}
+				if (cell[i][j][0] == 1 || cell[i][j][0] == 3 || j == width - 1)
+				{
+					cout<<"|";
+				}
+				else cout<<" ";
+			}
+			cout<<endl;
+			if (i != height - 1)
+			{
+				cout<<"+";
+				for (j=0; j<width; j++)
+				{
+					if (cell[i][j][0] == 2 || cell[i][j][0] == 3)
+					{
+						cout<<"---";
+					}
+					else cout<<"   ";
+					cout<<"+";
+				}
+				cout<<endl;
+			}
+			else
+			{
+				cout<<"+";
+				for (i=0; i<width; i++)
+				{
+					cout<<"---+";
+				}
+				cout<<endl;
+			}
+		}
+		cout<<endl<<endl;
+	}
+	//getchar();getchar();
+	return 0;
+}

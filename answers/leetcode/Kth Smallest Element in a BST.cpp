@@ -1,8 +1,7 @@
-//@type  Tree Binary Search
-//@result 91 / 91 test cases passed. Status: Accepted Runtime: 40 ms Submitted: 1 minute ago
-
-#include <iostream>
-using namespace std;
+//@algorithm binary search tree
+//@time complexity O(k)
+//@space complexity O(height)
+//@result 91 / 91 test cases passed. Status: Accepted Runtime: 20 ms Submitted: 0 minutes ago You are here! Your runtime beats 46.63% of cpp submissions.
 
 /**
  * Definition for a binary tree node.
@@ -16,22 +15,22 @@ using namespace std;
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-		return getValues(root)[k - 1];
+        int count = 0;
+        return kthSmallest(root, count, k);
     }
-	vector<int> getValues(TreeNode *root) {
-		vector<int> node_list;
-		if (NULL == root) {
-			return node_list;
-		}
-		node_list = getValues(root->left);
-		node_list.push_back(root->val);
-		vector<int> node_list1 = getValues(root->right);
-		node_list.insert(node_list.end(), node_list1.begin(), node_list1.end());
-		return node_list;
-	}
+    int kthSmallest(TreeNode *root, int &count, int k) {
+        if (NULL == root) {
+            return 0;
+        }
+        int left = kthSmallest(root->left, count, k);
+        if (count >= k) {
+            return left;
+        }
+        ++ count;
+        if (count >= k) {
+            return root->val;
+        }
+        int right = kthSmallest(root->right, count, k);
+        return right;
+    }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

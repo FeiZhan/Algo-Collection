@@ -1,8 +1,7 @@
 //@type Tree Binary Search
-//@result 18 / 18 test cases passed. Status: Accepted Runtime: 292 ms Submitted: 0 minutes ago
-
-#include <iostream>
-using namespace std;
+//@time complexity O(h ^ 2)
+//@space complexity O(h)
+//@result 18 / 18 test cases passed. Status: Accepted Runtime: 292 ms Submitted: 0 minutes ago You are here! Your runtime beats 35.69% of cpp submissions.
 
 /**
  * Definition for a binary tree node.
@@ -34,8 +33,3 @@ public:
 		return NULL == root ? 0 : getRight(root->right) + 1;
 	}
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

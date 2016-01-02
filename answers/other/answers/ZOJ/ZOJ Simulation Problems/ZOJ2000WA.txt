@@ -1,0 +1,76 @@
+//2000Palindrome Numbers
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num;
+	long long bit, tot, delta, st, times;
+	while (cin >> num && num > 0)
+	{
+		if (num < 10)
+		{
+			cout << num << endl;
+		}
+		else
+		{
+			bit = 2;
+			tot = 9;
+			delta = 9;
+			while (tot + delta < num)
+			{
+				tot += delta;
+				bit ++;
+				if ((bit & 1) == 1)
+				{
+					delta *= 10;
+				}
+			}
+			delta = num - tot;
+			st = 1;
+			times = bit / 2;
+			if (bit & 1)
+				times ++;
+			for (int i = 1; i < times; i ++)
+			{
+				st *= 10;
+			}
+			st = st + delta - 1;
+			cout << st;
+			if ( bit & 1 )
+				st /= 10;
+			while (st)
+			{
+				cout << st % 10;
+				st /= 10;
+			}
+			cout << endl;
+		}
+	}
+
+	return 0;
+}

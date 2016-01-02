@@ -1,0 +1,70 @@
+//2886Look and Say
+#include <iostream>
+#include <string>
+//#include <fstream>
+using namespace std;
+string itoa(int num)
+{
+	string ret;
+	ret.clear();
+	if (num >= 10)
+	{
+		ret.append(itoa(num / 10));
+	}
+	ret += '0' + num % 10;
+	return ret;
+}
+int main()
+{
+	//ifstream fin;
+	//fin.open("data.txt");
+	//cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+
+	int case_sum, count;
+	string str_in, str_cmp, str_out, str_tmp;
+	cin>>case_sum;
+	while (case_sum --)
+	{
+		cin>>str_in;
+		str_cmp = str_in.at(0);
+		count = 1;
+		str_out.clear();
+		for (int i = 1; i < str_in.size(); i ++)
+		{
+			str_tmp = str_in.at(i);
+			if (i == str_in.size() - 1)
+			{
+				if (str_cmp.compare(str_tmp) == 0)
+				{
+					count ++;
+				}
+				else
+				{
+					str_out.append(itoa(count));
+					str_out.append(str_cmp);
+					count = 1;
+					str_cmp = str_tmp;
+				}
+				str_out.append(itoa(count));
+				str_out.append(str_cmp);
+			}
+			else if (str_cmp.compare(str_tmp) != 0)
+			{
+				str_out.append(itoa(count));
+				str_out.append(str_cmp);
+				count = 1;
+				str_cmp = str_tmp;
+			}
+			else
+				count ++;
+		}
+		if (str_out.size() == 0)
+		{
+			str_out.append(itoa(count));
+			str_out.append(str_cmp);
+		}
+		cout<<str_out<<endl;
+	}
+	//system("pause");
+	return 0;
+}

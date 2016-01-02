@@ -1,0 +1,86 @@
+//2840File Searching
+#define DEBUG
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#ifdef DEBUG
+#include <fstream>
+#endif
+using namespace std;
+int main()
+{
+	#ifdef DEBUG
+	ifstream fin;
+	fin.open("data.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+	#endif
+
+	int file_sum, query_sum, star, find_left, find_right;
+	string str_query, query_left, query_right, str_tmp;
+	vector<string> file_vector;
+	bool find_flag, is_first = true;
+	while (cin >> file_sum && cin.eof() != true)
+	{
+		if (is_first == false)
+		{
+			cout << endl;
+		}
+		else
+			is_first = false;
+		file_vector.clear();
+		for (int i = 0; i < file_sum; i ++)
+		{
+			cin >> str_query;
+			file_vector.push_back(str_query);
+		}
+		cin >> query_sum;
+		for (int i = 0; i < query_sum; i ++)
+		{
+			find_flag = false;
+			cin >> str_query;
+			star = str_query.find('*');
+			if (star > 0)
+			{
+				query_left = str_query.substr(0, star);
+			}
+			else
+				query_left = "";
+			query_right = str_query.substr(star + 1);
+			for (int j = 0; j < file_vector.size(); j ++)
+			{
+				if (file_vector.at(j).size() < query_left.size() + query_right.size())
+				{
+					continue;
+				}
+				find_left = file_vector.at(j).find(query_left);
+				if (query_left.size() == 0 || find_left == 0)
+				{
+					str_tmp = file_vector.at(j).substr(find_left + query_left.size());
+					find_right = str_tmp.find(query_right);
+					if (query_right.size() == 0
+						|| (find_right != string::npos
+						&& find_right == str_tmp.size() - query_right.size()))
+					{
+						if (find_flag == true)
+						{
+							cout << ", ";
+						}
+						cout << file_vector.at(j);
+						find_flag = true;
+					}
+				}
+			}
+			if (find_flag == false)
+			{
+				cout << "FILE NOT FOUND" << endl;
+			}
+			else
+				cout << endl;
+		}
+	}
+	#ifdef DEBUG
+	system("pause");
+	#endif
+	return 0;
+}

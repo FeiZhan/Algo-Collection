@@ -1,0 +1,103 @@
+//2514Generate Passwords
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <string>
+#include <vector>
+
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	bool if_change;
+	int account_sum, change_cnt;
+	string acc_name, acc_pswd;
+	vector<string> name_vec, pswd_vec;
+	vector<bool> change_vec;
+	while (cin >> account_sum && account_sum > 0)
+	{
+		change_cnt = 0;
+		name_vec.clear();
+		pswd_vec.clear();
+		change_vec.clear();
+		for (int i = 0; i < account_sum; i ++)
+		{
+			cin >> acc_name >> acc_pswd;
+			name_vec.push_back(acc_name);
+			if_change = false;
+			for (int j = 0; j < acc_pswd.size(); j ++)
+			{
+				switch (acc_pswd.at(j))
+				{
+				case '1':
+					acc_pswd[j] = '@';
+					if_change = true;
+					break;
+				case '0':
+					acc_pswd[j] = '%';
+					if_change = true;
+					break;
+				case 'l':
+					acc_pswd[j] = 'L';
+					if_change = true;
+					break;
+				case 'O':
+					acc_pswd[j] = 'o';
+					if_change = true;
+					break;
+				default:
+					break;
+				}
+			}
+			if (if_change == true)
+			{
+				change_cnt ++;
+				change_vec.push_back(true);
+			}
+			else
+			{
+				change_vec.push_back(false);
+			}
+			pswd_vec.push_back(acc_pswd);
+		}
+		if (change_cnt == 0)
+		{
+			cout << "No account is modified." << endl;
+		}
+		else
+		{
+			cout << change_cnt << endl;
+			for (int i = 0; i <account_sum; i ++)
+			{
+				if (change_vec.at(i) == true)
+				{
+					cout << name_vec.at(i) << " " << pswd_vec.at(i) << endl;
+				}
+			}
+		}
+	}
+
+	return 0;
+}

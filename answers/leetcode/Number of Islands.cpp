@@ -1,5 +1,5 @@
 //@type  Depth-first Search Breadth-first Search Union Find
-//@result 45 / 45 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago
+//@result 45 / 45 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago You are here! Your runtime beats 49.57% of cpp submissions.
 
 #include <iostream>
 #include <vector>

@@ -1,0 +1,70 @@
+//2042Divisibility
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <memory.h>
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	bool flag[110], tmp[110];
+	int num[10010];
+	int num_sum, divident;
+
+	int case_sum;
+	cin >> case_sum;
+	while (case_sum --)
+	{
+		cin >> num_sum >> divident;
+		for (int i = 0; i < num_sum; i ++)
+		{
+			cin >> num[i];
+			num[i] = (num[i] % divident + divident) % divident;
+		}
+		memset(flag, false, sizeof(flag));
+		flag[num[0]] = true;
+		for (int i = 1; i < num_sum; i ++)
+		{
+			memset(tmp, false, sizeof(tmp));
+			for (int j = 0; j < divident; j ++)
+			{
+				if (flag[j])
+				{
+					tmp[(j - num[i] + divident) % divident] = true;
+					tmp[(j + num[i] + divident) % divident] = true;
+				}
+			}
+			memcpy(flag, tmp, sizeof(tmp));
+		}
+		if (flag[0])
+			cout << "D";
+		else
+			cout << "Not d";
+		cout << "ivisible" << endl;
+		if (case_sum)
+			cout << endl;
+	}
+
+	return 0;
+}

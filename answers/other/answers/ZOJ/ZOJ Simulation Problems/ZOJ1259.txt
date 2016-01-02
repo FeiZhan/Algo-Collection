@@ -1,0 +1,86 @@
+//1259Rails
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <stack>
+#define MAX_NUM 1010
+int coach[MAX_NUM];
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int coach_sum, now;
+	stack<int> coa_st;
+	bool if_find, is_first = true;
+	while (cin >> coach_sum && coach_sum > 0)
+	{
+		while (cin >> coach[0] && coach[0] > 0)
+		{
+			for (int i = 1; i < coach_sum; i ++)
+			{
+				cin >> coach[i];
+			}
+			while (coa_st.size() > 0)
+			{
+				coa_st.pop();
+			}
+			now = 1;
+			if_find = true;
+			for (int i = 0; i < coach_sum; i ++)
+			{
+				if (coa_st.empty() == false && coa_st.top() == coach[i])
+				{
+					coa_st.pop();
+					continue;
+				}
+				while (coach[i] != now && now <= coach_sum)
+				{
+					coa_st.push(now);
+					now ++;
+				}
+				if (now > coach_sum)
+				{
+					if_find = false;
+					break;
+				}
+				else if (coach[i] == now)
+				{
+					now ++;
+				}
+			}
+			if (if_find == true)
+			{
+				cout << "Yes" << endl;
+			}
+			else
+			{
+				cout << "No" << endl;
+			}
+		}
+		cout << endl;
+	}
+
+	return 0;
+}

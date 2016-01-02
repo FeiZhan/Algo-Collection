@@ -1,0 +1,13 @@
+#include "stdio.h"
+void main()
+{
+    int i,j,n;
+    double factorial=2,e=2.5;
+    printf("n e\n- -----------\n0 1\n1 2\n2 2.5\n");
+    for(n=3;n<10;n++)
+    {
+    	factorial*=n;
+    	e+=1.0/factorial;
+    	printf("%d %.9lf\n",n,e);
+    }
+}

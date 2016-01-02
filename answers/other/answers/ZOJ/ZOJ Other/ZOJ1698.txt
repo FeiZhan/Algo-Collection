@@ -1,0 +1,85 @@
+//1698Easier Done Than Said?
+//#define DEBUG
+#ifdef DEBUG
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <string>
+using namespace std;
+
+int main()
+{
+#ifdef DEBUG
+	ifstream fin;
+	fin.open("data.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+	freopen("data.txt", "r", stdin);
+#endif
+
+	bool is_vowel, is_last_vowel, is_acceptable, has_vowel;
+	int count;
+	string password;
+	while (cin >> password && password.compare("end") != 0)
+	{
+		count = 0;
+		is_last_vowel = 0;
+		has_vowel = false;
+		is_acceptable = true;
+		for (int i = 0; i < password.size(); i ++)
+		{
+			if (password.at(i) == 'a' || password.at(i) == 'e' || password.at(i) == 'i'
+				|| password.at(i) == 'o' || password.at(i) == 'u')
+			{
+				is_vowel = true;
+				has_vowel = true;
+			}
+			else
+				is_vowel = false;
+			if (i != 0)
+			{
+				if (password.at(i) == password.at(i - 1)
+					&& password.at(i) != 'e' && password.at(i) != 'o')
+				{
+					is_acceptable = false;
+					break;
+				}
+				if (is_vowel == is_last_vowel)
+				{
+					count ++;
+				}
+				else
+				{
+					count = 1;
+					is_last_vowel = ! is_last_vowel;
+				}
+			}
+			else
+			{
+				count ++;
+				is_last_vowel = is_vowel;
+			}
+			if (count >= 3)
+			{
+				is_acceptable = false;
+				break;
+			}
+		}
+		if (has_vowel == false)
+		{
+			is_acceptable = false;
+		}
+		cout << "<" << password << ">" << " is ";
+		if (is_acceptable == false)
+		{
+			cout << "not ";
+		}
+		cout << "acceptable." << endl;
+	}
+
+#ifdef DEBUG
+	system("pause");
+#endif
+	return 0;
+}

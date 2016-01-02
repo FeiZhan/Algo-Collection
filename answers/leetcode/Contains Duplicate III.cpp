@@ -1,6 +1,7 @@
 //@type Binary Search Tree
 //@result 30 / 30 test cases passed. Status: Accepted Runtime: 40 ms Submitted: 2 minutes ago You are here! Your runtime beats 86.13% of cpp submissions.
 
+//@algorithm shifting window
 class Solution {
 public:
 	bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {

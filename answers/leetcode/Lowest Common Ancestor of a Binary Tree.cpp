@@ -1,8 +1,7 @@
 //@type Tree
-//@result 31 / 31 test cases passed. Status: Accepted Runtime: 44 ms Submitted: 0 minutes ago
-
-#include <iostream>
-using namespace std;
+//@time complexity O(n)
+//@space complexity O(log(n))
+//@result 31 / 31 test cases passed. Status: Accepted Runtime: 24 ms Submitted: 0 minutes ago You are here! Your runtime beats 27.36% of cpp submissions.
 
 /**
  * Definition for a binary tree node.
@@ -16,33 +15,24 @@ using namespace std;
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (NULL == root) {
-			return NULL;
-		}
-		if (p == root && q == root) {
+        // find at least one
+        if (NULL == root || p == root || q == root) {
 			return root;
 		}
 		TreeNode *left = lowestCommonAncestor(root->left, p, q);
-		if (left) {
-			return left;
-		}
 		TreeNode *right = lowestCommonAncestor(root->right, p, q);
-		if (right) {
-			return right;
-		}
-		if (find(root, p) && find(root, q)) {
+        // find at least one in both branch
+		if (left && right) {
 			return root;
 		}
-		else {
-			return NULL;
-		}
+        else if (left) {
+            return left;
+        }
+        else if (right) {
+            return right;
+        }
+        else {
+            return NULL;
+        }
     }
-	bool find(TreeNode *root, TreeNode *target) {
-		return root && (root == target || find(root->left, target) || find(root->right, target));
-	}
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

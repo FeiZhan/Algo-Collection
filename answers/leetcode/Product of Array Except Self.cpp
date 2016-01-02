@@ -1,6 +1,7 @@
 //@type Array
+//@time complexity O(n)
+//@space complexity O(1)
 //@result 17 / 17 test cases passed. Status: Accepted Runtime: 60 ms Submitted: 0 minutes ago You are here! Your runtime beats 59.65% of cpp submissions.
-
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {

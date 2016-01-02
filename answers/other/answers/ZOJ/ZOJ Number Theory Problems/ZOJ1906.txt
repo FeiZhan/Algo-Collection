@@ -1,0 +1,91 @@
+//1906Relatives
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#include <cmath>
+#define MAX_NUM 100010
+bool prime[MAX_NUM];
+void Prime()
+{
+	memset(prime, true, sizeof(prime));
+	for (int i = 2; i < MAX_NUM; i ++)
+	{
+		if (prime[i])
+		{
+			for (int j = 2 * i; j < MAX_NUM; j += i)
+			{
+				prime[j] = false;
+			}
+		}
+	}
+}
+void factor(long long num)
+{
+	if (num <= 1)
+	{
+		cout << 0 << endl;
+		return;
+	}
+	if (num < MAX_NUM && prime[num])
+	{
+		cout << num - 1 << endl;
+		return;
+	}
+	long long sqrt_num = (long long)sqrt(double(num)), tmp = num, p = 1, q = 1;
+	for (long long i = 2; i <= sqrt_num; i ++)
+	{
+		if (tmp == 1)
+			break;
+		if (prime[i] && tmp % i == 0)
+		{
+			while (tmp % i == 0)
+			{
+				tmp /= i;
+			}
+			p *= i - 1;
+			q *= i;
+		}
+	}
+	if (tmp != 1)
+	{
+		p *= tmp - 1;
+		q *= tmp;
+	}
+	cout << (num / q) * p << endl;
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	Prime();
+	long long num;
+	while (cin >> num && num > 0)
+	{
+		factor(num);
+	}
+
+	return 0;
+}

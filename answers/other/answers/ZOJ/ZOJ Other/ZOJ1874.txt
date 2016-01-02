@@ -1,0 +1,72 @@
+//1874Primary Arithmetic
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <string>
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	string num[2];
+	int carry_sum;
+	bool smaller, larger, carry;
+	while (cin >> num[0] >> num[1]
+		&& (num[0].compare("0") != 0 || num[1].compare("0") != 0))
+	{
+		smaller = (num[0].size() < num[1].size()) ? false : true;
+		larger = (num[0].size() > num[1].size()) ? false : true;
+		for (int i = num[smaller].size(); i < num[larger].size(); i ++)
+		{
+			num[smaller] = "0" + num[smaller];
+		}
+		carry_sum = 0;
+		carry = false;
+		for (int i = num[larger].size() - 1; i >= 0; i --)
+		{
+			if (int(num[0].at(i) - '0') + int(num[1].at(i) - '0') + carry >= 10)
+			{
+				carry_sum ++;
+				carry = true;
+			}
+			else
+			{
+				carry = false;
+			}
+		}
+		if (carry_sum == 0)
+		{
+			cout << "No carry operation." << endl;
+		}
+		else if (carry_sum == 1)
+		{
+			cout << "1 carry operation." << endl;
+		}
+		else
+		{
+			cout << carry_sum << " carry operations." << endl;
+		}
+	}
+
+	return 0;
+}

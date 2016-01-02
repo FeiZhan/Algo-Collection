@@ -1,0 +1,130 @@
+//10188 - Automated Judge Script
+#define _FILE_IN_
+#define _FILE_OUT_
+//#define _C_LAN_
+#ifdef _FILE_IN_
+#include <fstream>
+#endif
+
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+#ifdef _FILE_IN_
+	ifstream fin;
+	fin.open("input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_OUT_
+	ofstream fout;
+	fout.open("output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("output.txt", "w", stdout);
+#endif
+#endif
+
+	bool is_wa, is_not_ac, is_first = true;
+	int right_ans_sum, ans_sum, case_num = 0, int_tmp;
+	char chr_tmp;
+	string ans_str;
+	vector<string> right_ans_vec, ans_vec;
+	vector<int> right_digit_vec, digit_vec;
+	while (cin >> right_ans_sum && right_ans_sum != 0)
+	{
+		//if (is_first == false)
+		//{
+		//	cout << endl;
+		//}
+		//else
+		//	is_first = false;
+		case_num ++;
+		cout << "Run #" << case_num << ": ";
+		right_ans_vec.clear();
+		right_digit_vec.clear();
+		getline(cin, ans_str);
+		for (int i = 0; i < right_ans_sum; i ++)
+		{
+			getline(cin, ans_str);
+			right_ans_vec.push_back(ans_str);
+			for (int j = 0; j < ans_str.size(); j ++)
+			{
+				if (isdigit(ans_str.at(j)) != false)
+				{
+					right_digit_vec.push_back(ans_str.at(j) - '0');
+				}
+			}
+		}
+		cin >> ans_sum;
+		digit_vec.clear();
+		ans_vec.clear();
+		getline(cin, ans_str);
+		for (int i = 0; i < ans_sum; i ++)
+		{
+			getline(cin, ans_str);
+			ans_vec.push_back(ans_str);
+			for (int j = 0; j < ans_str.size(); j ++)
+			{
+				if (isdigit(ans_str.at(j)) != false)
+				{
+					digit_vec.push_back(ans_str.at(j) - '0');
+				}
+			}
+		}
+		is_not_ac = false;
+		is_wa = false;
+		//if (right_ans_sum == ans_sum)
+		{
+			for (int i = 0; i < ans_sum; i ++)
+			{
+				if (ans_vec.at(i).compare(right_ans_vec.at(i)) != 0
+					|| right_ans_sum != ans_sum)
+				{
+					is_not_ac = true;
+					break;
+				}
+			}
+			if (is_not_ac == true)
+			{
+				if (digit_vec.size() == right_digit_vec.size())
+				{
+					for (int j = 0; j < digit_vec.size(); j ++)
+					{
+						if (digit_vec.at(j) != right_digit_vec.at(j))
+						{
+							is_wa = true;
+							break;
+						}
+					}
+					if (is_wa == false)
+					{
+						cout << "Presentation Error";
+					}
+					else
+						cout << "Wrong Answer";
+				}
+				else
+					cout << "Wrong Answer";
+			}
+			else
+				cout << "Accepted";
+		}
+		//else
+			//cout << "Wrong Answer";
+		cout << endl;
+	}
+
+#ifdef _FILE_IN_
+#ifndef _FILE_OUT_
+	system("pause");
+#endif
+#endif
+	return 0;
+}

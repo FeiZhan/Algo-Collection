@@ -1,4 +1,4 @@
-//@type  Stack Design
+//@type Stack Design
 //@result 17 / 17 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 1.02% of cpp submissions.
 
 class Queue {

@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+//@result Status: Accepted Runtime: 8 ms Submitted: 2 months, 4 weeks ago You are here! Your runtime beats 9.94% of cpp submissions.
 
 class Solution {
 public:
@@ -12,9 +11,3 @@ public:
 		return ans;
     }
 };
-
-int main() {
-	Solution s;
-	cout << s.reverseBits(1) << endl;
-	return 0;
-}

@@ -1,5 +1,6 @@
 //@type  Stack Design
 //@result 16 / 16 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 0.58% of cpp submissions.
+//@comment it is possible to use one queue to solve
 
 class Stack {
 public:

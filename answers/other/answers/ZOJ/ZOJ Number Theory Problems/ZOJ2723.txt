@@ -1,0 +1,76 @@
+//2723Semi-Prime
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <memory.h>
+#include <cmath>
+#define MAX 1000002
+bool prime[MAX];
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int num;
+	memset(prime, 1, sizeof(prime));
+	prime[0] = prime[1] = 0;
+	for (size_t i = 0; i < MAX; ++ i)
+	{
+		if (prime[i])
+		{
+			for (size_t j = 2; i * j < MAX; ++ j)
+			{
+				prime[i * j] = false;
+			}
+		}
+	}
+	int prime_cnt;
+	while (cin >> num)
+	{
+		if (prime[num] || num <= 1)
+		{
+			cout << "No" << endl;
+			continue;
+		}
+		prime_cnt = 1;
+		while (! prime[num])
+		{
+			for (int i = sqrt(double(num)); i >= 0; -- i)
+			{
+				if (prime[i] && num % i == 0)
+				{
+					prime_cnt ++;
+					num /= i;
+					break;
+				}
+			}
+		}
+		if (prime_cnt == 2)
+			cout << "Yes" << endl;
+		else
+			cout << "No" << endl;
+	}
+
+	return 0;
+}

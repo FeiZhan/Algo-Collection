@@ -1,0 +1,66 @@
+//2724Windows Message Queue
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <string>
+#include <map>
+typedef struct
+{
+	string msg, param;
+} smsg;
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int prio;
+	string cmd, msg, para;
+	smsg s_msg;
+	multimap<int, smsg> msg_map;
+	while (cin >> cmd)
+	{
+		switch (cmd.at(0))
+		{
+		case 'P':
+			cin >> msg >> para >> prio;
+			s_msg.msg = msg;
+			s_msg.param = para;
+			msg_map.insert(pair<int, smsg> (prio, s_msg));
+			break;
+		case 'G':
+			if (msg_map.size() == 0)
+			{
+				cout << "EMPTY QUEUE!" << endl;
+			}
+			else
+			{
+				s_msg = msg_map.begin()->second;
+				cout << s_msg.msg << " " << s_msg.param << endl;
+				msg_map.erase(msg_map.begin());
+			}
+		}
+	}
+
+	return 0;
+}

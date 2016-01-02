@@ -1,8 +1,5 @@
 //@type  Tree Depth-first Search Breadth-first Search
-//@result 210 / 210 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 1 minute ago
-
-#include <iostream>
-using namespace std;
+//@result 210 / 210 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 1 minute ago You are here! Your runtime beats 17.52% of cpp submissions.
 
 /**
  * Definition for a binary tree node.
@@ -16,26 +13,17 @@ using namespace std;
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> ans;
-		if (NULL == root) {
-			return ans;
-		}
-		vector<int> left = rightSideView(root->left);
-		vector<int> right = rightSideView(root->right);
-		ans.push_back(root->val);
-		for (size_t i = 0; i < left.size() || i < right.size(); ++ i) {
-			if (i < right.size()) {
-				ans.push_back(right[i]);
-			}
-			else {
-				ans.push_back(left[i]);
-			}
-		}
-		return ans;
+        vector<int> right_view;
+        dfs(0, root, right_view);
+        return right_view;
+    }
+    void dfs(int level, const TreeNode *root, vector<int> &right_view) {
+        if (root) {
+            if (right_view.size() <= level) {
+                right_view.push_back(root->val);
+            }
+            dfs(level + 1, root->right, right_view);
+            dfs(level + 1, root->left, right_view);
+        }
     }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

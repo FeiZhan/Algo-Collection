@@ -1,9 +1,5 @@
 //@type Dynamic Programming
-//@result 74 / 74 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago
-// reuse previous code
-
-#include <iostream>
-using namespace std;
+//@result 74 / 74 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 12.88% of cpp submissions.
 
 class Solution {
 public:
@@ -18,6 +14,7 @@ public:
 		nums.pop_back();
 		return max(rob1(nums), rob1(nums1));
     }
+    // reuse previous code
     int rob1(vector<int>& nums) {
 		if (0 == nums.size()) {
 			return 0;
@@ -35,8 +32,3 @@ public:
 		return dp[nums.size() - 1];
     }
 };
-
-int main() {
-	// your code goes here
-	return 0;
-}

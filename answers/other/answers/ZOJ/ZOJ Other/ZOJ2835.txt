@@ -1,0 +1,94 @@
+//2835Magic Square
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+#include <memory.h>
+
+int main(int argc, char *argv[])
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	int square[15][15], cnt[40];
+	size_t squ_deg;
+	bool is_same;
+	while (cin >> squ_deg && squ_deg)
+	{
+		is_same = false;
+		for (size_t i = 0; i < squ_deg; ++ i)
+		{
+			for (size_t j = 0; j < squ_deg; ++ j)
+			{
+				cin >> square[i][j];
+				if (is_same == true)
+					continue;
+				for (size_t k = 0; k <= i; ++ k)
+				{
+					for (size_t m = 0; m < j; ++ m)
+					{
+						if (square[i][j] == square[k][m])
+						{
+							is_same = true;
+							break;
+						}
+					}
+					if (is_same == true)
+						break;
+				}
+			}
+		}
+		if (is_same == true)
+		{
+			cout << "No" << endl;
+			continue;
+		}
+		memset(cnt, 0, sizeof(cnt));
+		for (size_t i = 0; i < squ_deg; ++ i)
+		{
+			for (size_t j = 0; j < squ_deg; ++ j)
+			{
+				cnt[i] += square[i][j];
+				cnt[squ_deg + j] += square[j][i];
+			}
+			cnt[squ_deg * 2] += square[i][i];
+			cnt[squ_deg * 2 + 1] += square[squ_deg - i - 1][squ_deg - i - 1];
+		}
+		is_same = true;
+		for (size_t i = 1; i < squ_deg * 2 + 2; ++ i)
+		{
+			if (cnt[0] != cnt[i])
+			{
+				is_same = false;
+				break;
+			}
+		}
+		if (is_same == true)
+		{
+			cout << "Yes" << endl;
+		}
+		else
+			cout << "No" << endl;
+	}
+
+	return 0;
+}

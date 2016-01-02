@@ -1,0 +1,113 @@
+//2107Quoit Design
+#define _FILE_DEBUG_
+//#define _C_LAN_
+//#define _DEBUG_OUTPUT_
+#ifdef _FILE_DEBUG_
+#include <fstream>
+#endif
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+#include <math.h>
+#include <stdlib.h>
+#include <iomanip>
+#define MAX_NUM 100010
+int y_sort[MAX_NUM];
+typedef struct
+{
+	double x, y;
+} spt;
+spt pt[MAX_NUM];
+double MinNum(double a, double b)
+{
+    if (a < b)
+		return a;
+    else
+		return b;
+}
+double Dist(spt &a, spt &b)
+{
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y-b.y));
+}
+int cmp_x(const void *a,const void *b)
+{
+	if (((spt*)a)->x < ((spt*)b)->x)
+		return -1;
+    else
+		return 1;
+}
+int cmp_y(const void *a, const void *b)
+{
+    if(pt[(*(int*)a)].y < pt[(*(int*)b)].y)
+		return -1;
+    else
+		return 1;
+}
+double NearestDist(int begin, int end)
+{
+	if (end - begin == 1)
+	{
+		return Dist(pt[begin], pt[end]);
+	}
+	else if (end - begin == 2)
+	{
+		return MinNum(MinNum(Dist(pt[begin], pt[begin + 1])
+			,Dist(pt[begin + 1], pt[begin + 2]))
+			,Dist(pt[begin], pt[begin + 2]));
+	}
+	int mid = (begin + end) / 2;
+	double min_dist = MinNum(NearestDist(begin, mid)
+		, NearestDist(mid + 1, end));
+	int y_end = 0;
+    for(int i = mid; i >= begin && (pt[mid].x - pt[i].x) < min_dist; i--)
+    {
+        y_sort[y_end ++] = i;
+    }
+    for(int i = mid + 1; i <= end && (pt[i].x - pt[mid + 1].x) < min_dist; i ++)
+    {
+        y_sort[y_end ++] = i;
+    }
+	qsort(y_sort, y_end, sizeof(y_sort[0]), cmp_y);
+	for (int i = 0; i < y_end; i ++)
+    {
+		for(int j = i + 1; j < y_end
+			&& pt[y_sort[j]].y - pt[y_sort[i]].y < min_dist; j ++)
+        {
+            min_dist = MinNum(min_dist, Dist(pt[y_sort[i]], pt[y_sort[j]]));
+        }
+    }
+	return min_dist;
+}
+int main()
+{
+#ifdef _FILE_DEBUG_
+	ifstream fin;
+	fin.open("../input.txt");
+	cin.rdbuf(fin.rdbuf()); // assign file's streambuf to cin
+#ifdef _C_LAN_
+	freopen("../input.txt", "r", stdin);
+#endif
+#endif
+#ifdef _FILE_DEBUG_
+	ofstream fout;
+	fout.open("../output.txt");
+	cout.rdbuf(fout.rdbuf()); // assign file's streambuf to cout
+#ifdef _C_LAN_
+	freopen("../output.txt", "w", stdout);
+#endif
+#endif
+
+	long pt_sum;
+	while (cin >> pt_sum && pt_sum > 0)
+	{
+		for (int i = 0; i < pt_sum; i ++)
+		{
+			cin >> pt[i].x >> pt[i].y;
+		}
+		qsort(pt, pt_sum, sizeof(pt[0]), cmp_x);
+		cout << setiosflags(ios::fixed) << setprecision(2)
+			<< NearestDist(0, pt_sum - 1) / 2 << endl;
+	}
+	return 0;
+}
