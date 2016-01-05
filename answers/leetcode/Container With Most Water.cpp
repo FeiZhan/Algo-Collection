@@ -1,3 +1,5 @@
+//@result 45 / 45 test cases passed. Status: Accepted Runtime: 28 ms Submitted: 0 minutes ago You are here! Your runtime beats 15.61% of cpp submissions.
+
 class Solution {
 public:
     int maxArea(vector<int> &height) {

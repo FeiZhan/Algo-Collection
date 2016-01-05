@@ -1,3 +1,5 @@
+//@result 83 / 83 test cases passed. Status: Accepted Runtime: 20 ms Submitted: 0 minutes ago You are here! Your runtime beats 86.77% of cpp submissions.
+
 class Solution {
 public:
     bool exist(vector<vector<char> > &board, string word) {

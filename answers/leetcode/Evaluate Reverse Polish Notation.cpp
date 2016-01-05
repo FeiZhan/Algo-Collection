@@ -1,3 +1,5 @@
+//@result 20 / 20 test cases passed. Status: Accepted Runtime: 20 ms Submitted: 0 minutes ago You are here! Your runtime beats 16.02% of cpp submissions.
+
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {

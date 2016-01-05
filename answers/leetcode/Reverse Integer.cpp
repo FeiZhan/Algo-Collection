@@ -1,32 +1,24 @@
+//@result 1032 / 1032 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago You are here! Your runtime beats 44.23% of cpp submissions.
+
 class Solution {
 public:
     int reverse(int x) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        bool negative = false;
-        if (x < 0)
-        {
-			negative = true;
-			x *= -1;
-		}
-		int ans = 0;
-		while (x > 0)
-		{
-			int digit = x % 10;
-			long long tmp = static_cast<long long>(ans * 10) + digit;
-			if (tmp > INT_MAX)
-			{
-				ans = INT_MAX;
-			} else
-			{
-				ans = static_cast<int>(tmp);
-			}
-			x /= 10;
-		}
-		if (negative)
-		{
-			ans *= -1;
-		}
-		return ans;
+        if (INT_MIN == x) {
+            return 0;
+        }
+        bool negative = x < 0;
+        if (negative) {
+            x = abs(x);
+        }
+        int reversed = 0;
+        while (x) {
+            if (reversed > INT_MAX / 10 || (INT_MAX / 10 == reversed && ! negative && x % 10 > INT_MAX % 10) || (INT_MAX / 10 == reversed && negative && x % 10 > INT_MAX % 10 + 1)) {
+                reversed = 0;
+                break;
+            }
+            reversed = reversed * 10 + x % 10;
+            x /= 10;
+        }
+        return reversed * (negative ? -1 : 1);
     }
 };

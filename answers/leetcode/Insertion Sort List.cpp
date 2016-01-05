@@ -1,3 +1,5 @@
+//@result 21 / 21 test cases passed. Status: Accepted Runtime: 88 ms Submitted: 0 minutes ago You are here! Your runtime beats 20.73% of cpp submissions.
+
 class Solution {
 public:
 	ListNode *insertionSortList(ListNode *head) {

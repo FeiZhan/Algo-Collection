@@ -55,7 +55,7 @@ class Solution {
 public:
 	Solution(void) {
 		vector<TreeNode *> tree_list;
-		tree_list.push_back(NULL);
+		//tree_list.push_back(NULL);
 		tree_map[0] = tree_list;
 		tree_list.clear();
 		TreeNode *node = new TreeNode(1);

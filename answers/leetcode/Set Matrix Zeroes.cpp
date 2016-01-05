@@ -1,4 +1,4 @@
-// idea from leetcode
+//@result 157 / 157 test cases passed. Status: Accepted Runtime: 104 ms Submitted: 0 minutes ago You are here! Your runtime beats 8.95% of cpp submissions.
 
 class Solution {
 public:

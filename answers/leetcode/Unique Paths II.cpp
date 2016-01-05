@@ -26,6 +26,8 @@ public:
 
 // 2015-01-10
 // 2d dp, 1d dp is rolling array
+//@result 43 / 43 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 13.67% of cpp submissions.
+
 class Solution {
 public:
 	int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {

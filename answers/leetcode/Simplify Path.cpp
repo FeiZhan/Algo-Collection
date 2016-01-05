@@ -1,3 +1,5 @@
+//@result 252 / 252 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago You are here! Your runtime beats 43.27% of cpp submissions.
+
 class Solution {
 public:
     string simplifyPath(string path) {

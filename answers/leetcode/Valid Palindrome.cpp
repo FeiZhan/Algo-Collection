@@ -1,35 +1,5 @@
-class Solution {
-public:
-    bool isPalindrome(string s) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        for (int i = 0; i < s.length(); ++ i)
-        {
-			if (s[i] >= 'A' && s[i] <= 'Z')
-			{
-				s[i] += 'a' - 'A';
-			} else if (s[i] >= '0' && s[i] <= '9')
-			{
-				continue;
-			} else if (s[i] < 'a' || s[i] > 'z')
-			{
-				s.erase(i, 1);
-				-- i;
-			}
-		}
-		bool flag = true;
-		for (int i = 0; i < s.length() / 2; ++ i)
-		{
-			if (s[i] != s[s.length() - 1 - i])
-			{
-				flag = false;
-				break;
-			}
-		}
-		return flag;
-    }
-};
-// accepted 2014-03-21
+//@result 476 / 476 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 42.69% of cpp submissions.
+
 class Solution {
 public:
 	bool isPalindrome(string s) {
@@ -43,9 +13,15 @@ public:
 			{
 				--j;
 			}
-			//std::cout << i << " " << s[i] << " " << isAlphanumeric(s[i]) << std::endl;
-			//std::cout << j << " " << s[j] << " " << isAlphanumeric(s[j]) << std::endl;
-			if (i < s.length() && j < s.length() && s[i] != s[j] && s[i] != s[j] - 'a' + 'A' && s[i] - 'a' + 'A' != s[j])
+            if (s[i] >= 'A' && s[i] <= 'Z') {
+                s[i] += 'a' - 'A';
+            }
+            if (s[j] >= 'A' && s[j] <= 'Z') {
+                s[j] += 'a' - 'A';
+            }
+			//std::cout << i << " " << s[i] << " " << char(s[i] - 'a' + 'A') << std::endl;
+			//std::cout << j << " " << s[j] << " " << char(s[j] - 'a' + 'A') << std::endl;
+			if (i < s.length() && j < s.length() && s[i] != s[j])
 			{
 				return false;
 			}

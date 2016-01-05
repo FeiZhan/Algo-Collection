@@ -1,3 +1,5 @@
+//@result 15 / 15 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 1.04% of cpp submissions.
+
 class Solution {
 public:
     vector<vector<int> > generate(int numRows) {

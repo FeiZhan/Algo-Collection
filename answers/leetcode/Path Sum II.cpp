@@ -1,3 +1,5 @@
+//@result 114 / 114 test cases passed. Status: Accepted Runtime: 24 ms Submitted: 0 minutes ago You are here! Your runtime beats 12.21% of cpp submissions.
+
 /**
  * Definition for binary tree
  * struct TreeNode {
@@ -48,6 +50,8 @@ public:
 	}
 };
 // accepted 2014-03-21
+//@result 114 / 114 test cases passed. Status: Accepted Runtime: 20 ms Submitted: 0 minutes ago You are here! Your runtime beats 31.51% of cpp submissions.
+
 class Solution {
 public:
 	vector<vector<int> > pathSum(TreeNode *root, int sum) {

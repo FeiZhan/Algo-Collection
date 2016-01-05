@@ -1,3 +1,5 @@
+//@result 151 / 151 test cases passed. Status: Accepted Runtime: 580 ms Submitted: 1 minute ago You are here! Your runtime beats 65.83% of cpp submissions.
+
 /**
 * Definition for an interval.
 * struct Interval {

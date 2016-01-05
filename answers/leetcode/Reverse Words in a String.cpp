@@ -22,6 +22,7 @@ public:
 };
 
 // 2015-1-1
+//@result 22 / 22 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 10.23% of cpp submissions.
 class Solution {
 public:
 	void reverseWords(string &s) {

@@ -1,3 +1,5 @@
+//@result 22 / 22 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 7.53% of cpp submissions.
+
 #include <iostream>
 #include <vector>
 using namespace std;

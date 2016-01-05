@@ -1,3 +1,5 @@
+//@result 27 / 27 test cases passed. Status: Accepted Runtime: 20 ms Submitted: 0 minutes ago You are here! Your runtime beats 79.69% of cpp submissions.
+
 /**
  * Definition for a point.
  * struct Point {

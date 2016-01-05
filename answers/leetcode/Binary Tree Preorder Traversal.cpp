@@ -23,6 +23,8 @@ public:
 	}
 };
 // iteratively
+//@result 67 / 67 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 1 minute ago You are here! Your runtime beats 12.08% of cpp submissions.
+
 class Solution {
 public:
 	vector<int> preorderTraversal(TreeNode *root) {

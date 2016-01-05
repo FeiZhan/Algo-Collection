@@ -1,8 +1,9 @@
 // binary search
+//@result 1017 / 1017 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 7.64% of cpp submissions.
 
 class Solution {
 public:
-    int sqrt(int x) {
+    int mySqrt(int x) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
 		if (x == 0)

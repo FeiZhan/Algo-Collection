@@ -1,52 +1,7 @@
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    vector<vector<int> > levelOrder(TreeNode *root) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		ans.clear();
-		levelOrderRec(root, 0);
-		return ans;
-    }
-    void levelOrderRec(const TreeNode *root, int level)
-    {
-		if (root)
-		{
-			addToAns(root->val, level);
-		} else
-		{
-			return;
-		}
-		if (root->left)
-		{
-			levelOrderRec(root->left, level + 1);
-		}
-		if (root->right)
-		{
-			levelOrderRec(root->right, level + 1);
-		}
-	}
-	void addToAns(int value, int level)
-	{
-		while (ans.size() <= level)
-		{
-			vector<int> tmp;
-			ans.push_back(tmp);
-		}
-		ans[level].push_back(value);
-	}
-    vector<vector<int> > ans;
-};
-
 // 2015-1-1
+//@result 34 / 34 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 79.94% of cpp submissions.
+
+
 /**
  * Definition for binary tree
  * struct TreeNode {

@@ -1,3 +1,4 @@
+//@result 3999 / 3999 test cases passed. Status: Accepted Runtime: 96 ms Submitted: 0 minutes ago You are here! Your runtime beats 5.90% of cpp submissions.
 
 class Solution {
 public:

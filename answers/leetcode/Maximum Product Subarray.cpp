@@ -1,18 +1,20 @@
+//@result 183 / 183 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 78.37% of cpp submissions.
+
 class Solution {
 public:
-    int maxProduct(int A[], int n) {
-		if (0 == n) {
+    int maxProduct(vector<int>& nums) {
+		if (0 == nums.size()) {
 			return 0;
 		}
-		int max = A[0], min = A[0];
+		int max = nums[0], min = nums[0];
 		int all_max = max;
-		for (int i = 1; i < n; ++ i) {
+		for (int i = 1; i < nums.size(); ++ i) {
 			// put them first, don't use polluted max, min
-			int temp0 = max * A[i];
-			int temp1 = min * A[i];
+			int temp0 = max * nums[i];
+			int temp1 = min * nums[i];
 			// reset them
-			max = A[i];
-			min = A[i];
+			max = nums[i];
+			min = nums[i];
 			if (temp0 > max) {
 				max = temp0;
 			}

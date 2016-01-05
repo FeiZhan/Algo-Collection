@@ -1,3 +1,5 @@
+//@result 16 / 16 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago You are here! Your runtime beats 8.58% of cpp submissions.
+
 class Solution {
 public:
 	int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {

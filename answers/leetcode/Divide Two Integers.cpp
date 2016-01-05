@@ -1,3 +1,5 @@
+//@result 988 / 988 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 9.17% of cpp submissions.
+
 class Solution {
 public:
 	int divide(int dividend, int divisor) {

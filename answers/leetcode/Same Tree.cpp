@@ -1,3 +1,5 @@
+//@result 54 / 54 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 6.81% of cpp submissions.
+
 /**
  * Definition for binary tree
  * struct TreeNode {

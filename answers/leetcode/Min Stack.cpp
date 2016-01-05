@@ -1,3 +1,5 @@
+//@result 17 / 17 test cases passed. Status: Accepted Runtime: 28 ms Submitted: 0 minutes ago You are here! Your runtime beats 42.34% of cpp submissions.
+
 class MinStack {
 public:
 	void push(int x) {

@@ -1,3 +1,5 @@
+//@result 19 / 19 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 23.55% of cpp submissions.
+
 class Solution {
 public:
 	vector<vector<int> > subsetsWithDup(vector<int> &S) {

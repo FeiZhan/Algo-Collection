@@ -1,3 +1,5 @@
+//@result 1158 / 1158 test cases passed. Status: Accepted Runtime: 28 ms Submitted: 0 minutes ago You are here! Your runtime beats 25.55% of cpp submissions.
+
 class Solution {
 public:
     string convert(string s, int nRows) {

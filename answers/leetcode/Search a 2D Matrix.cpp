@@ -1,3 +1,5 @@
+//@result 134 / 134 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 43.59% of cpp submissions.
+
 class Solution {
 public:
     bool searchMatrix(vector<vector<int> > &matrix, int target) {

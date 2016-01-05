@@ -1,3 +1,5 @@
+//@result 108 / 108 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 5.42% of cpp submissions.
+
 class Solution {
 public:
     vector<int> plusOne(vector<int> &digits) {

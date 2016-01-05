@@ -1,47 +1,49 @@
+//@result 161 / 161 test cases passed. Status: Accepted Runtime: 32 ms Submitted: 0 minutes ago You are here! Your runtime beats 42.19% of cpp submissions.
+
 #include <iostream>
 
 class Solution {
 public:
-    int removeDuplicates(int A[], int n) {
+    int removeDuplicates(vector<int>& nums) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        if (n <= 0)
+        if (nums.size() <= 0)
         {
 			return 0;
 		}
-		int head = -1, last = -1, size = n, previous = A[0];
-		for (int i = 1; i < n; ++ i)
+		int head = -1, last = -1, size = nums.size(), previous = nums[0];
+		for (int i = 1; i < nums.size(); ++ i)
 		{
-			if (A[i] == previous)
+			if (nums[i] == previous)
 			{
 				if (-1 == last)
 				{
 					head = i;
 				} else
 				{
-					A[last] = i;
+					nums[last] = i;
 				}
 				last = i;
 				// record the previous one
-				previous = A[i];
-				A[i] = -1;
+				previous = nums[i];
+				nums[i] = -1;
 				-- size;
 			} else
 			{
-				previous = A[i];
+				previous = nums[i];
 			}
 		}
 		int count = 0;
-		for (int i = 0; i < n; ++ i)
+		for (int i = 0; i < nums.size(); ++ i)
 		{
 			if (i == head)
 			{
 				++ count;
-				head = A[head];
+				head = nums[head];
 			} else
 			{
 		//std::cout << "head " << head << std::endl;
-				A[i - count] = A[i];
+				nums[i - count] = nums[i];
 			}
 		}
 		return size;

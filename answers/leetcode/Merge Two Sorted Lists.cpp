@@ -1,3 +1,5 @@
+//@result 208 / 208 test cases passed. Status: Accepted Runtime: 8 ms Submitted: 0 minutes ago You are here! Your runtime beats 71.34% of cpp submissions.
+
 #include <iostream>
 using namespace std;
 /**

@@ -1,9 +1,9 @@
-// idea from leetcode
 // recursive
+//@result 299 / 299 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 8.54% of cpp submissions.
 
 class Solution {
 public:
-    double pow(double x, int n) {
+    double myPow(double x, int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
 		if (0 == n)

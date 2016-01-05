@@ -1,4 +1,5 @@
-// binary search does not work
+//@result 117 / 117 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 43.29% of cpp submissions.
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -33,6 +34,7 @@ public:
 		return strs[0].substr(0, i);
     }
 };
+
 int main()
 {
 	Solution s;

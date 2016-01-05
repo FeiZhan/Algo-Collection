@@ -1,3 +1,5 @@
+//@result 16 / 16 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 17.12% of cpp submissions.
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

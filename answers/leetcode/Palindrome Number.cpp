@@ -1,3 +1,5 @@
+//@result 11506 / 11506 test cases passed. Status: Accepted Runtime: 92 ms Submitted: 0 minutes ago You are here! Your runtime beats 30.64% of cpp submissions.
+
 class Solution {
 public:
     bool isPalindrome(int x) {

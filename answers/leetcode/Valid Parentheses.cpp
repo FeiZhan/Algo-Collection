@@ -1,3 +1,5 @@
+//@result 65 / 65 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 5.29% of cpp submissions.
+
 class Solution {
 public:
     bool isValid(string s) {

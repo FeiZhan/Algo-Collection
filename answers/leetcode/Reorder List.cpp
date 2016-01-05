@@ -1,4 +1,5 @@
 // http://fisherlei.blogspot.ca/2013/11/leetcode-reorder-list-solution.html
+//@result 13 / 13 test cases passed. Status: Accepted Runtime: 60 ms Submitted: 0 minutes ago You are here! Your runtime beats 91.05% of cpp submissions.
 
 /**
  * Definition for singly-linked list.

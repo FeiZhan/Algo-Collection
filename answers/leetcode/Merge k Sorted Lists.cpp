@@ -1,4 +1,5 @@
-// exist better solutions
+//@result 130 / 130 test cases passed. Status: Accepted Runtime: 424 ms Submitted: 0 minutes ago You are here! Your runtime beats 40.18% of cpp submissions.
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -9,32 +10,27 @@
  */
 class Solution {
 public:
-    ListNode *mergeKLists(vector<ListNode *> &lists) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-		ListNode *head = new ListNode(0), *now = head;
-		vector<ListNode *> nows(lists);
-		bool change;
-		do
-		{
-			int min = INT_MAX, min_pos = -1;
-			for (int i = 0; i < nows.size(); ++ i)
-			{
-				if (nows[i] != NULL && nows[i]->val < min)
-				{
-					min = nows[i]->val;
-					min_pos = i;
-				}
-			}
-			change = false;
-			if (min_pos >= 0 && nows[min_pos] != NULL)
-			{
-				change = true;
-				nows[min_pos] = nows[min_pos]->next;
-				now->next = new ListNode(min);
-				now = now->next;
-			}
-		} while (change);
-		return head->next;
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        auto comp = [] (ListNode *&a, ListNode *&b) -> bool {
+            return a->val > b->val;
+        };
+        std::priority_queue<ListNode *, std::vector<ListNode *>, decltype(comp)> heap(comp);
+        for (size_t i = 0; i < lists.size(); ++ i) {
+            if (lists[i]) {
+                heap.push(lists[i]);
+            }
+        }
+        ListNode *dummy = new ListNode(INT_MAX);
+        ListNode *current = dummy;
+        while (! heap.empty()) {
+            current->next = heap.top();
+            heap.pop();
+            current = current->next;
+            if (current->next) {
+                heap.push(current->next);
+            }
+            current->next = NULL;
+        }
+        return dummy->next;
     }
 };

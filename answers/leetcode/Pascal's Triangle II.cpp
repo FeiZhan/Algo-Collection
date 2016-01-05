@@ -1,3 +1,5 @@
+//@result 34 / 34 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 12.14% of cpp submissions.
+
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {

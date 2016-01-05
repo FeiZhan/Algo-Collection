@@ -1,3 +1,5 @@
+//@result 61 / 61 test cases passed. Status: Accepted Runtime: 0 ms Submitted: 0 minutes ago You are here! Your runtime beats 7.70% of cpp submissions.
+
 class Solution {
 public:
     int uniquePaths(int m, int n) {

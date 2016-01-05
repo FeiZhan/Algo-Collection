@@ -1,3 +1,5 @@
+//@result 20 / 20 test cases passed. Status: Accepted Runtime: 4 ms Submitted: 0 minutes ago You are here! Your runtime beats 9.80% of cpp submissions.
+
 class Solution {
 public:
     void rotate(vector<vector<int> > &matrix) {
