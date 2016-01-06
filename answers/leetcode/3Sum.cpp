@@ -39,6 +39,8 @@ public:
 
 // 2015-01-10
 // two pointers
+//@result 311 / 311 test cases passed. Status: Accepted Runtime: 76 ms Submitted: 0 minutes ago You are here! Your runtime beats 11.93% of cpp submissions.
+
 class Solution {
 public:
 	vector<vector<int> > threeSum(vector<int> &num) {

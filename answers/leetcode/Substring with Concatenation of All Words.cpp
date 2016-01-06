@@ -1,3 +1,6 @@
+//@result 169 / 169 test cases passed. Status: Accepted Runtime: 100 ms Submitted: 1 hour ago You are here! Your runtime beats 65.38% of cpp submissions.
+// DP does not work
+
 class Solution {
 public:
 	vector<int> findSubstring(string S, vector<string> &L) {

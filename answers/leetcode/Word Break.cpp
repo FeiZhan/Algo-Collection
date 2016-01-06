@@ -39,3 +39,21 @@ public:
 		}
 	}
 };
+
+//@result 32 / 32 test cases passed. Status: Accepted Runtime: 12 ms Submitted: 0 minutes ago You are here! Your runtime beats 17.31% of cpp submissions.
+
+class Solution {
+public:
+    bool wordBreak(string s, unordered_set<string>& wordDict) {
+        vector<bool> dp(s.length(), false);
+        for (size_t i = 0; i < s.length(); ++ i) {
+            for (size_t j = 0; j <= i; ++ j) {
+                if ((0 == j || dp[j - 1]) && wordDict.end() != wordDict.find(s.substr(j, i - j + 1))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp.back();
+    }
+};

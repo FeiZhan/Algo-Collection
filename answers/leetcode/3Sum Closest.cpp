@@ -39,6 +39,8 @@ public:
 
 // 2015-01-10
 // two pointers
+//@result 120 / 120 test cases passed. Status: Accepted Runtime: 28 ms Submitted: 0 minutes ago You are here! Your runtime beats 15.51% of cpp submissions.
+
 class Solution {
 public:
 	int threeSumClosest(vector<int> &num, int target) {
