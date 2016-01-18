@@ -1,4 +1,4 @@
-//@result WA
+//@result Accepted Total Runtime: 8 ms 100% test cases passed.
 
 class Solution {
 public:
@@ -8,23 +8,39 @@ public:
      */
     bool firstWillWin(vector<int> &values) {
         // write your code here
-        vector<int> dp(values.size(), 0);
-        for (size_t i = 0; i < values.size(); ++ i) {
-            if (0 == i) {
-                dp[i] = values[i];
+        if (values.size() <= 2) {
+            return true;
+        }
+        vector<pair<int, bool> > dp(values.size(), make_pair(INT_MIN, false));
+        dp[values.size() - 1] = make_pair(values.back(), false);
+        dp[values.size() - 2] = make_pair(values[values.size() - 2] + values.back(), true);
+        for (size_t i = values.size() - 3; i < dp.size(); -- i) {
+            int target = 0;
+            // enemy takes one
+            if (dp[i + 1].second) {
+                target = values[i] + ((i + 3 < values.size()) ? dp[i + 3].first : 0);
             }
-            else if (1 == i) {
-                dp[i] = values[i - 1] + values[i];
+            // enemy takes two
+            else {
+                target = values[i] + ((i + 2 < values.size()) ? dp[i + 2].first : 0);
             }
-            else if (2 == i) {
-                dp[i] = min(dp[i - 2] + values[i], dp[i - 1]);
+            // I take one
+            if (dp[i].first < target) {
+                dp[i].first = target;
+                dp[i].second = false;
             }
-            else if (3 == i) {
-                dp[i] = min(values[i] + min(dp[i - 2], dp[i - 3]), values[i] + values[i - 1] + dp[i - 3]);
-            } else {
-                dp[i] = max(values[i] + min(dp[i - 2], dp[i - 3]), values[i] + values[i - 1] + min(dp[i - 3], dp[i - 4]));
+            if (dp[i + 2].second) {
+                target = values[i] + values[i + 1] + ((i + 4 < values.size()) ? dp[i + 4].first : 0);
+            }
+            else {
+                target = values[i] + values[i + 1] + ((i + 3 < values.size()) ? dp[i + 3].first : 0);
+            }
+            // I take two
+            if (dp[i].first < target) {
+                dp[i].first = target;
+                dp[i].second = true;
             }
         }
-        return dp[dp.size() - 1] * 2 > std::accumulate(values.begin(), values.end(), 0);
+        return dp[0].first > (dp[0].second ? dp[2].first : dp[1].first);
     }
 };

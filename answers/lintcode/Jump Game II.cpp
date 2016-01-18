@@ -1,4 +1,6 @@
-//@result TLE
+//@result Accepted Total Runtime: 36 ms 100% test cases passed.
+//@algorithm greedy
+// time is more strict than leetcode
 
 class Solution {
 public:
@@ -8,13 +10,19 @@ public:
      */
     int jump(vector<int> A) {
         // wirte your code here
-		vector<int> dp(A.size(), INT_MAX);
-		dp[0] = 0;
-		for (size_t i = 0; i < dp.size(); ++ i) {
-			for (size_t j = 1; j <= A[i] && i + j < dp.size(); ++ j) {
-				dp[i + j] = min(dp[i + j], dp[i] + 1);
-			}
-		}
-		return dp[dp.size() - 1];
+        int count = 0;
+        int reach = 0;
+        int current = 0;
+        for (int i = 0; i < A.size(); ++ i) {
+            if (i > reach) {
+                return -1;
+            }
+            else if (i > current) {
+                current = reach;
+                ++ count;
+            }
+            reach = max(reach, i + A[i]);
+        }
+        return count;
     }
 };

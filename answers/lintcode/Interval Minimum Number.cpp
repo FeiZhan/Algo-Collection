@@ -18,10 +18,11 @@ public:
     vector<int> intervalMinNumber(vector<int> &A, vector<Interval> &queries) {
         // write your code here
         vector<int> min_list;
-        SegmentTreeNode *root = new SegmentTreeNode(0, A.size() * 2);
+        SegmentTreeNode *root = new SegmentTreeNode(0, A.size() - 1);
         for (size_t i = 0; i < A.size(); ++ i) {
             root->add(i, i, A[i]);
         }
+        //root->build(0, A.size() - 1, A);
         for (size_t i = 0; i < queries.size(); ++ i) {
             int temp = root->query(queries[i].start, queries[i].end);
             min_list.push_back(temp);
@@ -57,12 +58,26 @@ public:
                 }
             }
         }
+        void build(size_t b, size_t e, const vector<int> &nums) {
+            if (b > e || e >= nums.size()) {
+                return;
+            }
+            else if (b == e) {
+                value = nums[b];
+            }
+            else {
+                left = new SegmentTreeNode(b, (b + e) / 2);
+                left->build(b, (b + e) / 2, nums);
+                right = new SegmentTreeNode((b + e) / 2 + 1, e);
+                right->build((b + e) / 2 + 1, e, nums);
+                value = min(left->value, right->value);
+            }
+        }
         int query(int b, int e) {
             int ans = INT_MAX;
             if (b > end || e < begin) {
-                return INT_MAX;
+                return ans;
             }
-            //cout << "debug (" << begin << ", " << end << ") " << value << ": " << b << " " << e << endl;
             if (b <= begin && e >= end) {
                 ans = min(ans, value);
             }
