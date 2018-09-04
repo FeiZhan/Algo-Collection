@@ -11,24 +11,31 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode tailA = reverse(headA);
-        ListNode tailB = reverse(headB);
-        headA = tailA;
-        headB = tailB;
-        while (headA != null && headB != null && headA.val == headB.val) {
-            headA = headA.next;
-            headB = headB.next;
+        int diff = 0;
+        ListNode currentA = headA;
+        while (currentA != null) {
+            diff++;
+            currentA = currentA.next;
         }
-        ListNode intersection = headA;
-        reverse(tailA);
-        reverse(tailB);
-        return headA != null ? headA.next : null;
-    }
-
-    public ListNode reverse(ListNode head) {
-        if (null == head) {
-            return null;
+        ListNode currentB = headB;
+        while (currentB != null) {
+            diff--;
+            currentB = currentB.next;
         }
-        ListNode
+        currentA = headA;
+        currentB = headB;
+        while (diff > 0) {
+            currentA = currentA.next;
+            diff--;
+        }
+        while (diff < 0) {
+            currentB = currentB.next;
+            diff++;
+        }
+        while (currentA != currentB) {
+            currentA = currentA.next;
+            currentB = currentB.next;
+        }
+        return currentA;
     }
 }
