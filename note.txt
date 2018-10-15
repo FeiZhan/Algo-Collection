@@ -1,9 +1,9 @@
-followed by a blank line. 
-ÒªÓÃ2¸ö\n
+followed by a blank line.
+Òªï¿½ï¿½2ï¿½ï¿½\n
 
-scanf("%d %d")ºÍscanf("%d%d")Ò»Ñù
+scanf("%d %d")ï¿½ï¿½scanf("%d%d")Ò»ï¿½ï¿½
 
-mainº¯ÊýÓ¦ÎªintÐÍ£¬×îºóreturn 0 £¬¼´£º
+mainï¿½ï¿½ï¿½ï¿½Ó¦Îªintï¿½Í£ï¿½ï¿½ï¿½ï¿½return 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 int main()
 
@@ -15,32 +15,36 @@ int main()
 
 }
 
-ÕâÑù×öÊÇÒòÎª±ÜÃâÓÐÐ©±àÒëÆ÷±¨´í¡£
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
-and followed by the end-of-line.ÔÚ×îºó¼ÓÒ»¸ö\n
+and followed by the end-of-line.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½\n
 
 A blank line should separate output lines.
-Á½¸ö´ð°¸ÖÐ¼äÓÃ\n\n£¬´ð°¸ºÍ½áÎ²ÓÃ\n»òÃ»ÓÐ
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½\n\nï¿½ï¿½ï¿½ð°¸ºÍ½ï¿½Î²ï¿½ï¿½\nï¿½ï¿½Ã»ï¿½ï¿½
 
-The first line of input for a game will be an integer n <= 20. (A value of n = 0 terminates input.) The next two lines will each contain n integers between 1 and 5 inclusive indicating the cards played on each of n rounds. 
-Êý×éÓ¦ÉèÎª[20]
+The first line of input for a game will be an integer n <= 20. (A value of n = 0 terminates input.) The next two lines will each contain n integers between 1 and 5 inclusive indicating the cards played on each of n rounds.
+ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Îª[20]
 
-ZOJ1113¿ÉÒÔÍ¨¹ý¶¯Ì¬¹æ»®»¯¼ò
-Ç°Ãæ¼¸¸öÖ±½ÓÊä³ö
+ZOJ1113ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½æ»®ï¿½ï¿½ï¿½ï¿½
+Ç°ï¿½æ¼¸ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½
 
-n´ÎÑ­»·£ºwhile(n--)
+nï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½while(n--)
 
-Segmentation Fault Êý×éÌ«Ð¡ÁË
+Segmentation Fault ï¿½ï¿½ï¿½ï¿½Ì«Ð¡ï¿½ï¿½
 
-¾¡Á¿½«Êý×éÅª´óÐ©
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åªï¿½ï¿½Ð©
 
-×¢Òâ×îºóÒ»¸öÊä³öµÄÊý×ÖÖ®ºóÊÇ·ñÓ¦¸Ã¸úÒ»¸ö¿Õ¸ñ
+×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ç·ï¿½Ó¦ï¿½Ã¸ï¿½Ò»ï¿½ï¿½ï¿½Õ¸ï¿½
 
-Èç¹ûÓÐºÜ¶àÌØÊâÇé¿ö£¬²»±ØÓ²°ÑËûÃÇ¼ÆËãÔÚÄÚ£¬¿ÉÒÔµ¥¶ÀÁÐ³ö¡£
+ï¿½ï¿½ï¿½ï¿½ÐºÜ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½
 
-ÈôÊäÈëµÄn==0¾ÍÍË³ö£ºwhile (cin >> n, n)
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½n==0ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½while (cin >> n, n)
 
-×¢ÒâÊä³öµÄ¸ñÊ½£¨Presentation Error £©
+×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½Ê½ï¿½ï¿½Presentation Error ï¿½ï¿½
 
-cÓïÑÔÖÐÊµÏÖÒÔ2ÎªµÄ¶ÔÊýµÄº¯ÊýÊÇÉ¶£¿log(n)/log(2) 
+cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½2Îªï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½log(n)/log(2)
+
+RWZxkpDEnLNyjxmcZZda
+VS140COMNTOOLS
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
