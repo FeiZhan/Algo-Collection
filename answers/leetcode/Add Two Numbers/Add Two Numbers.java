@@ -11,12 +11,14 @@ class Solution {
         int carry = 0;
         ListNode head = new ListNode(-1);
         ListNode current = head;
+
         while (l1 != null || l2 != null) {
             current.next = new ListNode(-1);
             current = current.next;
             current.val = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + carry;
             carry = current.val / 10;
             current.val %= 10;
+
             if (l1 != null) {
                 l1 = l1.next;
             }
@@ -24,12 +26,16 @@ class Solution {
                 l2 = l2.next;
             }
         }
+
         while (carry > 0) {
             current.next = new ListNode(-1);
             current = current.next;
             current.val = carry % 10;
             carry /= 10;
         }
+
         return head.next;
     }
 }
+//Runtime: 6 ms, faster than 7.72% of Java online submissions for Add Two Numbers.
+//Memory Usage: 45.2 MB, less than 8.89% of Java online submissions for Add Two Numbers.
