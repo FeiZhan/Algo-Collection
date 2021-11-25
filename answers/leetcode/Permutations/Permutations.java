@@ -1,28 +1,27 @@
 class Solution {
-    
-    private int[] nums;
-    private List<List<Integer>> permutations;
-    
     public List<List<Integer>> permute(int[] nums) {
-        this.nums = nums;
-        this.permutations = new LinkedList<>();
-        this.backtrack(new LinkedList<>(), new HashSet<>());
-        return this.permutations;
+        List<List<Integer>> results = new LinkedList<>();
+        for (int number : nums) {
+            backtrack(number, new LinkedList<>(), results, nums);
+        }
+
+        return results;
     }
-    
-    private void backtrack(List<Integer> permutation, Set<Integer> set) {
-        if (permutation.size() == this.nums.length) {
-            this.permutations.add(new LinkedList<>(permutation));
+
+    private void backtrack(int current, List<Integer> numbers, List<List<Integer>> results, int[] nums) {
+        numbers.add(current);
+        if (numbers.size() == nums.length) {
+            results.add(new LinkedList<>(numbers));
         } else {
-            for (int num : nums) {
-                if (!set.contains(num)) {
-                    permutation.add(num);
-                    set.add(num);
-                    this.backtrack(permutation, set);
-                    permutation.remove(permutation.size() - 1);
-                    set.remove(num);
+            for (int number : nums) {
+                if (!numbers.contains(number)) {
+                    backtrack(number, numbers, results, nums);
                 }
             }
         }
+
+        numbers.remove(numbers.size() - 1);
     }
 }
+//Runtime: 7 ms, faster than 7.28% of Java online submissions for Permutations.
+//Memory Usage: 42.1 MB, less than 6.23% of Java online submissions for Permutations.

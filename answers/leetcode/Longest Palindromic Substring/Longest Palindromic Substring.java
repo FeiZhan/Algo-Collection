@@ -1,29 +1,30 @@
 class Solution {
     public String longestPalindrome(String s) {
-        int maxLength = 0;
-        String longest = "";
+        int left = 0;
+        int right = 0;
+
         for (int i = 0; i < s.length(); i++) {
-            int x = i;
-            int y = i;
-            while (x >= 0 && y < s.length() && s.charAt(x) == s.charAt(y)) {
-                if (y - x + 1 > maxLength) {
-                    maxLength = y - x + 1;
-                    longest = s.substring(x, y + 1);
-                }
-                x--;
-                y++;
+            int j = 0;
+            while (i - j >= 0 && i + j < s.length() && s.charAt(i - j) == s.charAt(i + j)) {
+                j++;
             }
-            x = i;
-            y = i + 1;
-            while (x >= 0 && y < s.length() && s.charAt(x) == s.charAt(y)) {
-                if (y - x + 1 > maxLength) {
-                    maxLength = y - x + 1;
-                    longest = s.substring(x, y + 1);
-                }
-                x--;
-                y++;
+            if (j * 2 - 1 > right - left + 1) {
+                left = i - j + 1;
+                right = i + j - 1;
+            }
+
+            j = 0;
+            while (i - j >= 0 && i + j + 1 < s.length() && s.charAt(i - j) == s.charAt(i + j + 1)) {
+                j++;
+            }
+            if (j * 2 > right - left + 1) {
+                left = i - j + 1;
+                right = i + j;
             }
         }
-        return longest;
+
+        return s.substring(left, right + 1);
     }
 }
+//Runtime: 49 ms, faster than 48.66% of Java online submissions for Longest Palindromic Substring.
+//Memory Usage: 39.9 MB, less than 45.36% of Java online submissions for Longest Palindromic Substring.
