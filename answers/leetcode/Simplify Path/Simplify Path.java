@@ -1,34 +1,26 @@
 class Solution {
     public String simplifyPath(String path) {
-        String simplified = null;
-        if (path != null) {
-            String[] splitted = path.split("/");
-            for (int i = 0; i < splitted.length; i++) {
-                if (splitted[i].equals(".")) {
-                    splitted[i] = "";
-                } else if (splitted[i].equals("..")) {
-                    splitted[i] = "";
-                    int j = i - 1;
-                    while (j >= 0) {
-                        if (!splitted[j].equals("")) {
-                            splitted[j] = "";
-                            break;
-                        }
-                        j--;
+        String[] folders = path.split("/");
+        Stack<String> stack = new Stack();
+
+        for (String folder : folders) {
+            switch (folder) {
+                case "":
+                case ".":
+                    break;
+                case "..":
+                    if (!stack.empty()) {
+                        stack.pop();
                     }
-                }
-            }
-            StringBuilder sb = new StringBuilder();
-            for (String s : splitted) {
-                if (!s.equals("")) {
-                    sb.append("/").append(s);
-                }
-            }
-            simplified = sb.toString();
-            if (simplified.length() == 0) {
-                simplified = "/";
+                    break;
+                default:
+                    stack.push(folder);
+                    break;
             }
         }
-        return simplified;
+
+        return "/" + String.join("/", new LinkedList<>(stack));
     }
 }
+//Runtime: 6 ms, faster than 49.58% of Java online submissions for Simplify Path.
+//Memory Usage: 38.9 MB, less than 94.06% of Java online submissions for Simplify Path.
