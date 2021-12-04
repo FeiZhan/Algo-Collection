@@ -3,44 +3,42 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
     public void reorderList(ListNode head) {
-        if (head == null) {
-            return;
-        }
         ListNode left = head;
         ListNode right = head;
-        while (right != null && right.next != null) {
+        while (right != null && right.next != null && right.next.next != null) {
             left = left.next;
             right = right.next.next;
         }
-        ListNode reversed = new ListNode(-1);
-        while (left.next != null) {
-            ListNode temp = reversed.next;
-            reversed.next = left.next;
-            left.next = left.next.next;
-            reversed.next.next = temp;
-        }
+
+        ListNode current = left.next;
+        left.next = null;
         ListNode dummy = new ListNode(-1);
-        dummy.next = head;
-        left = dummy.next;
-        right = reversed.next;
-        ListNode current = dummy;
-        while (left != null || right != null) {
-            if (left != null) {
-                current.next = left;
-                current = current.next;
-                left = left.next;
-            }
-            if (right != null) {
-                current.next = right;
-                current = current.next;
-                right = right.next;
-            }
+
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = dummy.next;
+            dummy.next = current;
+            current = next;
         }
-        head = dummy.next;
+
+        left = head;
+        right = dummy.next;
+        while (right != null) {
+            ListNode next0 = left.next;
+            ListNode next1 = right.next;
+            left.next = right;
+            right.next = next0;
+            left = next0;
+            right = next1;
+        }
     }
 }
+//Runtime: 1 ms, faster than 99.92% of Java online submissions for Reorder List.
+//Memory Usage: 41.6 MB, less than 74.66% of Java online submissions for Reorder List.

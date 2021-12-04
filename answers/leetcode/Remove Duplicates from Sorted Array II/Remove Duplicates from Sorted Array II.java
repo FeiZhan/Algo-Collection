@@ -1,12 +1,14 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int index = 1;
+        int left = 2;
         for (int i = 2; i < nums.length; i++) {
-            if (nums[i] != nums[index] || nums[i] != nums[index - 1]) {
-                index++;
-                nums[index] = nums[i];
+            if (nums[left - 2] < nums[i]) {
+                nums[left] = nums[i];
+                left++;
             }
         }
-        return index + 1;
+        return left - 1;
     }
 }
+//Runtime: 0 ms, faster than 100.00% of Java online submissions for Remove Duplicates from Sorted Array II.
+//Memory Usage: 39 MB, less than 89.49% of Java online submissions for Remove Duplicates from Sorted Array II.
