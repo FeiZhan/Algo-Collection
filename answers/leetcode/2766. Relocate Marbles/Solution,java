@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> relocateMarbles(int[] nums, int[] moveFrom, int[] moveTo) {
+        Set<Integer> marbles = new HashSet<>();
+        for (int number : nums) {
+            marbles.add(number);
+        }
+        for (int i = 0; i < moveFrom.length; i++) {
+            if (!marbles.contains(moveFrom[i])) {
+                continue;
+            }
+            marbles.remove(moveFrom[i]);
+            marbles.add(moveTo[i]);
+        }
+
+        List<Integer> result = new LinkedList<>(marbles);
+        Collections.sort(result);
+        return result;
+    }
+}
