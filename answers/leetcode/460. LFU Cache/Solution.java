@@ -1,56 +1,64 @@
-import java.util.SortedMap;
-
 class LFUCache {
 
     private int capacity = 0;
-    private Map<Integer, Integer> valueMap = new HashMap<>();
-    private Map<Integer, Integer> countMap = new HashMap<>();
-    private SortedMap<Integer, Set<Integer>> counterMap = new TreeMap<>();
+    private int minCount = 1;
+    private Map<Integer, Integer> keyMap = new HashMap<>();
+    private Map<Integer, Integer> keyCountMap = new HashMap<>();
+    private Map<Integer, Set<Integer>> countMap = new HashMap<>();
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
     }
-
+    
     public int get(int key) {
-        increment(key);
-        return valueMap.getOrDefault(key, -1);
-    }
-
-    public void put(int key, int value) {
-        if (!valueMap.containsKey(key) && valueMap.size() >= capacity) {
-            int leastCount = counterMap.firstKey();
-            Set<Integer> set = counterMap.get(leastCount);
-            int leastKey = set.iterator().next();
-            valueMap.remove(leastKey);
-            countMap.remove(leastKey);
-            set.remove(leastKey);
-            if (set.isEmpty()) {
-                counterMap.remove(leastCount);
-            }
+        if (!keyMap.containsKey(key)) {
+            return -1;
         }
 
-        valueMap.put(key, value);
-        increment(key);
+        incrementCount(key);
+        return keyMap.get(key);
+    }
+    
+    public void put(int key, int value) {
+        if (!keyMap.containsKey(key) && keyMap.size() >= capacity) {
+            Set<Integer> keySet = countMap.get(minCount);
+            int minKey = keySet.iterator().next();
+            removeCount(minKey);
+            keyMap.remove(minKey);
+        }
+
+        incrementCount(key);
+        keyMap.put(key, value);
     }
 
-    private void increment(int key) {
-        if (!valueMap.containsKey(key)) {
+    private void removeCount(int key) {
+        if (!keyMap.containsKey(key)) {
+            return;
+        }
+        if (!keyCountMap.containsKey(key)){
             return;
         }
 
-        int count = countMap.getOrDefault(key, 0);
-        if (count > 0) {
-            Set<Integer> set = counterMap.get(count);
-            set.remove(key);
-            if (set.isEmpty()) {
-                counterMap.remove(count);
+        int count = keyCountMap.get(key);
+        keyCountMap.remove(key);
+        Set<Integer> keySet = countMap.get(count);
+        keySet.remove(key);
+        if (keySet.isEmpty()) {
+            countMap.remove(count);
+            if (minCount == count) {
+                minCount++;
             }
         }
-        count++;
-        countMap.put(key, count);
-        Set<Integer> set = counterMap.getOrDefault(count, new LinkedHashSet<>());
-        set.add(key);
-        counterMap.put(count, set);
+    }
+
+    private void incrementCount(int key) {
+        int count = keyCountMap.getOrDefault(key, 0) + 1;
+        removeCount(key);
+        keyCountMap.put(key, count);
+        Set<Integer> keySet = countMap.getOrDefault(count, new LinkedHashSet<>());
+        keySet.add(key);
+        countMap.put(count, keySet);
+        minCount = Math.min(minCount, count);
     }
 }
 
