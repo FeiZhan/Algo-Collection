@@ -1,0 +1,2 @@
+GET http://localhost:5000/api/covid?country=Afghanistan&startDate=2020-01-01&endDate=2020-01-06 HTTP/1.1
+Accept: application/json
