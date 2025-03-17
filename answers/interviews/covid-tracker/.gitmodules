@@ -1,3 +1,0 @@
-[submodule "datasets/covid-19"]
-	path = datasets/covid-19
-	url = https://github.com/owid/covid-19-data.git
